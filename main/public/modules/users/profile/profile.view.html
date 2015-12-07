@@ -1,0 +1,142 @@
+<section class="dashboard-form row dashboard-top-section">
+    <div class="container">
+        <div class="col-sm-12">
+            <h2 ng-if="editedUser.is_complete">Edit my profile</h2>
+            <h2 ng-if="!editedUser.is_complete">Complete my profile</h2>
+            <hr/>
+        </div>
+
+        <div class="col-sm-12">
+            <form class="form-horizontal"
+                  name="form"
+                  ng-submit="submit()"
+                  unsaved-warning-form>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textName">My Name</label>
+                    <div class="col-md-4">
+                        <input id="textName"
+                               name="textName"
+                               type="text"
+                               placeholder="Full Name &mdash; Jane Smith"
+                               class="dh-form-control input-md"
+                               ng-maxlength="100"
+                               ng-model="editedUser.name">
+                        <div style="color:maroon;" ng-messages="form.textName.$error"
+                             ng-show="form.textName.$touched && form.$dirty">
+                            <div ng-message="maxlength">Name can be up to 100 characters long.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-offset-4 col-md-8 dh-form-header"><h4>Program Information</h4></div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textProgram">My program is</label>
+                    <div class="col-md-6">
+                        <div class="radio dh-radio" ng-repeat="option in programs">
+                            <label for="choice-{{ option.value }}">
+                                <input type="radio"
+                                       name="choice-{{ option.value }}"
+                                       id="choice-{{ option.value }}" value="{{ option.value }}"
+                                       ng-model="editedUser.program"
+                                       ng-change="onSelectProgram()">
+                                {{ option.name }}
+                            </label>
+                        </div>
+                        <input id="textProgram"
+                               name="textProgram"
+                               type="text"
+                               placeholder="Other program"
+                               ng-maxlength="100"
+                               class="dh-form-control input-md"
+                               ng-model="editedUser.otherProgram"
+                               ng-change="onChangeProgramOther()">
+                        <div style="color:maroon;" ng-messages="form.textProgram.$error"
+                             ng-show="form.textProgram.$touched && form.$dirty">
+                            <div ng-message="maxlength">Program name can be up to 100 characters long.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textInstitution">I currently study/work at</label>
+                    <div class="col-md-6">
+                        <div class="radio dh-radio" ng-repeat="option in institutions">
+                            <label for="choice-{{ option.value }}">
+                                <input type="radio"
+                                       name="choice-{{ option.value }}"
+                                       id="choice-{{ option.value }}" value="{{ option.value }}"
+                                       ng-model="editedUser.institution"
+                                       ng-change="onSelectInstitution()">
+                                {{ option.name }}
+                            </label>
+                        </div>
+                        <input id="textInstitution"
+                               name="textInstitution"
+                               type="text"
+                               placeholder="Name of your institution/work place &mdash; eg. Facebook"
+                               ng-maxlength="140"
+                               class="dh-form-control input-md"
+                               ng-model="editedUser.otherInstitution"
+                               ng-change="onChangeInstitutionOther()">
+                        <div style="color:maroon;" ng-messages="form.textInstitution.$error"
+                             ng-show="form.textInstitution.$touched && form.$dirty">
+                            <div ng-message="maxlength">Institution/Work place name can be up to 140 characters long.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-offset-4 col-md-8 dh-form-header"><h4>About You</h4></div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textProgram">My hometown is</label>
+                    <div class="col-md-6">
+                        <input id="textLocation"
+                               name="textLocation"
+                               type="text"
+                               placeholder="City or State &mdash; eg. NY"
+                               ng-maxlength="40"
+                               class="dh-form-control input-md"
+                               ng-model="editedUser.location">
+                        <div style="color:maroon;" ng-messages="form.textLocation.$error"
+                             ng-show="form.textLocation.$touched && form.$dirty">
+                            <div ng-message="maxlength">Location can be up to 40 characters long.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textstory">A little about me</label>
+                    <div class="col-md-8">
+                    <textarea class="dh-form-control"
+                              id="textstory"
+                              name="textstory"
+                              rows="3"
+                              placeholder="I am an awesome person who ..."
+                              ng-model="editedUser.bio"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="inputFile">Profile picture</label>
+                    <div class="col-md-8">
+                        <ga-image-upload user="user"
+                                         form="form"
+                                         image-url="editedUser.avatar_url">
+                        </ga-image-upload>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-4">
+                        <button type="submit" ng-disabled="isLoading" class="btn btn-success btn-lg">
+                            <i class="fa fa-circle-o-notch fa-spin" ng-if="isLoading"></i> Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

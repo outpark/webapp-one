@@ -1,0 +1,347 @@
+@import "variables.less";
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Lora","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: @dh-dark-text;
+  background-color: @dh-light-gray;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 35px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  letter-spacing: 1px;
+}
+
+.light {
+  font-weight: normal;
+}
+
+p, label {
+  margin: 0 0 25px;
+  font-size: 18px;
+  line-height: 1.4;
+  font-family: "Lora", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  @media(min-width:768px) {
+    margin: 0 0 35px;
+    font-size: 20px;
+    line-height: 1.8;
+  }
+}
+
+a {
+  color: fade(@dh-dark-text, 80%);
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: @dh-dark-text
+  }
+}
+
+
+/* Backgrounds */
+
+.bg-white {
+  background-color: @primary;
+  color: @dh-dark-text;
+}
+
+.bg-pink {
+  background-color: @dh-pink;
+  color: @primary;
+}
+
+.bg-blue {
+  background-color: @bootstrap-blue;
+  color: @primary;
+}
+
+.bg-green {
+  background-color: @dh-green;
+  color: @primary;
+}
+
+.bg-orange {
+  background-color: @dh-orange;
+  color: @primary;
+}
+
+/* Foregrounds */
+
+.fg-white {
+  color: @primary;
+}
+
+.fg-pink {
+  color: @dh-pink;
+}
+
+.fg-blue {
+  color: @bootstrap-blue;
+}
+
+.fg-green {
+  color: @dh-green;
+}
+
+.fg-orange {
+  color: @dh-orange;
+}
+
+/* Inputs */
+.dh-form-control,
+.dh-form-control{
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  line-height: 1.42857143;
+  color: #555;
+  background: #fff none;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 1px solid #ccc;
+  margin-bottom: -1px;
+  font-size: 1.2em;
+}
+
+input.dh-form-control {
+  height: 50px;
+}
+
+input.dh-form-control.disabled {
+  background-color: @dh-light-gray !important;
+}
+
+button.dh-input-button {
+  height: 50px;
+}
+
+
+.dh-radio input[type="radio"] {
+  position: relative;
+}
+
+.dh-checkbox input[type="checkbox"] {
+  position: relative;
+}
+
+.dh-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+//
+//.dh-toast{
+//  .alert {
+//    background-color: @dh-dark-text !important;
+//    color: @primary !important;
+//    border-color: @primary !important;
+//    button {
+//      &:hover{
+//        color: fade(@primary, 80%);
+//      }
+//    }
+//  }
+//  .alert-warning {
+//    color: #8a6d3b;
+//    background-color: #fcf8e3;
+//    border-color: #faebcc;
+//  }
+//}
+
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+  padding-left: 5px;
+}
+
+/* Buttons */
+.btn {
+  text-transform: uppercase;
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  border-radius: 0;
+}
+
+.btn-white {
+  color: fade(@dh-dark-text, 90%);
+  background-color: fade(@primary, 90%);
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: @dh-dark-text;
+    background-color: @primary;
+  }
+}
+
+
+.btn-danger-t,
+.btn-success-t,
+.btn-default-t,
+.btn-primary-t{
+  border: 0;
+  color: fade(@bootstrap-red, 70%);
+  background-color: transparent;
+  border: none;
+  &:hover,
+  &:focus,
+  &:active{
+    box-shadow: none;
+    border: none;
+    outline: none;
+    color: @bootstrap-red;
+  }
+}
+
+.btn-primary-t {
+  color: fade(@bootstrap-blue, 70%);
+  &:hover,
+  &:focus,
+  &:active{
+    color: @bootstrap-blue;
+  }
+}
+
+.btn-success-t {
+  color: fade(@dh-green, 70%);
+  &:hover,
+  &:focus,
+  &:active{
+    color: @dh-green;
+  }
+}
+
+.btn-default-t {
+  color: fade(@dh-dark-text, 70%);
+  &:hover,
+  &:focus,
+  &:active{
+    color: @dh-dark-text;
+  }
+}
+
+/* Page styles */
+.page-top {
+  padding-top: 52px;
+}
+
+/* Navbar */
+.dh-navbar {
+  margin-bottom: 0;
+  border-bottom: 2px solid fade(@dh-dark-text, 8%);
+  text-transform: uppercase;
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-color: @primary;
+  color: @dh-dark-text;
+  .navbar-brand {
+    font-weight: 700;
+    &:focus {
+      outline: none;
+    }
+    .navbar-toggle {
+      padding: 4px 6px;
+      font-size: 16px;
+      color: @dh-dark-text;
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+  }
+  a {
+    color: @dh-dark-text;
+  }
+  .nav {
+    li {
+      a {
+        -webkit-transition: background .3s ease-in-out;
+        -moz-transition: background .3s ease-in-out;
+        transition: background .3s ease-in-out;
+        &:hover {
+          color: fade(@dh-dark-text, 80%);
+          outline: none;
+          background-color: transparent;
+        }
+        &:focus,
+        &:active {
+          outline: none;
+          background-color: transparent;
+        }
+        .profile-pic {
+          width: 20px;
+          border-radius: 50%;
+        }
+      }
+      &.active {
+        outline: none;
+        a {
+          background-color: fade(@dh-dark-text, 30%);
+          &:hover {
+            color: @dh-dark-text;
+          }
+        }
+      }
+    }
+  }
+  @media(min-width:768px) {
+    padding: 20px 0;
+    border-bottom: none;
+    letter-spacing: 1px;
+    background: transparent;
+    -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    transition: background .5s ease-in-out,padding .5s ease-in-out;
+    color: @dh-light-text;
+    a {
+      color: @dh-light-text;
+    }
+    &.top-nav-collapse {
+      padding: 0;
+      background: @primary;
+      color: @dh-dark-text;
+      border-bottom: 2px solid fade(@dh-dark-text, 8%);
+      a {
+        color: @dh-dark-text;
+        &:hover {
+          color: fade(@dh-dark-text, 80%) !important;
+          outline: none;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+/* DH Cards */
+
+body {
+  webkit-tap-highlight-color: fade(white, 20%);
+}

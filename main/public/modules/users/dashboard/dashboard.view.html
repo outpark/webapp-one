@@ -1,0 +1,19 @@
+<section class="page-top row" style="background-color:{{ headerColor }}">
+    <div class="container dh-page-header">
+        <div class="col-sm-12 page-header">
+            <h1>{{ headerTitle }} <small>{{ headerSubtitle }}</small></h1>
+        </div>
+        <div ng-if="headerButtonVisible" class="btn-header col-sm-12">
+            <button class="btn {{ headerButtonColor || 'btn-success' }} " ng-click="onHeaderButtonClick()">
+                {{ headerButtonText }}
+            </button>
+        </div>
+    </div>
+</section>
+<div class="arrow-down row">
+    <div class="container" style="color:{{ headerColor }}">
+        <i class="fa fa-caret-down fa-2x"></i>
+    </div>
+</div>
+
+<data-ui-view></data-ui-view>

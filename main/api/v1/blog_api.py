@@ -1,0 +1,57 @@
+# coding: utf-8
+# pylint: disable=too-few-public-methods, no-self-use, missing-docstring, unused-argument
+"""
+Provides API logic relevant to users
+"""
+from flask_restful import reqparse, Resource
+
+import auth
+from google.appengine.ext import ndb
+
+from main import API
+from model import Blog
+from api.helpers import ArgumentValidator, make_list_response, make_empty_ok_response
+from flask import request, g
+from pydash import _
+from api.decorators import model_by_key, user_by_username, authorization_required, admin_required, login_required
+
+@API.resource('/api/v1/blogs')
+class BlogsApi(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('cursor', type=ArgumentValidator.create('cursor'))
+        args = parser.parse_args()
+
+        blogs_future = Blog.query() \
+            .order(-Blog.modified) \
+            .fetch_page_async(30, start_cursor=args.cursor)
+
+        total_count_future = Blog.query().count_async(keys_only=True)
+        stories, next_cursor, more = blogs_future.get_result()
+        stories = [s.to_dict(include=Blog.get_public_properties()) for s in stories]
+        return make_list_response(stories, next_cursor, more, total_count_future.get_result())
+
+    @admin_required
+    def post(self):
+        """Creates new project if provided valid arguments"""
+        parser = reqparse.RequestParser()
+        parser.add_argument('text', required=True)
+        args = parser.parse_args()
+
+        blog_db = Blog(
+        text=args.text,
+        feature= args.feature,
+        tags=args.tags,
+        )
+        blog_db.put()
+        return blog_db.to_dict(include=Blog.get_public_properties())
+
+@API.resource('/api/v1/stories/<string:key>')
+class StoriesByUserAPI(Resource):
+
+    def get(self, key):
+        story_db = Story.get_by_id(key)
+        if not story_db:
+            return make_empty_ok_response()
+        else:
+            return story_db.to_dict(include=Story.get_public_properties())

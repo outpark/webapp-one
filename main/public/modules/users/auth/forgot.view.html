@@ -1,0 +1,46 @@
+<!-- Intro Header -->
+<header id="pageTop" class="intro-section">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <!--left container-->
+                <div class="col-sm-7 padding-bottom padding-top">
+                    <h1 class="brand-heading">
+                        <span class="icon-dh-logo"></span>
+                        <span class="light">Dental</span> Hackathon
+                    </h1>
+                    <p class="intro-text">Reset your password to continue the challenge.</p>
+                    <button class="btn btn-lg btn-white" ui-sref="signup">
+                        Don't have an Account? Sign Up.</i>
+                    </button>
+                </div>
+                <div class="col-sm-5 padding-bottom padding-top">
+                    <form class="form-signup" name="signupForm" ng-submit="submit()">
+                        <h3 class="form-signin-heading">Reset Your Password</h3>
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <div>
+                            <input ng-model="credentials.email"
+                                   required
+                                   type="email"
+                                   class="dh-form-control" placeholder="Email address &mdash; someone@example.com"
+                                   tabindex="1"
+                                   autofocus
+                                   name="login">
+                            <div style="color:maroon;" ng-messages="signupForm.login.$error"
+                                 ng-show="signupForm.login.$touched && signupForm.$dirty">
+                                <div ng-message="required">Email address is required.</div>
+                                <div ng-message="email">Email address in invalid.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-lg btn-primary btn-block {{ isLoading ? 'disabled': '' }}" type="submit">
+                                <i class="fa fa-spin fa-circle-o-notch" ng-if="isLoading"></i> Reset Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+

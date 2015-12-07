@@ -1,0 +1,19 @@
+# python cache files
+*.pyc
+*.pyo
+.DS_Store
+
+# pycharm/jetbrains file
+.idea
+
+# Folders to ignore
+bower_components
+node_modules
+main/lib
+main/public/dist
+main/public/lib
+temp/
+
+# Specific files
+main/index.yaml
+main/lib.zip

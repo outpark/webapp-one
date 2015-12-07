@@ -1,0 +1,14 @@
+# extends 'base.html'
+
+# block content
+
+<toast></toast>
+<!-- Navigation -->
+<div ng-controller="NavbarController"
+     ng-include="'/p/modules/core/layout/navbar.view.html'">
+</div>
+<!-- end navigation -->
+<data-ui-view></data-ui-view>
+# include 'bit/footer.html'
+
+# endblock

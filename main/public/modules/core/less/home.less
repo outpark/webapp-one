@@ -1,0 +1,129 @@
+@import "variables.less";
+@import "mixins.less";
+@import "grid.less";
+
+/* Sections */
+.intro-section {
+  display: table;
+  width: 100%;
+  height: 100%;
+  padding: 100px 0;
+  text-align: center;
+  color: white;
+  background: url(/p/modules/core/img/banner-hd.png) no-repeat bottom center scroll;
+  background-color: black;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  .intro-body {
+    display: table-cell;
+    vertical-align: middle;
+    .brand-heading {
+      font-size: 40px;
+    }
+    .intro-text {
+      font-size: 18px;
+    }
+    .padding-bottom{
+      padding-bottom: 50px;
+    }
+    .padding-top{
+      padding-top: 125px;
+    }
+    a.white{
+      color: fade(@primary, 90%);
+      &:hover{
+        color: @primary;
+      }
+    }
+    .form-signup{
+      background-color: @dh-light-gray;
+      padding: 20px;
+      color: @dh-dark-text;
+      border-radius: 5px;
+      button{
+        margin: 20px 0px;
+      }
+      h3{
+        font-weight: normal;
+        font-size: 1.2em;
+      }
+    }
+  }
+  @media(min-width:768px) {
+    height: 100%;
+    padding: 0;
+    .intro-body {
+      .brand-heading {
+        font-size: 40px;
+      }
+      .intro-text {
+        font-size: 26px;
+      }
+    }
+  }
+}
+
+.dh-section {
+  padding: 100px 0;
+}
+
+#about {
+  .text-container {
+    text-align: left;
+    @media (min-width: 768px) {
+      text-align: right;
+    }
+  }
+  .video-container {
+    text-align: center;
+    @media (min-width: 768px) {
+      text-align: right;
+    }
+    iframe {
+      max-width: 100%;
+    }
+  }
+}
+
+#core-challenges {
+  .header {
+    height: 200px;
+    h4 {
+      padding-top: 15px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.story-section {
+  padding: 100px 0;
+  color: @dh-dark-text
+}
+
+#footer {
+  padding: 40px 0;
+  color: @dh-pink !important;
+  li {
+    a {
+      font-size: 18px;
+      line-height:30px;
+    }
+    margin-right: 10px;
+  }
+  a {
+    color: @dh-pink !important;;
+    &:active,
+    &:hover {
+      color: fade(@dh-pink, 70%);
+    }
+  }
+  .social-links {
+    text-align: left;
+    @media(min-width:768px) {
+      text-align: right;
+    }
+  }
+}
+

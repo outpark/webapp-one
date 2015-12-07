@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="col-lg-12 text-center">
+        <h2>{{ username ? username + "'s Projects" : 'All Projects' }}</h2></div>
+    <div class="col-md-12 text-center" ng-if="isLoading">
+        <h4><i class="fa fa-spin fa-circle-o-notch"></i> Loading Projects...</h4>
+    </div>
+    <div class="col-lg-12 text-center" ng-if="projectsModel && projectsModel.length == 0 && !isLoading">
+        <h4>No projects yet...</h4>
+        <a class="btn btn-lg btn-primary" href="" ui-sref="dashboard.projects.add">Create One?</a>
+    </div>
+    <div class="col-lg-6 col-sm-6" ng-repeat="project in projectsModel | orderBy: '-modified'">
+        <div class="card project">
+            <div class="feature">
+                <img alt="" src="{{  project.feature }}">
+            </div>
+            <div class="card-body">
+                <div class="card-info">
+                    <h4>{{ project.name }}</h4>
+                    <span> &mdash; {{ project.elevator }}</span>
+                </div>
+                <p>
+                    {{ project.story | words:15}}
+                </p>
+                <ul class="members">
+                    <h6>Members</h6>
+                    <li ng-repeat="member in project.members_struct">
+                        <img class="avatar" src="{{ member.avatar_url }}"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="share buttons">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-lg btn-default-t" ui-sref="dashboard.projects.edit({key:project.key})">
+                        <span class="fa fa-share" aria-hidden="true"></span>
+                        <span class="text">Read More</span>
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-lg btn-primary-t" ng-click="shareFacebook(project)">
+                        <span class="fa fa-facebook-official" aria-hidden="true"></span>
+                        <span class="text">Share</span>
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-lg btn-success-t" ng-click="shareTwitter(project)">
+                        <span class="fa fa-twitter" aria-hidden="true"></span>
+                        <span class="text">Tweet</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 text-center" ng-if="more">
+        <a href="" ng-click="readMore()">See more projects...</a>
+    </div>
+</div>

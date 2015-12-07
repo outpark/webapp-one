@@ -1,0 +1,5 @@
+# if config.DEVELOPMENT
+    <link rel="stylesheet" href="/p/dist/style.css?{{config.CURRENT_VERSION_ID}}">
+# else
+    <link rel="stylesheet" href="/p/dist/style.min.css?{{config.CURRENT_VERSION_ID}}">
+# endif

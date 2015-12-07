@@ -1,0 +1,43 @@
+<section class="dashboard-form dashboard-top-section">
+    <div class="container">
+        <div class="row">
+            <h2>Share My Story</h2>
+            <hr/>
+            <form class="form-horizontal"
+                  name="storyForm"
+                  ng-submit="submit()"
+                  unsaved-warning-form>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="textStory">My Story is</label>
+                    <div class="col-md-10">
+                    <textarea class="dh-form-control"
+                              id="textstory"
+                              name="textstory"
+                              rows="6"
+                              required
+                              placeholder="I believe the Dental Hackathon is..."
+                              ng-model="story.text"></textarea>
+                        <div style="color:maroon;" ng-messages="storyForm.textstory.$error"
+                             ng-show="storyForm.textstory.$touched && storyForm.$dirty">
+                            <div ng-message="required">Story is required.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10 col-md-offset-2">
+                        <button type="submit" ng-disabled="isStoryLoading" class="btn btn-success btn-lg">
+                            <i ng-if="isStoryLoading" class="fa fa-spin fa-circle-o-notch"></i>
+                            <i ng-if="!isStoryLoading" class="fa fa-send"></i> Share
+                        </button>
+                        <button type="button" class="btn btn-danger-t btn-lg pull-right" ng-click="cancel()">
+                            <i class="fa fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

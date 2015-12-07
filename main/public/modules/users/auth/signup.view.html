@@ -1,0 +1,83 @@
+<!-- Intro Header -->
+<header id="pageTop" class="intro-section">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <!--left container-->
+                <div class="col-sm-7 padding-bottom padding-top">
+                    <h1 class="brand-heading">
+                        <span class="icon-dh-logo"></span>
+                        <span class="light">Dental</span> Hackathon
+                    </h1>
+                    <p class="intro-text">Log in to explore projects and meet your team.</p>
+                    <button class="btn btn-lg btn-white" ui-sref="login">
+                        Already have an account? Log in.</i>
+                    </button>
+                </div>
+                <div class="col-sm-5 padding-bottom padding-top">
+                    <form class="form-signup" name="signupForm" ng-submit="signup()">
+                        <h3 class="form-signin-heading">Take the Challenge</h3>
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <div>
+                            <input ng-model="credentials.email"
+                                   required
+                                   type="email"
+                                   class="dh-form-control" placeholder="Email address"
+                                   tabindex="1"
+                                   autofocus
+                                   name="email">
+                            <div style="color:maroon;" ng-messages="signupForm.email.$error"
+                                 ng-show="signupForm.email.$touched && signupForm.$dirty">
+                                <div ng-message="required">Email is required.</div>
+                                <div ng-message="email">Not a valid email.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="inputUsername" class="sr-only">Username</label>
+                            <input ng-model="credentials.username"
+                                   class="dh-form-control" placeholder="Username"
+                                   ng-minlength="5"
+                                   ng-maxlength="20"
+                                   tabindex="2"
+                                   required
+                                   name="username" type="text">
+                            <div style="color:maroon;" ng-messages="signupForm.username.$error"
+                                 ng-show="signupForm.username.$touched && signupForm.$dirty">
+                                <div ng-message="required">Username is required.</div>
+                                <div ng-message="minlength">Username needs to be at least 5 characters long.</div>
+                                <div ng-message="maxlength">Username can be up to 20 characters long.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input ng-model="credentials.password"
+                                   tabindex="3"
+                                   name="password"
+                                   type="password"
+                                   placeholder="Password"
+                                   class="dh-form-control"
+                                   ng-minlength="5"
+                                   ng-maxlength="20"
+                                   required
+                                    />
+                            <div style="color:maroon;" ng-messages="signupForm.password.$error"
+                                 ng-show="signupForm.password.$touched && signupForm.$dirty">
+                                <div ng-message="required">Password is required.</div>
+                                <div ng-message="minlength">Password needs to be at least 5 characters long.</div>
+                                <div ng-message="maxlength">Password can be up to 20 characters long.</div>
+                            </div>
+                        </div>
+                        <div ng-if="!showLogin">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                        </div>
+                        <div ng-if="showLogin">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                            <a href="">Forgot your password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
