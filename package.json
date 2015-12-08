@@ -1,5 +1,5 @@
 {
-  "name": "dentalhackathon",
+  "name": "hacknyu",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,11 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/sajarora/dentalhackathon_webapp.git"
+    "url": "git+ssh://git@github.com:hacknyu2016/webapp-one.git"
   },
   "author": "Saj Arora",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/sajarora/dentalhackathon_webapp#readme",
+  "homepage": "https://github.com/hacknyu2016/webapp-one#readme",
   "devDependencies": {
     "browser-sync": "^2.9.8",
     "del": "^2.0.2",

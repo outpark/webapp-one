@@ -29,7 +29,7 @@
     var modulesDir = publicDir + '/modules';
 
     // Backend paths
-    var pyLibDir = mainDir + '/lib';
+    var pyLibDir = mainDir + '/pylibs';
 
     var injectAssetsDir = mainDir + '/templates/bit/';
     var htmlViews = ['modules/**/*.html'];
@@ -191,8 +191,8 @@
     });
 
     gulp.task('zip-lib', function() {
-        gulp.src('./main/lib/**/*')
-            .pipe(zip('lib.zip'))
+        gulp.src(pyLibDir + '/**/*')
+            .pipe(zip('pylibs.zip'))
             .pipe(gulp.dest('./main/'));
     });
 

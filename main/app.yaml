@@ -1,4 +1,4 @@
-application: dental-hackathon-16
+application: hack-nyu
 version: 1
 runtime: python27
 api_version: 1
@@ -54,7 +54,7 @@ skip_files:
 - ^(.*/)?app\.yml
 - ^(.*/)?index\.yaml
 - ^(.*/)?index\.yml
-- ^lib/.*
+- ^pylibs/.*
 - ^public/lib/.*
 - ^public/modules/application.js
 - ^public/modules/.*\.coffee
