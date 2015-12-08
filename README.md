@@ -17,13 +17,9 @@ http://hack-nyu.appspot.com
 3. Install git
 4. Clone with git: https://github.com/hacknyu2016/webapp-one or git@github.com:hacknyu2016/webapp-one.git
 3. Setup flask requirements - in the root folder run:```python setup.py```
-4. Install node modules:```npm install```
-5. Install bower components:```
-bower install
-```
-7. Run Gulp to enable livereload and css generation from .less```
-gulp
-```
+4. Install node modules: ```npm install```
+5. Install bower components: ```bower install```
+7. Run Gulp to enable livereload and css generation from .less: ```gulp```
 6. Run app engine server: You can do this from within PyCharm:
   * Run > Edit Configurations... > Add (+): App Engine Server as a configuration
   * Set the working directory as ./main
@@ -35,9 +31,7 @@ Note: You can also run from the terminal by running dev_appserver.py '/address-t
   * dev_appserver.py is found in google_appengine folder
 
 ##Contributing to the Project
-1. After you have cloned the git and set up the environment, create a new branch for the feature/fix you are working on```
-git checkout -b feature-projects
-```
+1. After you have cloned the git and set up the environment, create a new branch for the feature/fix you are working on: ``` git checkout -b feature-projects```
 2. Add your features and push your branch frequently
   1. git add .
   2. git commit -m 'e.g. Added templates'
