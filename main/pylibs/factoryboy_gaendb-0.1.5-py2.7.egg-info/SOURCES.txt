@@ -1,7 +1,0 @@
-factoryboy_gaendb.egg-info/PKG-INFO
-factoryboy_gaendb.egg-info/SOURCES.txt
-factoryboy_gaendb.egg-info/dependency_links.txt
-factoryboy_gaendb.egg-info/requires.txt
-factoryboy_gaendb.egg-info/top_level.txt
-gaendb/__init__.py
-gaendb/factories.py

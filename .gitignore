@@ -9,11 +9,11 @@
 # Folders to ignore
 bower_components
 node_modules
-main/lib
+main/pylibs
 main/public/dist
 main/public/lib
 temp/
 
 # Specific files
 main/index.yaml
-main/lib.zip
+main/pylibs.zip

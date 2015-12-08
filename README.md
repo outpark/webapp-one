@@ -1,5 +1,6 @@
-# webapp-one
+# Webapp-ONE
 First iteration of the Hack NYU platform
+http://hack-nyu.appspot.com
 
 ##Pre-reqs
 * Python
