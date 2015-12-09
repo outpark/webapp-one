@@ -19,7 +19,7 @@ http://hack-nyu.appspot.com
   * Mac/Linux: ```python setup.py```
   * Windows: 
      - Make a directory in ./main called pylibs
-     - run the following in the ./main folder: ```pip install -t ./pylibs -r requirements.txt```
+     - run the following in the ./main folder: ```pip install -t ./pylibs -r ./../requirements.txt```
 5. Install node modules: ```npm install```
 6. Install bower components: ```bower install```
 7. Run Gulp to enable livereload and css generation from .less: ```gulp```
