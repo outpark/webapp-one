@@ -42,7 +42,7 @@ def img(bkey):
 
 
 # index - home page
-@app.route('/<year>')
+@app.route('/')
 def index():
     """Render index template"""
     return flask.render_template('index.html')

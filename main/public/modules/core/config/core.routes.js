@@ -6,11 +6,17 @@
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
-            //guest routes
+        //guest routes
             .state('home', {
                 url         : '/',
                 controller  : 'HomeController',
                 templateUrl : '/p/modules/home/home.view.html'
+            })
+            //app routes
+            .state('app', {
+                url: '/app',
+                controller: 'DashboardController',
+                templateUrl:'/p/modules/mainapp/layout/dashboard.view.html'
             })
 
             //user routes
