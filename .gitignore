@@ -13,6 +13,7 @@ main/pylibs
 main/public/dist
 main/public/lib
 temp/
+datastore
 
 # Specific files
 main/index.yaml

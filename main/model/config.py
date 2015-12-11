@@ -15,7 +15,7 @@ class Config(Base, ConfigAuth):
     analytics_id = ndb.StringProperty(default='')  # Google Analytics ID
     brand_name = ndb.StringProperty(default=config.APPLICATION_NAME)  # Webapp name
     description = ndb.StringProperty(default='')  # Webapp description
-    feedback_email = ndb.StringProperty(default='dentalhackathon16@gmail.com')  # Admin's email, where feedback will be sent
+    feedback_email = ndb.StringProperty(default='')  # Admin's email, where feedback will be sent
     flask_secret_key = ndb.StringProperty(default=util.uuid())
     notify_on_new_user = ndb.BooleanProperty(default=True)  # Whether to send email to admin if user signs up
     recaptcha_forms = ndb.StringProperty(repeated=True)  # List of form names where recaptcha is enabled

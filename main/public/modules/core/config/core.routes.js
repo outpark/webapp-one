@@ -6,30 +6,33 @@
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
+            //guest routes
             .state('home', {
                 url         : '/',
                 controller  : 'HomeController',
-                templateUrl : '/p/modules/core/home/home.view.html'
+                templateUrl : '/p/modules/home/home.view.html'
             })
-            .state('workshops-code', {
-                url: '/workshops/{code}',
-                controller : 'WorkshopsController',
-                templateUrl: '/p/modules/core/workshops/workshops.view.html'
+
+            //user routes
+            .state('login', {
+                url         : '/login',
+                controller  : 'LoginController',
+                templateUrl : '/p/modules/users/auth/login.view.html'
             })
-            .state('workshops', {
-                url: '/workshops',
-                controller : 'WorkshopsController',
-                templateUrl: '/p/modules/core/workshops/workshops.view.html'
+            .state('logout', {
+                url         : '/logout',
+                controller: function (Restangular, gaAuthentication, $state, gaAppConfig) {
+                    Restangular.all('auth/signout').post().then(function (appConfig) {
+                        gaAuthentication.user = false;
+                        _.assignDelete(gaAppConfig, appConfig);
+                        $state.go('home');
+                    });
+                }
             })
-            .state('contact', {
-                url: '/contact',
-                controller : 'ContactController',
-                templateUrl: '/p/modules/core/contact/contact.view.html'
-            })
-            .state('blog', {
-                url: '/blog',
-                controller: 'BlogController',
-                templateUrl: '/p/modules/core/blog/blog.index.html'
+            .state('dashboard', {
+                url         : '/dashboard',
+                controller  : 'DashboardController',
+                templateUrl : '/p/modules/users/dashboard/dashboard.view.html'
             });
     });
 }());

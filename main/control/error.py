@@ -32,9 +32,11 @@ def error_handler(err):
     if flask.request.path.startswith('/api/'):
         return helpers.handle_error(err)
 
-    if err.code != 404:
-        flask.flash(err.name)
-    return flask.render_template('index.html')
+    if flask.request.path.startswith('/app/'):
+        return flask.render_template('app.html')
+
+    flask.flash(err.name)
+    return flask.render_template('error.html')
 
 
 if config.PRODUCTION:

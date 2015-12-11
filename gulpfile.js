@@ -52,6 +52,7 @@
             'lib/angular/angular.js',
             'lib/angular-animate/angular-animate.min.js',
             'lib/angular-messages/angular-messages.js',
+            'lib/angular-flash-alert/dist/angular-flash.min.js',
             'lib/angular-sanitize/angular-sanitize.js',
             'lib/angular-scroll/angular-scroll.js',
             'lib/angular-truncate/src/truncate.js',
@@ -100,7 +101,7 @@
     //css/less files
     var cssFiles = [
         'lib/bootstrap/dist/css/bootstrap.css',
-        'lib/ngToast/dist/ngToast.css',
+        'lib/angular-flash-alert/dist/angular-flash.min.css',
         'lib/animate.css/animate.css',
         'modules/core/fonts/font-awesome/font-awesome.css',
         'modules/core/fonts/icomoon/style.css'

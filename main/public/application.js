@@ -10,7 +10,7 @@ var AppConfig = (function() {
     var applicationModuleVendorDependencies = [
         'ngSanitize',
         'ngMessages',
-        'ngToast',
+        'flash',
         'ngAnimate',
         'ui.router',
         'restangular',

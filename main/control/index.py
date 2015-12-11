@@ -14,7 +14,7 @@ import config
 from model import User, UserValidator, Config
 from api.helpers import ArgumentValidator
 
-
+# Uploads images for user
 @app.route('/uploadimage', methods=['POST'])
 def upload():
     if request.method == 'POST':
@@ -32,6 +32,7 @@ def upload():
         return 400
 
 
+# Retrieves images based on key
 @app.route("/images/<bkey>")
 def img(bkey):
     blob_info = blobstore.get(bkey)
@@ -40,12 +41,21 @@ def img(bkey):
     return response
 
 
-@app.route('/')
+# index - home page
+@app.route('/<year>')
 def index():
     """Render index template"""
     return flask.render_template('index.html')
 
 
+# app - login and dashboard
+@app.route('/app')
+def app_route():
+    """Render the app template"""
+    return flask.render_template('app.html')
+
+
+# Injects user model into every page request
 @app.context_processor
 def inject_user():
     """Injects 'user' variable into jinja template, so it can be passed into angular. See base.html"""
@@ -57,6 +67,7 @@ def inject_user():
     }
 
 
+# Injects app config into every page request
 @app.context_processor
 def inject_config():
     """Injects 'app_config' variable into jinja template, so it can be passed into angular. See base.html"""
@@ -68,6 +79,7 @@ def inject_config():
     }
 
 
+# Injects validators for forms into every page request
 @app.context_processor
 def inject_validators():
     """Injects 'validators' variable into jinja template, so it can be passed into angular. See base.html

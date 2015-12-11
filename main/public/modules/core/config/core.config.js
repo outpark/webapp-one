@@ -1,3 +1,11 @@
+/**
+ * Core config file
+ * Sets up the location mode to html5 (no # in the address bar)
+ * Sets up the Restangular's base url and request interceptors
+ * Initializes Facebook app
+ * Initializes Twitter app
+ * Sets scope.user and scope.cfg for all controllers inside <body/>
+ */
 (function() {
     'use strict';
 
@@ -5,7 +13,7 @@
 
     module.constant('_', _);
 
-    module.config(function($locationProvider, RestangularProvider, ngToastProvider,
+    module.config(function($locationProvider, RestangularProvider,
                            $fbProvider, $twtProvider, $httpProvider) {
         $locationProvider.html5Mode(false);
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -15,20 +23,13 @@
                 id : 'key'
             });
 
-        ngToastProvider.configure({
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom',
-            dismissButton: true,
-            additionalClasses: 'dh-toast'
-        });
-
         $fbProvider.init('1044653762222445');
         $twtProvider.init()
             .trimText(true);
     });
 
-    module.run(function(Restangular, $state, $rootScope, $timeout, ngToast, gaAuthentication,
-                        gaBrowserHistory, gaFlashMessages) {
+    module.run(function(Restangular, $state, $rootScope, $timeout, gaAuthentication,
+                        gaBrowserHistory, gaFlashMessages, Flash) {
         var loadingPromise;
         var endLoading = function () {
             $timeout.cancel(loadingPromise);
@@ -46,15 +47,15 @@
             var msg = res.data && res.data.message ? res.data.message :
                 'Sorry, I failed so badly I can\'t even describe it :(';
             if (res.status === 403) {
-                ngToast.danger('Sorry, you\'re not allowed to do it, please sign in with different account');
+                Flash.create('danger', 'Sorry, you\'re not allowed to do it, please sign in with different account');
                 $state.go('signin');
             } else if (res.status === 401) {
-                ngToast.warning('Please sign in first!');
+                Flash.create('danger', 'Please sign in first!');
                 $state.go('signin');
             } else if (res.status === 404) {
-                ngToast.danger(res.data.message || 'Sorry, this requested page doesn\'t exist');
+                Flash.create('danger', res.data.message || 'Sorry, this requested page doesn\'t exist');
             } else {
-                ngToast.create(msg);
+                Flash.create('danger', msg);
             }
             return true;
         });
@@ -100,64 +101,25 @@
          * If there are FlashMessages from server, toast will display them
          */
         if (!_.isEmpty(gaFlashMessages)) {
-            ngToast.create(gaFlashMessages[0]);
+            Flash.create(gaFlashMessages[0]);
         }
     });
+
     module.controller('CoreController', function($scope, $document, $anchorScroll, $location,
                                                  gaAuthentication, gaAppConfig){
+        $scope.user = gaAuthentication.user; //attaches signed in user to scope of <body/>
+        $scope.cfg = gaAppConfig; //attaches config to scope of <body/>
 
-        $scope.auth = gaAuthentication;
-        $scope.user = $scope.auth.user;
-        $scope.cfg = gaAppConfig;
-
-        $scope.isLogged = gaAuthentication.isLogged();
-        var currentLocation = $location.path();
-
-        function fancyNavInit(){
-            $scope.fancyNav = false;
-            if (currentLocation == '/') {
-                $scope.fancyNav = true;
-            }
-        }
-
-        var animateScrollTo = null;
-
-        function myEasing(t) {
-            return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1;
-        }
-
-        $scope.scrollTo = function(location){
-            animateScrollTo = null;
-            var element = angular.element(document.getElementById(location));
-            $document.scrollToElement(element, 0, 500, myEasing);
-        };
-
-        $scope.homeAndScrollTo = function(location){
-            if (currentLocation != '/') {
-                $location.url('/');
-                $location.hash(location);
-                $anchorScroll();
-            } else {
-                $scope.scrollTo(location);
-            }
-        };
-
-        $scope.$on('$locationChangeSuccess', function(){
-            currentLocation = $location.path();
-            fancyNavInit();
-            if (animateScrollTo != null)
-                $scope.scrollTo(animateScrollTo);
-            $scope.isLogged = gaAuthentication.isLogged();
-            $scope.auth = gaAuthentication;
-            $scope.user = $scope.auth.user;
-        });
-
-        fancyNavInit();
     });
-    module.constant('dhColors', {
-        BLUE: '#337AB7',
-        ORANGE: '#FA9D15',
-        PINK: '#D93173',
-        GREEN: '#42AF4A'
+
+    module.constant('hnyColor', {
+        DARK_PRIMARY_COLOR: '#512DA8',
+        PRIMARY_COLOR: '#673AB7',
+        LIGHT_PRIMARY_COLOR: '#D1C4E9',
+        TEXT_PRIMARY_COLOR: '#FFFFFF',
+        ACCENT_COLOR: '#7C4DFF',
+        PRIMARY_TEXT_COLOR: '#212121',
+        SECONDARY_TEXT_COLOR: '#727272',
+        DIVIDER_COLOR: '#B6B6B6'
     });
 }());

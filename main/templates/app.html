@@ -1,9 +1,11 @@
 # extends 'base.html'
 
 # block content
+
+<toast></toast>
 <!-- Navigation -->
-<div ng-controller="HomeNavbarController"
-     ng-include="'/p/modules/home/navbar.view.html'">
+<div ng-controller="NavbarController"
+     ng-include="'/p/modules/core/layout/navbar.view.html'">
 </div>
 <!-- end navigation -->
 <data-ui-view></data-ui-view>
