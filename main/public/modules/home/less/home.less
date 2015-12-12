@@ -1,0 +1,69 @@
+.hacknyu-navbar-clear{
+  padding-top: 20px;
+  background: transparent;
+  position:absolute;
+  z-index: 2;
+  width: 100%;
+}
+
+.hacknyu-brand {
+  text-transform: uppercase;
+  span.hack {
+    background-color: @darkPrimaryColor;
+    color: @textPrimaryColor;
+    padding: 5px 15px;
+  }
+  span.nyu {
+    background-color: @textPrimaryColor;
+    color: @darkPrimaryColor;
+    padding: 5px 15px;
+  }
+}
+
+#hello {
+  color: @textPrimaryColor;
+  position: relative;
+  .cover {
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-background-size:cover;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position:50% 50%;
+  }
+  .intro {
+    padding: 300px 0;
+    h2 {
+      font-size: 1.9em;
+    }
+  }
+  .cities{
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    a {
+      color: @textPrimaryColor;
+      padding: 10px;
+      &.active {
+        text-decoration: underline;
+      }
+    }
+  }
+  .hacknyu-weather {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    p {
+      font-weight: bold;
+      font-size: 1.5em;
+      span::after {
+        content: "\00b0";
+      }
+    }
+  }
+}

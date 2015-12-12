@@ -90,11 +90,8 @@
 
     //copy the fonts overs
     gulp.task('copy-fonts', function() {
-        gulp.src('font-awesome/fonts/*', {
-            cwd : publicLibDir
-        }).pipe(gulp.dest(distDir + '/fonts'));
-        gulp.src('modules/core/fonts/*', {
-            cwd : publicDir
+        gulp.src('core/fonts/**/*', {
+            cwd : modulesDir
         }).pipe(gulp.dest(distDir + '/fonts'));
     });
 

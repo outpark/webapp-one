@@ -35,6 +35,12 @@ handlers:
   mime_type: font/ttf
   expiration: 1000d
 
+- url: /p/(.*\.woff)
+  static_files: public/\1
+  upload: public/(.*\.woff)
+  mime_type: font/woff
+  expiration: 1000d
+
 - url: /p/
   static_dir: public/
   expiration: 1000d
