@@ -1,15 +1,7 @@
 # extends 'base.html'
 
 # block content
-<div id="wrapper-home">
-    <div flash-message="5000" ></div>
-    <!-- Navigation -->
-    <div ng-controller="HomeNavbarController"
-         ng-include="'/p/modules/home/navbar.view.html'">
-    </div>
-    <!-- end navigation -->
-    <data-ui-view></data-ui-view>
-</div>
+<data-ui-view></data-ui-view>
 # include 'bit/footer.html'
 
 # endblock

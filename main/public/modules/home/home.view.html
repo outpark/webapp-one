@@ -3,23 +3,22 @@
          ng-show="activeCity == city" style="background-image:url({{ city.banner }})">
     </div>
 
-    <div class="container">
+    <div class="container flex">
+        <nav>
+            <a href=""><span class="fui-user"></span> Sign in</a>
+        </nav>
         <div class="row">
-            <div class="col-sm-12 text-center intro">
+            <div class="col-xs-12 text-center intro">
                 <h1 class="hacknyu-brand"><span class="hack">Hack</span><span class="nyu">NYU</span></h1>
                 <h2>1 Competition &middot; 5 Tracks</h2>
                 <ul class="cities" ng-repeat="city in cities">
                     <li><a href="" class="{{ activeCity == city ? 'active' : '' }}"
                            ng-click="selectCity($index)">{{ city.name }}</a></li>
                 </ul>
-            </div><!-- /col-lg-8 -->
-        </div><!-- /row -->
-    </div> <!-- /container -->
-    <div class="hacknyu-weather">
-        <div class="container">
-            <div class="row">
-                <p class="pull-right">New York | <span>48</span> F</p>
             </div>
+        </div> <!-- /intro -->
+        <div class="hacknyu-weather">
+            <p class="pull-right">New York | <span>48</span> F</p>
         </div>
     </div>
 </div>

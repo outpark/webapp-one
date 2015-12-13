@@ -49,8 +49,4 @@
 
         $scope.transitionToCity(cityIndex++);
     });
-
-    module.controller('HomeNavbarController', function($scope, $log){
-
-    });
 }());
