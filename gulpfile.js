@@ -17,6 +17,7 @@
     var minifyCSS = require('gulp-minify-css');
     var templateCache = require('gulp-angular-templatecache');
     var zip = require('gulp-zip');
+    var autoprefixer = require('gulp-autoprefixer');
 
     var rootDir = '.';
 
@@ -112,11 +113,15 @@
 
     //do the less stuff
     gulp.task('less', function() {
-        return gulp.src(cssFiles.concat(manifestLessFile), {
-            cwd : publicDir
-        }).pipe(sourcemaps.init()).pipe(less({
-            paths : lessPaths
-        })).pipe(sourcemaps.write()).pipe(concatCss('style.css')).pipe(gulp.dest(distDir));
+        return gulp.src(cssFiles.concat(manifestLessFile), {cwd : publicDir})
+            .pipe(sourcemaps.init())
+            .pipe(less({paths : lessPaths}))
+            .pipe(sourcemaps.write())
+            .pipe(concatCss('style.css'))
+            .pipe(autoprefixer({
+                browsers: ['last 2 versions'],
+                cascade: false
+            })).pipe(gulp.dest(distDir));
     });
 
     //live reloading

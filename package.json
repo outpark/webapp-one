@@ -21,6 +21,7 @@
     "grunt-pylint": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.8.0",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-bower": "0.0.10",
     "gulp-clone": "^1.0.0",
     "gulp-concat-css": "^2.2.0",
