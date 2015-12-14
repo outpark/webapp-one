@@ -22,11 +22,13 @@ class Config(Base, ConfigAuth):
     recaptcha_private_key = ndb.StringProperty(default='')
     recaptcha_public_key = ndb.StringProperty(default='')
     salt = ndb.StringProperty(default=util.uuid())
+    weatherApiKey = ndb.StringProperty(default='fa7c1e2d25e0b8399540efa2b411c512')
     verify_email = ndb.BooleanProperty(default=True)  # Whether to verify emails of newly registered users
 
     PUBLIC_PROPERTIES = ConfigAuth.get_public_properties() + \
                         ['analytics_id', 'brand_name', 'description', 'recaptcha_public_key',
-                         'has_recaptcha', 'has_feedback_form', 'recaptcha_forms', 'verify_email']
+                         'has_recaptcha', 'has_feedback_form', 'recaptcha_forms', 'verify_email',
+                         'weatherApiKey']
 
     @property
     def has_feedback_form(self):

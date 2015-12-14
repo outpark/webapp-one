@@ -1,4 +1,4 @@
-<div id="hello">
+<header id="home">
     <div ng-repeat="city in cities" class="cover animated {{ city.animation }}"
          ng-show="activeCity == city" style="background-image:url({{ city.banner }})">
     </div>
@@ -17,10 +17,13 @@
                 </ul>
             </div>
         </div> <!-- /intro -->
-        <div class="hacknyu-weather">
-            <p class="pull-right">New York | <span>48</span> F</p>
-        </div>
     </div>
-</div>
+</header>
 
-<div style="height:2000px;"></div>
+<section id="content" >
+    <div class="container" style="height:2000px;">
+        <a href="" ng-click="tempInCelsius=!tempInCelsius" class="hacknyu-weather pull-right">
+            {{ activeCity.name }} | <span>{{ getTemp(activeCity) }}</span> {{ tempInCelsius ? 'C' : 'F' }}
+        </a>
+    </div>
+</section>
