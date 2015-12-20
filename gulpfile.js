@@ -109,8 +109,8 @@
 
     //copy the fonts overs
     gulp.task('copy-fonts', function() {
-        gulp.src('core/fonts/**/*', {
-            cwd : modulesDir
+        gulp.src('font-awesome/fonts/*', {
+            cwd : publicLibDir
         }).pipe(gulp.dest(distDir + '/fonts'));
     });
 
@@ -118,11 +118,10 @@
     var cssFiles = [
         'lib/bootstrap/dist/css/bootstrap.css',
         'lib/angular-flash-alert/dist/angular-flash.min.css',
-        'lib/animate.css/animate.css',
-        'modules/core/fonts/font-awesome/font-awesome.css',
-        'modules/core/fonts/icomoon/style.css'
+        'lib/animate.css/animate.css'
     ];
     var lessPaths = [
+        publicDir + '/lib/font-awesome/less'
     ];
     var appLessPaths = publicDir + '/modules/**/less';
     lessPaths = lessPaths.concat(glob.sync(appLessPaths));
