@@ -18,6 +18,7 @@
     var templateCache = require('gulp-angular-templatecache');
     var zip = require('gulp-zip');
     var autoprefixer = require('gulp-autoprefixer');
+    var gutil = require('gutil');
 
     var rootDir = '.';
 
@@ -132,7 +133,12 @@
     gulp.task('less', function() {
         return gulp.src(cssFiles.concat(manifestLessFile), {cwd : publicDir})
             .pipe(sourcemaps.init())
-            .pipe(less({paths : lessPaths}))
+            .pipe(less({
+                paths : lessPaths
+            }).on('error', function(err){
+                gutil.log(err);
+                this.emit('end');
+            }))
             .pipe(sourcemaps.write())
             .pipe(concatCss('style.css'))
             .pipe(autoprefixer({

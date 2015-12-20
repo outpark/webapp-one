@@ -1,12 +1,18 @@
-<header>
-    <div class="brand">
-        HackNYU
+<!--header start-->
+<header class="navbar navbar-inverse navbar-embossed" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+            <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href=""  ui-sref="/app">
+            HackNYU
+        </a>
     </div>
-    <nav>
-        Top navbar
-    </nav>
 </header>
-
-<div id="sidebar">
-
-</div>
+<aside>
+    Side bar
+</aside>
+<section id="main-content">
+    <data-ui-view></data-ui-view>
+</section>
+<!--sidebar end-->

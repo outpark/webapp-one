@@ -4,7 +4,7 @@
     'use strict';
     var module = angular.module('mainapp');
 
-    module.controller('DasbhoardController', function(){
+    module.controller('DashboardController', function(){
 
     });
 }());
