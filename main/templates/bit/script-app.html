@@ -59,14 +59,18 @@
 
     <script src="/p/modules/core/js/vendor/video.js"></script>
 
-    <script src="/p/modules/home/home.controller.js"></script>
+    <script src="/p/modules/mainapp/app.module.js"></script>
 
-    <script src="/p/modules/home/config/home.routes.js"></script>
+    <script src="/p/modules/mainapp/config/app.routes.js"></script>
+
+    <script src="/p/modules/mainapp/dashboard/dashboard.controller.js"></script>
+
+    <script src="/p/modules/mainapp/layout/app.controller.js"></script>
 
     <!-- endinject -->
 # else
     <script src="/p/dist/libs.min.js?{{ config.CURRENT_VERSION_ID }}"></script>
-    <script src="/p/dist/script.min.js?{{ config.CURRENT_VERSION_ID }}"></script>
+    <script src="/p/dist/script-app.min.js?{{ config.CURRENT_VERSION_ID }}"></script>
     <script src="/p/dist/templates.js?{{ config.CURRENT_VERSION_ID }}"></script>
 # endif
 

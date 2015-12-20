@@ -68,16 +68,33 @@
         ],
         scripts:[
             'application.js',
-            'modules/**/*.js',
+            'modules/core/**/*.js',
             '!modules/**/tests/**/*.js'
+        ],
+        appScripts: [
+            'modules/mainapp/**/*.js'
+        ],
+        homeScripts: [
+            'modules/home/**/*.js'
         ]
     };
 
     //links all angular scripts and module scripts into a script.html file
     //this script.html file is injected into base.html via jinja2
     function injectScripts() {
+        //first script file is for app stuff
+        var targetApp = gulp.src(injectAssetsDir + 'script-app.html');
+        var sourcesApp = gulp.src(jsFiles.lib.concat(jsFiles.scripts, jsFiles.appScripts),
+            {
+                read: false,
+                cwd: publicDir
+            });
+        targetApp.pipe(inject(sourcesApp, {
+            addPrefix: 'p'
+        })).pipe(gulp.dest(injectAssetsDir));
+
         var target = gulp.src(injectAssetsDir + 'script.html');
-        var sources = gulp.src(jsFiles.lib.concat(jsFiles.scripts), {
+        var sources = gulp.src(jsFiles.lib.concat(jsFiles.scripts, jsFiles.homeScripts), {
             read : false,
             cwd  : publicDir
         });
@@ -173,9 +190,14 @@
         gulp.src(jsFiles.lib, {
             cwd : publicDir
         }).pipe(ngAnnotate()).pipe(uglify('libs.min.js')).pipe(gulp.dest(distDir));
-        gulp.src(jsFiles.scripts, {
+        //app scripts
+        gulp.src(jsFiles.scripts.concat(jsFiles.appScripts), {
             cwd : publicDir
-        }).pipe(ngAnnotate()).pipe(uglify('scripts.min.js')).pipe(gulp.dest(distDir));
+        }).pipe(ngAnnotate()).pipe(uglify('script-app.min.js')).pipe(gulp.dest(distDir));
+        //home scripts
+        gulp.src(jsFiles.scripts.concat(jsFiles.homeScripts), {
+            cwd : publicDir
+        }).pipe(ngAnnotate()).pipe(uglify('script.min.js')).pipe(gulp.dest(distDir));
         gulp.src('style.css', {
             cwd : distDir
         }).pipe(minifyCSS()).pipe(rename({

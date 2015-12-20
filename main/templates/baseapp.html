@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html class="ng-cloak" lang="en">
+<head>
+    # include 'bit/meta.html'
+    <title>{{ config.CONFIG_DB.brand_name }}</title>
+    # include 'bit/style.html'
+    # block head
+    # endblock
+    # include 'bit/analytics.html'
+</head>
+
+<body id="page-top" ng-controller="CoreController">
+# block content
+# endblock
+
+# include 'bit/script-app.html'
+# block scripts
+# endblock
+<script type="text/javascript">
+    var module = angular.module('app');
+    module.value('gaAuthenticatedUser', {{ user | tojson | safe }});
+    module.value('gaAppConfig', {{ app_config | tojson | safe }});
+    module.value('gaFlashMessages', {{ get_flashed_messages() | tojson | safe }});
+    module.value('gaValidators', {{ validators | tojson | safe }});
+</script>
+</body>
+</html>
