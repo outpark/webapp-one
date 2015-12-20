@@ -65,7 +65,9 @@
             'lib/restangular/dist/restangular.js',
             'lib/lodash/dist/lodash.js',
             'lib/angular-no-captcha/src/angular-no-captcha.js',
-            'lib/angular-elastic/elastic.js'
+            'lib/angular-elastic/elastic.js',
+            'lib/jquery.nicescroll/dist/jquery.nicescroll.min.js',
+            'lib/angular-nicescroll/angular-nicescroll.js'
         ],
         scripts:[
             'application.js',

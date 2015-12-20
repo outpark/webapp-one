@@ -19,7 +19,8 @@ var AppConfig = (function() {
         'socialsharing',
         'noCAPTCHA',
         'truncate',
-        'monospaced.elastic'
+        'monospaced.elastic',
+        'angular-nicescroll'
     ];
 
     // Add a new vertical module
