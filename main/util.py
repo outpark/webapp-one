@@ -41,6 +41,25 @@ def create_name_from_email(email):
     return re.sub(r'_+|-+|\.+|\++', ' ', email.split('@')[0]).title()
 
 
+def create_username_from_email(email):
+    """Function tries to recreate real name from email address
+
+    Examples:
+      >>> create_name_from_email('bobby.tables@email.com')
+      bobby.tables
+      >>> create_name_from_email('bobby-tables@email.com')
+      bobby.tables
+
+    Args:
+      email (string): Email address
+
+    Returns:
+      string: Hopefully user's real name
+
+    """
+    return re.sub(r'_+|-+|\.+|\++', '.', email.split('@')[0]).lower()
+
+
 def password_hash(password):
     """Hashes given plain text password with sha256 encryption
     Hashing is salted with salt configured by admin, stored in >>> model.Config

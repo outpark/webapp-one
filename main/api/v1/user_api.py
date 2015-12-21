@@ -15,7 +15,7 @@ from model import User, UserValidator, UserImage
 from api.helpers import ArgumentValidator, make_list_response, make_empty_ok_response
 from flask import request, g
 from pydash import _
-from api.decorators import model_by_key, user_by_username, authorization_required, admin_required
+from api.decorators import model_by_key, user_by_username, authorization_required, admin_required, login_required
 
 
 @API.resource('/api/v1/users')
@@ -23,6 +23,7 @@ class UsersAPI(Resource):
     """Gets list of users. Uses ndb Cursor for pagination. Obtaining users is executed
     in parallel with obtaining total count via *_async functions
     """
+    @login_required
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('cursor', type=ArgumentValidator.create('cursor'))

@@ -78,6 +78,11 @@ def make_empty_ok_response():
     return '', 204
 
 
+def make_json_ok_response(data):
+    """Returns OK response with json body"""
+    return data
+
+
 def make_list_response(reponse_list, cursor=None, more=False, total_count=None):
     """Creates reponse with list of items and also meta data useful for pagination
 
@@ -159,6 +164,53 @@ class ArgumentValidator(model.BaseValidator):
         if not cursor:
             return None
         return Cursor(urlsafe=cursor)
+
+
+class ApiException(object):
+    Error = {
+        # default error
+        0: {
+            "type": exceptions.InternalServerError,
+            "message": "Internal Server Error"
+        },
+
+        # 100 are all auth codes
+        100: {
+            "type": exceptions.Forbidden,
+            "message": "Invalid credentials"
+        },
+        101: {
+            "type": exceptions.Forbidden,
+            "message": "Account deactivated by user"
+        },
+        102: {
+            "type": exceptions.Forbidden,
+            "message": "Account suspended"
+        },
+        103: {
+            "type": exceptions.Forbidden,
+            "message": "Account banned"
+        },
+        104: {
+            "type": exceptions.Forbidden,
+            "message": "Account deleted"
+        },
+        105: {
+            "type": exceptions.Forbidden,
+            "message": "Email not verified"
+        },
+    }
+
+    @classmethod
+    def error(cls, code):
+        """Raises 400 Bad request exception
+
+        Raises:
+            HTTPException: with 400 code
+        """
+        error = cls.Error.get(code, cls.Error.get(0))
+
+        raise  error.get("type")(error.get("message"))
 
 
 

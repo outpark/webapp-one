@@ -162,15 +162,24 @@ def signin_oauth(oauth_app, scheme=None):
         return flask.redirect(flask.url_for('index'))
 
 
-def create_user_db(auth_id, name, username, email='', verified=False, password='', **props):
-    """Saves new user into datastore"""
+def create_user_db(auth_id, username, email, verified, password, **props):
+    """Saves new user into datastore
+
+    Args:
+        auth_id:
+        username:
+        email:
+        verified:
+        password:
+        **props:
+    """
     if password:
         password = util.password_hash(password)
 
     email = email.lower()
     username = username.lower()
+
     user_db = model.User(
-        name=name,
         email=email,
         username=username,
         auth_ids=[auth_id] if auth_id else [],
