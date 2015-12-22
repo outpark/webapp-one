@@ -67,7 +67,8 @@
             'lib/angular-no-captcha/src/angular-no-captcha.js',
             'lib/angular-elastic/elastic.js',
             'lib/jquery.nicescroll/dist/jquery.nicescroll.min.js',
-            'lib/angular-nicescroll/angular-nicescroll.js'
+            'lib/angular-nicescroll/angular-nicescroll.js',
+            'lib/angular-bootstrap/ui-bootstrap-tpls.js'
         ],
         scripts:[
             'application.js',
@@ -151,7 +152,7 @@
     //live reloading
     gulp.task('reload', function() {
         $.livereload.listen();
-        gulp.watch(jsFiles.scripts.concat(htmlViews), {
+        gulp.watch(jsFiles.scripts.concat(jsFiles.appScripts, jsFiles.homeScripts, htmlViews), {
             cwd : publicDir
         }).on('change', $.livereload.changed);
     });

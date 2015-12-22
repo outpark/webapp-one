@@ -36,10 +36,11 @@ def upload():
 @app.route("/images/<bkey>")
 def img(bkey):
     blob_info = blobstore.get(bkey)
-    response = make_response(blob_info.open().read())
-    response.headers['Content-Type'] = blob_info.content_type
-    return response
-
+    if blob_info:
+        response = make_response(blob_info.open().read())
+        response.headers['Content-Type'] = blob_info.content_type
+        return response
+    return make_response()
 
 # index - home page
 @app.route('/')

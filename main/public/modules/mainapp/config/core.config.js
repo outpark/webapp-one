@@ -9,7 +9,7 @@
 (function() {
     'use strict';
 
-    var module = angular.module('core');
+    var module = angular.module('mainapp');
 
     module.constant('_', _);
 
@@ -48,10 +48,10 @@
                 'Sorry, I failed so badly I can\'t even describe it :(';
             if (res.status === 403) {
                 Flash.create('danger', 'Sorry, you\'re not allowed to do it, please sign in with different account');
-                $state.go('signin');
+                $state.go('login');
             } else if (res.status === 401) {
                 Flash.create('danger', 'Please sign in first!');
-                $state.go('signin');
+                $state.go('login');
             } else if (res.status === 404) {
                 Flash.create('danger', res.data.message || 'Sorry, this requested page doesn\'t exist');
             } else {

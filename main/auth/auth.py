@@ -220,12 +220,8 @@ def create_or_get_user_db(auth_id, name, username, email='', **kwargs):
 def signin_user_db(user_db, remember=False):
     """Signs in given user"""
     flask_user_db = FlaskUser(user_db)
-    auth_params = flask.session.get('auth-params', {
-        'remember': remember,
-    })
     flask.session.pop('auth-params', None)
-    return login.login_user(flask_user_db, remember=auth_params['remember'])
-
+    return login.login_user(flask_user_db, remember=remember)
 
 def signout_user():
     """Signs out given user"""

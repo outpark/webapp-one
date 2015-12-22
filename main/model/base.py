@@ -71,7 +71,7 @@ class BaseValidator(object):
         return result
 
 
-class Base(ndb.Model):
+class Base(ndb.Expando):
     """Base model class, it should always be extended
 
     Attributes:

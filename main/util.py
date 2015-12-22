@@ -154,7 +154,7 @@ def constrain_regex(string, regex):
     """
     regex_email = re.compile(regex, re.IGNORECASE)
     if not regex_email.match(string):
-        raise ValueError('Incorrect regex format')
+        raise ValueError('Not a valid email')
     return string
 
 

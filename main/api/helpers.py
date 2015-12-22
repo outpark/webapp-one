@@ -177,10 +177,6 @@ class ApiException(object):
         # 100 are all auth codes
         100: {
             "type": exceptions.Forbidden,
-            "message": "Invalid credentials"
-        },
-        101: {
-            "type": exceptions.Forbidden,
             "message": "Account deactivated by user"
         },
         102: {
@@ -199,6 +195,14 @@ class ApiException(object):
             "type": exceptions.Forbidden,
             "message": "Email not verified"
         },
+        106: {
+            "type": exceptions.Forbidden,
+            "message": "Invalid credentials"
+        },
+        107: {
+            "type": exceptions.BadRequest,
+            "message": "Must agree to all terms and conditions"
+        }
     }
 
     @classmethod

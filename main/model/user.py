@@ -10,7 +10,7 @@ import util
 
 class UserValidator(model.BaseValidator):
     """Defines how to create validators for user properties. For detailed description see BaseValidator"""
-    name = [1, 100]
+    name = [1, 64]
     '''
     >>> username = [3, 64]
     '''
@@ -89,11 +89,13 @@ class User(model.Base):
         pass
 
     """A class describing datastore users."""
-    name = ndb.StringProperty(validator=UserValidator.create('name'))
+    first_name = ndb.StringProperty(validator=UserValidator.create('name'), required=True)
+    last_name = ndb.StringProperty(validator=UserValidator.create('name'), required=True)
+    name = ndb.ComputedProperty(lambda self: self.first_name.title() + ' ' + self.last_name.title())
     username = ndb.StringProperty(default='', required=True, validator=UserValidator.create('username_validator'))
     email = ndb.StringProperty(default='', validator=UserValidator.create('email', required=True))
     auth_ids = ndb.StringProperty(repeated=True)
-    active = ndb.IntegerProperty(default=0) # 0: active, 1: deactivated by user, 2: suspended, 3: forbidden, 4: deleted
+    active = ndb.IntegerProperty(default=1) # 1: active, 0: deactivated by user, 2: suspended, 3: forbidden, 4: deleted
     admin = ndb.BooleanProperty(default=False) # True if user has global permissions (most powerful setting)
     roles = ndb.StringProperty(repeated=True)
     permissions = ndb.StringProperty(repeated=True)
