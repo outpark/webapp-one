@@ -20,7 +20,8 @@ var AppConfig = (function() {
         'noCAPTCHA',
         'truncate',
         'monospaced.elastic',
-        'angular-nicescroll'
+        'angular-nicescroll',
+        'ui.bootstrap'
     ];
 
     // Add a new vertical module

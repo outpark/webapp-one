@@ -1,0 +1,41 @@
+<div class="container">
+
+    <form class="form-signin" name="loginForm" ng-submit="signup()">
+        <div class="form-alert-space">
+            <div class="alert alert-{{ formError.color }}
+            animated fadeInDown" ng-show="formError.show">{{ formError.message }}</div>
+        </div>
+        <h2 class="form-signin-heading">Logo</h2>
+        <div class="login-wrap">
+            <div class="user-login-info animated {{ loginAnimation }}">
+                <h2 class="heading">Sign up</h2>
+                <input type="text" class="form-control" ng-model="credentials.first_name" ng-change="inputChanged()"
+                       placeholder="First Name" name="firstName">
+                <input type="text" class="form-control" ng-model="credentials.last_name" ng-change="inputChanged()"
+                       placeholder="Last Name" name="lastName" required>
+                <input type="email" class="form-control" ng-model="credentials.email" ng-change="inputChanged()"
+                       placeholder="Username/Email Address" name="email" required>
+                <input type="password" class="form-control" ng-model="credentials.password"
+                       placeholder="Password" name="password" required ng-change="inputChanged()">
+            </div>
+            <div class="form-button-bar">
+                 <label class="checkbox">
+                    <input type="checkbox" ng-model="credentials.terms"> I agree to all
+                     <a href="">HackNYU Terms & Conditions</a>
+                </label>
+                <button class="btn btn-lg btn-login btn-block" type="submit">Sign Up</button>
+                <button class="btn btn-lg btn-github btn-block" ng-click="authenticateWithGithub()">
+                    <i class="fa fa-github"></i> Github
+                </button>
+            </div>
+
+            <div class="registration">
+                Already have an account?
+                <a class="" ui-sref="login">
+                    Log in to your account
+                </a>
+            </div>
+
+        </div>
+    </form>
+</div>

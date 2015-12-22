@@ -6,7 +6,7 @@
 (function() {
     'use strict';
 
-    var module = angular.module('core');
+    var module = angular.module('mainapp');
 
     /**
      * @namespace Lodash

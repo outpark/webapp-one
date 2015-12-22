@@ -13,8 +13,8 @@
         var history = [];
         var beforeLogin = null;
         var ignoredStates = ['signout'];
-        var dashboardHome = 'dashboard.home';
-        var dashboardProfile = 'dashboard.profile';
+        var dashboardHome = 'app.dashboard';
+        var dashboardProfile = 'app.profile';
         var wasProfileShownForcefully = false;
 
         return {
@@ -61,8 +61,7 @@
                     else
                         $state.go(dashboardHome);
                 } else {
-                    if (!user.is_complete)
-                        gaToast.show('Your user profile is incomplete. Click here to complete');
+                    //check if user profile is complete (terms have to be accepted)
                     $location.url(beforeLogin);
                 }
             },

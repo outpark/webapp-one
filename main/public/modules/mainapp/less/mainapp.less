@@ -59,20 +59,32 @@ a,a:hover,a:focus {
 #container {
   width:100%;
   height:100%;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
   -webkit-transition:all .3s ease-in-out;
   -moz-transition:all .3s ease-in-out;
   -o-transition:all .3s ease-in-out;
   transition: all .3s ease-in-out;
 }
 
+/*OVERRIDE BOOTSTRAP**/
+.btn-success {
+  background-color: @colorAccent !important;
+  border-color: @colorAccent !important;
+  &:hover {
+    background-color: darken(@colorAccent, 10%) !important;
+  }
+}
+
 /*login page*/
 .form-signin {
   max-width:330px;
-  margin:100px auto;
-  background:@colorWhite;
+  margin:40px auto;
   border-radius:5px;
   -webkit-border-radius:5px;
+}
+.form-alert-space {
+  height: 60px;
 }
 .form-signin h2.form-signin-heading {
   margin:0;
@@ -110,7 +122,8 @@ a,a:hover,a:focus {
 .form-signin .form-control:focus {
   z-index:2;
 }
-.form-signin input[type="text"],.form-signin input[type="password"] {
+.form-signin input[type="text"],.form-signin input[type="password"],
+.form-signin input[type="email"] {
   margin-bottom:15px;
   border-radius:5px;
   -webkit-border-radius:5px;
@@ -169,6 +182,13 @@ a,a:hover,a:focus {
 .user-login-info .form-control:last-child {
   margin-bottom:0 !important;
 }
+
+.form-button-bar {
+  background: @colorWhite;
+  margin:-20px -20px 0px -20px;
+  padding:20px;
+}
+
 .registration {
   position:absolute;
   bottom:-35px;

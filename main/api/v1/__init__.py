@@ -2,12 +2,6 @@
 # pylint: disable=wildcard-import
 """Loads all routes and their functions"""
 
+from .app_api import *
 from .user_api import *
-from .project_api import *
-from .story_api import *
-from .feedback_api import *
 from .auth_api import *
-from .config_api import *
-from .generate_db_api import *
-from .application_api import *
-from .invite_api import *
