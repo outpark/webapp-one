@@ -20,75 +20,64 @@
         $scope.showRightSidebar = false;
 
         //initialize open/close states of sidebar items
-        var state = $state.current.name;
         $scope.sidebar = [
             {
                 name: 'Hub',
                 sref: 'app.dashboard',
-                icon: 'fa-dashboard',
-                active: state == 'app.dashboard'
+                icon: 'fa-dashboard'
             },
             {
                 name: 'HACKNYU',
                 icon: 'hn-hack_nyu',
-                active: state == 'app.projects',
-                isCollapsed: false,
+                isCollapsed: true,
                 subItems: [
                     {
                         name: 'Browse Tracks',
                         sref: 'app.projects',
-                        icon: '',
-                        active: state == 'app.projects'
+                        icon: ''
                     },
                     {
                         name: 'Register',
                         sref: 'app.projects',
                         srefOptions: '',
-                        icon: '',
-                        active: state == 'app.projects'
+                        icon: ''
                     },
                     {
                         name: 'Workshops',
                         sref: 'app.teams',
                         srefOptions: '',
-                        icon: '',
-                        active: state == 'app.teams'
+                        icon: ''
                     }
                 ]
             },
             {
                 name: 'Projects',
                 icon: 'fa-th',
-                active: state == 'app.projects',
-                isCollapsed: false,
+                isCollapsed: true,
                 subItems: [
                     {
                         name: 'All Projects',
                         sref: 'app.projects',
-                        icon: '',
-                        active: state == 'app.projects'
+                        icon: ''
                     },
                     {
                         name: 'My Projects',
                         sref: 'app.projects',
                         srefOptions: '',
-                        icon: '',
-                        active: state == 'app.projects'
+                        icon: ''
                     },
                     {
                         name: 'Teams',
                         sref: 'app.teams',
                         srefOptions: '',
-                        icon: '',
-                        active: state == 'app.teams'
+                        icon: ''
                     }
                 ]
             },
             {
                 name: 'Channels',
                 icon: 'fa-hashtag',
-                active: state == 'app.channels',
-                isCollapsed: false,
+                isCollapsed: true,
                 subItems: [ //in future include only channels user is part of
                     {
                         name: '#general',
@@ -105,40 +94,55 @@
                 ]
             },
             {
+                name: 'Profile',
+                sref: 'app.profile',
+                icon: 'fa-user'
+            },
+            {
                 name: 'Settings',
                 icon: 'fa-cog',
-                active: state == 'app.settings',
-                isCollapsed: false,
+                isCollapsed: true,
                 subItems: [
                     {
-                        name: 'Personal',
-                        sref: 'app.projects',
-                        icon: '',
-                        active: state == 'app.projects'
+                        name: 'Sign in & Security',
+                        sref: 'app.security',
+                        icon: 'fa-user-secret'
                     },
                     {
-                        name: 'Profile',
-                        sref: 'app.projects',
-                        srefOptions: '',
-                        icon: '',
-                        active: state == 'app.projects'
+                        name: 'Personal Info & Privacy',
+                        sref: 'app.personal',
+                        icon: 'fa-lock'
                     },
                     {
-                        name: 'Notifications',
-                        sref: 'app.teams',
-                        srefOptions: '',
-                        icon: '',
-                        active: state == 'app.teams'
+                        name: 'Account Preferences',
+                        sref: 'app.preferences',
+                        icon: 'fa-life-ring'
                     }
                 ]
             },
             {
                 name: 'Log out',
                 sref: 'logout',
-                icon: 'fa-sign-out',
-                active: state == 'logout'
+                icon: 'fa-sign-out'
             }
         ];
+        $scope.$on('$stateChangeSuccess', function () {
+            var path = $state.current.name;
+            angular.forEach($scope.sidebar, function(item){ //iterate over each item
+                item.active = item.sref == path; // set active pending if path matches item sref
+
+                if (item.subItems){ //check each subitem
+                    angular.forEach(item.subItems, function(subItem){
+                        if (subItem.sref == path){
+                            subItem.active = true; //set subitem as active
+                            item.isCollapsed = false; //open up the category
+                        } else {
+                            subItem.active = false; //not active subitem, take active off
+                        }
+                    });
+                }
+            });
+        });
     });
 
     module.controller('AppNavbarController', function($scope, $log){

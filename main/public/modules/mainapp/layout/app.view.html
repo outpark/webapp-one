@@ -231,19 +231,19 @@
             }" style="overflow: hidden; outline: none;" tabindex="5000">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <li ng-repeat="item in sidebar" class="{{ item.subItems ? 'sub-menu dcjq-parent-li' : '' }}">
-                        <a ng-if="!item.subItems" href="" class="{{ item.active ? 'active' : '' }}" ui-sref="item.sref">
+                        <a ng-if="!item.subItems" href="" class="{{ item.active ? 'active' : '' }}" ui-sref="{{ item.sref }}">
                             <i class="fa {{ item.icon }}"></i>
                             <span>{{ item.name }}</span>
                         </a>
-                        <a ng-if="item.subItems" href="" class="{{ item.isCollapsed ? 'active' : '' }}"
-                           ng-click="item.isCollapsed = !item.isCollapsed">
+                        <a ng-if="item.subItems" href="" ng-click="item.isCollapsed = !item.isCollapsed"
+                           class="{{ !item.isCollapsed ? 'not-collapsed' : '' }}">
                             <i class="fa {{ item.icon }}"></i>
                             <span>{{ item.name }}</span>
                             <span class="dcjq-icon"></span>
                         </a>
-                        <ul ng-if="item.subItems" class="sub" uib-collapse="!item.isCollapsed">
+                        <ul ng-if="item.subItems" class="sub" uib-collapse="item.isCollapsed">
                             <li ng-repeat="subitem in item.subItems">
-                                <a href="" class="{{ subitem.active ? 'active' : '' }}" ui-sref="subitem.sref">
+                                <a href="" class="{{ subitem.active ? 'active' : '' }}" ui-sref="{{ subitem.sref }}">
                                     <i class="fa {{ subitem.icon }}"></i>
                                     <span>{{ subitem.name }}</span>
                                 </a>

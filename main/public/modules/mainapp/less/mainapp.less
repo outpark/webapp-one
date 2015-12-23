@@ -18,6 +18,7 @@
 @colorBackgroundLight:  #f3f3f3;
 @colorBackground:       #9c949f;
 @colorBackgroundDark:   #333333;
+@colorBackgroundDarker: #2a2a2a;
 @colorBackgroundXDark:  #000000;
 
 
@@ -230,7 +231,7 @@ a,a:hover,a:focus {
   position:absolute;
   right:10px;
 }
-.active .dcjq-icon {
+.not-collapsed .dcjq-icon {
   background:url(/p/modules/mainapp/img/nav-expand.png) no-repeat bottom;
   border-radius:3px;
   -moz-border-radius:3px;
@@ -330,8 +331,7 @@ ul.sidebar-menu li a {
   -ms-transition:all 0.3s ease;
   transition:all 0.3s ease;
 }
-ul.sidebar-menu li a.active,ul.sidebar-menu li a:hover,ul.sidebar-menu li a:focus {
-  background:@colorBackgroundXDark;
+ul.sidebar-menu li a {
   color:@colorAccentText;
   display:block;
   -webkit-transition:all 0.3s ease;
@@ -339,7 +339,14 @@ ul.sidebar-menu li a.active,ul.sidebar-menu li a:hover,ul.sidebar-menu li a:focu
   -o-transition:all 0.3s ease;
   -ms-transition:all 0.3s ease;
   transition:all 0.3s ease;
+  &.active {
+    background:@colorBackgroundXDark !important;
+  }
+  &:hover, &:focus, &.not-collapsed {
+    background: @colorBackgroundDarker ;
+  }
 }
+
 ul.sidebar-menu li a i {
   font-size:15px;
   padding-right:6px;

@@ -44,8 +44,8 @@
             })
             .state('app.profile', {
                 url: '/profile',
-                controller: 'DashboardController',
-                templateUrl:'/p/modules/mainapp/dashboard/dashboard.view.html'
+                controller: 'ProfileController',
+                templateUrl:'/p/modules/mainapp/profile/profile.view.html'
             })
             .state('app.dashboard', {
                 url: '',
