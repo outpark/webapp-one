@@ -115,6 +115,9 @@
         gulp.src('font-awesome/fonts/*', {
             cwd : publicLibDir
         }).pipe(gulp.dest(distDir + '/fonts'));
+        gulp.src('modules/core/fonts/*', {
+            cwd: publicDir
+        }).pipe(gulp.dest(distDir + '/fonts'));
     });
 
     //css/less files

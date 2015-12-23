@@ -29,8 +29,8 @@
                 active: state == 'app.dashboard'
             },
             {
-                name: 'HackNYU 2016',
-                icon: 'fa-th',
+                name: 'HACKNYU',
+                icon: 'hn-hack_nyu',
                 active: state == 'app.projects',
                 isCollapsed: false,
                 subItems: [
