@@ -1,0 +1,19 @@
+<div class="carousel wizard" ng-swipe-right="prev()" ng-swipe-left="next()">
+    <div class="steps clearfix" ng-show="slides.length > 1">
+        <ul role="tablist">
+            <li role="tab" ng-repeat="slide in slides | orderBy:indexOfSlide track by $index"
+                ng-class="{ current: isActive(slide), disabled: !isActive(slide) }" ng-click="select(slide)">
+                <a id="wizard-t-0" href="">
+                    <span class="number">{{ $index + 1 }}.</span> {{ slide.name }}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="carousel-inner" ng-transclude></div>
+    <div class="modal-footer">
+        <a class="btn btn-default btn-lg" ng-click="prev()">Previous</a>
+        <a class="btn btn-primary btn-lg" ng-click="next()" ng-if="getCurrentIndex() != slides.length - 1">Next</a>
+        <button class="btn btn-primary btn-lg" type="submit" ng-if="getCurrentIndex() == slides.length - 1">
+            Finish</button>
+    </div>
+</div>

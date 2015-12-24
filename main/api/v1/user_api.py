@@ -55,16 +55,18 @@ class UserByUsernameAPI(Resource):
 class UserByKeyAPI(Resource):
     @authorization_required
     @model_by_key
-    def put(self, key):
+    def post(self, key):
         """Updates user's properties"""
-        update_properties = ['name', 'location', 'program', 'bio', 'institution', 'avatar_url']
+        update_properties = ['first_name', 'last_name', 'avatar_url']
         if auth.is_admin():
             update_properties += ['verified', 'active', 'admin']
-
-        new_data = _.pick(request.json, update_properties)
-        print new_data
-        g.model_db.populate(**new_data)
-        g.model_db.check_completed()
+        new_user_data = _.pick(request.json, update_properties)
+        # get profile data
+        profile = request.json.get('profile')
+        update_properties = ['show_profile_wizard', 'workplaces', 'colleges', 'schools', 'first_run']
+        new_profile_data = _.pick(profile, update_properties)
+        g.model_db.populate(**new_user_data)
+        g.model_db.profile.populate(**new_profile_data)
         g.model_db.put()
         return g.model_db.to_dict(include=User.get_public_properties())
 
@@ -100,13 +102,26 @@ class UserImageAPI(Resource):
     @authorization_required
     @model_by_key
     def post(self, key):
+        parser = reqparse.RequestParser()
+        parser.add_argument('size', type=int, help='Not a valid size')
+        parser.add_argument('crop', type=bool, help='Crop can be true or false')
+        args = parser.parse_args()
+
         secret = str(uuid.uuid4())
+
+        options = None
+        if args.size or args.crop:
+            options = {
+                "size" : args.size,
+                "crop" : args.crop
+            }
 
         user_image = UserImage(
             secret=secret,
             user_key=str(g.model_db.key),
             username=g.model_db.username,
-            name=g.model_db.name
+            name=g.model_db.name,
+            options=options
         )
         user_image.put()
         upload_url = blobstore.create_upload_url('/uploadimage?key=' + str(user_image.key.urlsafe()))

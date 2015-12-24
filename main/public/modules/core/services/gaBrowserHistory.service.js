@@ -14,7 +14,7 @@
         var beforeLogin = null;
         var ignoredStates = ['signout'];
         var dashboardHome = 'app.dashboard';
-        var dashboardProfile = 'app.profile';
+        var dashboardProfile = 'app.profile-wizard';
         var wasProfileShownForcefully = false;
 
         return {
@@ -54,7 +54,7 @@
             },
             redirectAfterLogin: function(user){
                 if (beforeLogin == null) { //no redirect login
-                    if (user != null && !user.is_complete) { // redirect to profile editor
+                    if (user != null && user.profile.show_profile_wizard) { // redirect to profile editor
                         wasProfileShownForcefully = true;
                         $state.go(dashboardProfile);
                     }

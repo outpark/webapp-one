@@ -1,0 +1,11 @@
+<div class="image-uploader">
+    <div class="image-thumbnail animated {{ error.animation }}">
+        <img class="img-responsive" src="{{ imageUrl }}" alt="Picture"/>
+        <span class="help-block">{{ getHelperText() }}</span>
+    </div>
+    <p class="text-danger">{{ error.message }}</p>
+    <i ng-if="imageUploading" class="fa fa-spin fa-circle-o-notch pull-left"></i>
+    <input ng-disabled="imageUploading"
+           onchange="angular.element(this).scope().imageSelected(this.files)"
+           type="file" accept="image/*"/>
+</div>

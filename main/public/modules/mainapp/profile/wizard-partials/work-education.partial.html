@@ -1,0 +1,56 @@
+<div class="row text-left">
+    <div class="col-lg-6 col-lg-offset-3">
+        <h2>Work</h2>
+        <a href="" class="btn btn-success" ng-click="wizardFxn.addWorkplace()"
+           ng-if="!wizardFxn.isEditingWorkplace()">
+            <i class="fa fa-plus"></i> Add a workplace
+        </a>
+        <hr>
+    </div>
+</div>
+<!--Repeat form-group for each college-->
+<div ng-repeat="workplace in data.profile.workplaces | orderBy: 'modified'">
+    <div class="workplace" ng-if="!workplace.edit">
+        {{ workplace.company }}
+    </div>
+    <div class="col-lg-8 col-lg-offset-2 well animated bounceInRight" ng-if="workplace.edit">
+        <form ng-submit="wizardFxn.saveWorkplace(workplace)" class="form-horizontal" unsaved-warning-form>
+            <p class="alert alert-danger" ng-if="workplace.error">{{ workplace.error }}</p>
+            <div class="col-lg-12 tools">
+                <a href="" ng-click="wizardFxn.deleteWorkplace(workplace)" class="fa fa-trash text-danger"> Delete</a>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Company</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control input-lg" ng-model="workplace.company"
+                            placeholder="Where have you worked?" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Position</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control input-lg" ng-model="workplace.position"
+                            placeholder="What is your job title?" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">City/Town</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control input-lg" ng-model="workplace.city">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Description</label>
+                <div class="col-sm-7">
+                    <textarea class="form-control" rows="6" ng-model="workplace.description"></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="text-right">
+                <button class="btn btn-default" ng-click="wizardFxn.cancelWorkplace(workplace)">Dismiss</button>
+                <button class="btn btn-primary" type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>

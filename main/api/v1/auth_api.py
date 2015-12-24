@@ -8,7 +8,7 @@ from flask import g
 import util
 import auth
 import config
-from model import User, UserValidator, Config
+from model import User, UserValidator, Config, Profile
 import task
 from main import API
 from api.helpers import make_empty_ok_response, ApiException
@@ -48,7 +48,8 @@ class SignupAPI(Resource):
             avatar_url=User.get_gravatar_url(args.email),
             roles=[User.Roles.MEMBER],
             first_name=args.first_name,
-            last_name=args.last_name
+            last_name=args.last_name,
+            profile=Profile()
         )
 
         user_db.put()
@@ -58,7 +59,9 @@ class SignupAPI(Resource):
 
         # sign in user
         auth.signin_user_db(user_db, remember=True)
-        return user_db.to_dict(include=User.get_private_properties())
+        user_json_response = user_db.to_dict(include=User.get_private_properties())
+        user_json_response["profile"] = user_db.profile.to_dict(include=Profile.get_private_properties())
+        return user_json_response
 
 
 @API.resource('/api/v1/auth/signin')
@@ -77,7 +80,9 @@ class SigninAPI(Resource):
 
         # everything is good; signin
         auth.signin_user_db(g.user_db, remember=g.args.remember)
-        return g.user_db.to_dict(include=User.get_private_properties())
+        user_json_response = g.user_db.to_dict(include=User.get_private_properties())
+        user_json_response["profile"] = g.user_db.profile.to_dict(include=Profile.get_private_properties())
+        return user_json_response
 
 
 @API.resource('/api/v1/auth/signout')

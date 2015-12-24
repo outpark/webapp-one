@@ -5,13 +5,14 @@ Provides logic for rendering index template
 import flask
 
 from flask import request, make_response
+from google.appengine.api.images import get_serving_url
 from google.appengine.ext import ndb
 from google.appengine.ext.blobstore import blobstore
 from werkzeug.http import parse_options_header
 from main import app
 import auth
 import config
-from model import User, UserValidator, Config
+from model import User, UserValidator, Config, Profile
 from api.helpers import ArgumentValidator
 
 # Uploads images for user
@@ -27,6 +28,11 @@ def upload():
             user_image = user_image_key.get()
             if user_image:
                 user_image.blob_key = blob_key
+                # check if cropping is needed
+                if user_image.options:
+                    user_image.url = get_serving_url(blob_key,
+                                                     user_image.options.get('size'),
+                                                     user_image.options.get('crop'))
                 user_image.put()
                 return flask.jsonify(user_image.to_dict())
         return 400
@@ -62,10 +68,13 @@ def inject_user():
     """Injects 'user' variable into jinja template, so it can be passed into angular. See base.html"""
     user = False
     if auth.is_logged_in():
-        user = auth.current_user_db().to_dict(include=User.get_private_properties())
-    return {
-        'user': user
-    }
+        user = auth.current_user_db()
+        user_json = user.to_dict(include=User.get_private_properties())
+        user_json['profile'] = user.profile.to_dict(include=Profile.get_private_properties())
+        return {
+            'user': user_json
+        }
+    return {'user': False}
 
 
 # Injects app config into every page request

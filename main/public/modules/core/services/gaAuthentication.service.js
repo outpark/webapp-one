@@ -13,7 +13,7 @@
         var me = {
             user     : gaAuthenticatedUser,
             isLogged : function() {
-                return !!me.user;
+                return !!me.user && me.user.id;
             },
             isAdmin  : function() {
                 return me.isLogged() && me.user.admin;

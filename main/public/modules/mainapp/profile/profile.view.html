@@ -7,17 +7,19 @@
                 <div class="panel-body profile-information">
                     <div class="col-md-3">
                         <div class="profile-pic text-center">
-                            <img src="images/lock_thumb.jpg" alt="">
+                            <img src="{{ user.avatar_url }}" alt="Profile picture">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-desk">
                             <h1>{{ user.name }}</h1>
-                            <span class="text-muted">Product Manager</span>
+                            <span class="text-muted">{{ user.profile.occupation || 'HackNYU Member' }}</span>
+                            <br/>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor vestibulum imperdiet. Ut auctor accumsan erat, a vulputate metus tristique non. Aliquam aliquam vel orci quis sagittis.
+                                {{ user.profile.bio || 'Write a bio...' }}
                             </p>
-                            <a href="#" class="btn btn-primary">View Profile</a>
+                            <br/>
+                            <a href="#" class="btn btn-primary">Edit Profile</a>
                         </div>
                     </div>
                     <div class="col-md-3">

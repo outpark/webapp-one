@@ -220,40 +220,8 @@
             <!--search & user info end-->
         </div>
     </header>
-    <aside>
-        <div id="sidebar" class="nav-collapse {{ showLeftSidebar ? '' : 'hide-left-bar' }}">
-            <!-- sidebar menu start-->
-            <div class="leftside-navigation"  ng-nicescroll nice-option="{
-                cursorcolor: '#1FB5AD',
-                cursorborder: '0px solid #fff',
-                cursorborderradius: '0px',
-                cursorwidth: '3px'
-            }" style="overflow: hidden; outline: none;" tabindex="5000">
-                <ul class="sidebar-menu" id="nav-accordion">
-                    <li ng-repeat="item in sidebar" class="{{ item.subItems ? 'sub-menu dcjq-parent-li' : '' }}">
-                        <a ng-if="!item.subItems" href="" class="{{ item.active ? 'active' : '' }}" ui-sref="{{ item.sref }}">
-                            <i class="fa {{ item.icon }}"></i>
-                            <span>{{ item.name }}</span>
-                        </a>
-                        <a ng-if="item.subItems" href="" ng-click="item.isCollapsed = !item.isCollapsed"
-                           class="{{ !item.isCollapsed ? 'not-collapsed' : '' }}">
-                            <i class="fa {{ item.icon }}"></i>
-                            <span>{{ item.name }}</span>
-                            <span class="dcjq-icon"></span>
-                        </a>
-                        <ul ng-if="item.subItems" class="sub" uib-collapse="item.isCollapsed">
-                            <li ng-repeat="subitem in item.subItems">
-                                <a href="" class="{{ subitem.active ? 'active' : '' }}" ui-sref="{{ subitem.sref }}">
-                                    <i class="fa {{ subitem.icon }}"></i>
-                                    <span>{{ subitem.name }}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- sidebar menu end-->
-        </div>
+    <aside ng-controller="SidebarController"
+     ng-include="'/p/modules/mainapp/layout/sidebar.view.html'">
     </aside>
     <section id="main-content" class="{{ showLeftSidebar ? '' : 'merge-left' }}">
         <data-ui-view></data-ui-view>

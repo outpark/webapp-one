@@ -47,6 +47,11 @@
                 controller: 'ProfileController',
                 templateUrl:'/p/modules/mainapp/profile/profile.view.html'
             })
+            .state('app.profile-wizard', {
+                url: '/profile/wizard',
+                controller: 'ProfileWizardController',
+                templateUrl: '/p/modules/mainapp/profile/profile-wizard.view.html'
+            })
             .state('app.dashboard', {
                 url: '',
                 controller: 'DashboardController',

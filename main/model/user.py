@@ -65,17 +65,23 @@ class UserValidator(model.BaseValidator):
 class ProfileValidator(model.BaseValidator):
     location = [0, 100]
     bio = [0, 140]
-    program = [0, 200]
-    institution = [0, 200]
+    occupation = [0, 200]
+    organization = [0, 200]
 
 
 class Profile(model.Base):
+    show_profile_wizard = ndb.IntegerProperty(default=1, required=True) # 0: don't show, 1,2,...the step of the wizard to show
     terms_accepted = ndb.BooleanProperty(default=False, required=True)
     location = ndb.StringProperty(validator=ProfileValidator.create('location'))
-    program = ndb.StringProperty(validator=ProfileValidator.create('program'))
+    workplaces = ndb.JsonProperty(repeated=True)
+    colleges = ndb.JsonProperty(repeated=True)
+    schools = ndb.JsonProperty(repeated=True)
     bio = ndb.StringProperty(validator=ProfileValidator.create('bio'))
-    institution = ndb.StringProperty(validator=ProfileValidator.create('institution'))
-    is_complete = ndb.BooleanProperty(default=False)
+    first_run = ndb.BooleanProperty(default=True, required=True)
+
+    PUBLIC_PROPERTIES = ['location', 'workplaces', 'colleges', 'schools', 'bio', 'organization'] # accessible by everyone
+
+    PRIVATE_PROPERTIES = ['show_profile_wizard', 'terms_accepted', 'first_run'] # accessible only by the user
 
 
 class User(model.Base):
@@ -105,7 +111,7 @@ class User(model.Base):
     avatar_url = ndb.StringProperty(default='')
     profile = ndb.StructuredProperty(Profile)
 
-    PUBLIC_PROPERTIES = ['name', 'username', 'avatar_url', 'profile'] # accessible by everyone
+    PUBLIC_PROPERTIES = ['first_name', 'last_name', 'name', 'username', 'avatar_url'] # accessible by everyone
 
     PRIVATE_PROPERTIES = ['email', 'active', 'admin', 'roles', 'permissions', 'verified'] # accessible only by user
 
@@ -153,3 +159,5 @@ class UserImage(model.Base):
     username = ndb.StringProperty(required=True)
     name = ndb.StringProperty(default='')
     blob_key = ndb.StringProperty(default='')
+    url = ndb.StringProperty()
+    options = ndb.JsonProperty()

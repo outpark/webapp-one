@@ -9,17 +9,23 @@
     });
 
     module.controller('AppController', function($scope, $window, $log, gaAuthentication,
-                                                gaBrowserHistory, gaAppConfig, $state) {
+                                                gaBrowserHistory, gaAppConfig, $uibModal) {
         $log.debug('App Controller active');
 
         $scope.cfg = gaAppConfig;
         $scope.auth = gaAuthentication;
         $scope.user = $scope.auth.user;
 
+        $log.debug($scope.user);
+
         $scope.showLeftSidebar = true;
         $scope.showRightSidebar = false;
 
+    });
+
+    module.controller('SidebarController', function($scope, $log, $state){
         //initialize open/close states of sidebar items
+        $log.debug('Sidebar Controller active');
         $scope.sidebar = [
             {
                 name: 'Hub',
@@ -143,9 +149,5 @@
                 }
             });
         });
-    });
-
-    module.controller('AppNavbarController', function($scope, $log){
-
     });
 }());

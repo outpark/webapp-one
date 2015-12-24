@@ -37,7 +37,6 @@ class MockDataAPI(Resource):
     @ndb.toplevel
     def post(self, data_type):
         """Generates mock data for development purposes"""
-        print data_type
         if not config.DEVELOPMENT:
             abort(404)
         # UserFactory.create_batch(50)

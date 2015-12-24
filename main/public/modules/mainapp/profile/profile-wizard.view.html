@@ -1,0 +1,21 @@
+<section class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    Profile Wizard
+                </header>
+                <div class="panel-body">
+                    <form-wizard wizard-fxn="wizardFxn">
+                        <form-wizard-slide name="Personal Info" wizard-fxn="wizardFxn"
+                                           data="user" partial="/p/modules/mainapp/profile/wizard-partials/personal-info.partial.html">
+                        </form-wizard-slide>
+                        <form-wizard-slide active="true" name="Work & Education" wizard-fxn="wizardFxn" data="user"
+                                           partial="/p/modules/mainapp/profile/wizard-partials/work-education.partial.html">
+                        </form-wizard-slide>
+                    </form-wizard>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
