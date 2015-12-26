@@ -68,7 +68,8 @@
             'lib/angular-elastic/elastic.js',
             'lib/jquery.nicescroll/dist/jquery.nicescroll.min.js',
             'lib/angular-nicescroll/angular-nicescroll.js',
-            'lib/angular-bootstrap/ui-bootstrap-tpls.js'
+            'lib/angular-bootstrap/ui-bootstrap-tpls.js',
+            'lib/angular-google-gapi/angular-google-gapi.js'
         ],
         scripts:[
             'application.js',
@@ -112,6 +113,9 @@
 
     //copy the fonts overs
     gulp.task('copy-fonts', function() {
+        gulp.src('bootstrap/fonts/*', {
+            cwd : publicLibDir
+        }).pipe(gulp.dest(distDir + '/fonts'));
         gulp.src('font-awesome/fonts/*', {
             cwd : publicLibDir
         }).pipe(gulp.dest(distDir + '/fonts'));
@@ -122,12 +126,12 @@
 
     //css/less files
     var cssFiles = [
-        'lib/bootstrap/dist/css/bootstrap.css',
         'lib/angular-flash-alert/dist/angular-flash.min.css',
         'lib/animate.css/animate.css'
     ];
     var lessPaths = [
-        publicDir + '/lib/font-awesome/less'
+        publicLibDir + '/font-awesome/less',
+        publicLibDir + '/bootstrap/less'
     ];
     var appLessPaths = publicDir + '/modules/**/less';
     lessPaths = lessPaths.concat(glob.sync(appLessPaths));

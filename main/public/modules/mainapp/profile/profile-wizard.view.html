@@ -1,21 +1,54 @@
-<section class="wrapper">
-    <div class="row">
-        <div class="col-sm-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    Profile Wizard
-                </header>
-                <div class="panel-body">
-                    <form-wizard wizard-fxn="wizardFxn">
-                        <form-wizard-slide name="Personal Info" wizard-fxn="wizardFxn"
-                                           data="user" partial="/p/modules/mainapp/profile/wizard-partials/personal-info.partial.html">
-                        </form-wizard-slide>
-                        <form-wizard-slide active="true" name="Work & Education" wizard-fxn="wizardFxn" data="user"
-                                           partial="/p/modules/mainapp/profile/wizard-partials/work-education.partial.html">
-                        </form-wizard-slide>
-                    </form-wizard>
-                </div>
-            </section>
-        </div>
+<div class="row">
+    <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Profile Wizard
+            </header>
+            <div class="panel-body">
+                <form-wizard wizard-fxn="wizardFxn">
+                    <form-wizard-slide ng-repeat="form in forms"
+                                       name="{{ form.name }}"
+                                       wizard-fxn="wizardFxn"
+                                       data="user"
+                                       partial="{{ form.partial }}"
+                                       active="form.active"></form-wizard-slide>
+                </form-wizard>
+            </div>
+        </section>
     </div>
-</section>
+    <script type="text/ng-template" id="modalBrowser.html">
+        <div class="modal-content">
+            <form ng-submit="submit()" unsaved-warning-form name="uploadForm">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">×</button>
+                    <h2 class="modal-title">Upload to Drive: {{ gapi.user.name }}</h2>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-6">
+                        <h3><i class="hn-hack_nyu"></i> HACKNYU Files in Drive</h3>
+                        <ul>
+                            <li ng-repeat="file in files">
+                                {{ file.title }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Select your resume</label>
+                            <div class="col-md-4">
+                                <i ng-if="uploading" class="fa fa-spin fa-circle-o-notch pull-left"></i>
+                                <input ng-disabled="uploading"
+                                       onchange="angular.element(this).scope().fileSelected(this.files[0])"
+                                       type="file"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+                    <button class="btn btn-success" type="submit">Upload</button>
+                </div>
+            </form>
+        </div>
+    </script>
+</div>

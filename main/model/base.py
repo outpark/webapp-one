@@ -2,6 +2,9 @@
 """Provides implementation of Base model and BaseValidator"""
 
 from __future__ import absolute_import
+
+import uuid
+
 from google.appengine.api import datastore_types
 from google.appengine.ext import ndb
 
@@ -101,9 +104,9 @@ class Base(ndb.Expando):
             return super(Base, self).to_dict(include=include)
 
         for name in include:
-            attr = getattr(self, name)
-            if not attr:
+            if not hasattr(self, name):
                 continue
+            attr = getattr(self, name)
             if name.find('struct') > 0:
                 if isinstance(attr, list):
                     items = []
@@ -152,6 +155,72 @@ class Base(ndb.Expando):
         return ['key', 'id'] + _.keys(cls._properties)
 
     def id(self):
-        return self.key.get_id()
+        return self.key.id()
 
 
+class StructuredBase(Base):
+
+    @classmethod
+    def is_valid(cls, model): # overriden
+        return True, None
+
+    JSON_NAME = 'base_struct'
+
+    PUBLIC_PROPERTIES = []
+
+    @classmethod
+    def create(cls, ancestor_model, data):
+        items = getattr(ancestor_model, cls.JSON_NAME) or []
+        item_data = _.pick(data, cls.PUBLIC_PROPERTIES)
+        prev_keys = []
+
+        for item in items: # get all prev keys
+            prev_keys.append(item.key) # keep track of all used keys
+
+        item_db = cls(
+            key=str(uuid.uuid4()),
+            **item_data)
+
+        is_valid, error = cls.is_valid(item_db)
+        if not is_valid:
+            return False, error
+
+        while True: # generate a unique key for this new workplace
+            try:
+                prev_keys.index(item_db.key)
+                item_db.key = str(uuid.uuid4())
+            except ValueError:
+                break
+
+        items.append(item_db)
+        setattr(ancestor_model, cls.JSON_NAME, items)
+        ancestor_model.put()
+        return True, item_db.to_dict(include=cls.PUBLIC_PROPERTIES)
+
+
+    @classmethod
+    def update(cls, ancestor_model, key, data):
+        items = getattr(ancestor_model, cls.JSON_NAME) or []
+        item_data = _.pick(data, cls.PUBLIC_PROPERTIES)
+        for index, item in enumerate(items):
+            if item.key == key:
+                item.populate(**item_data)
+                is_valid, error = cls.is_valid(item)
+                if not is_valid:
+                    return False, error
+                items[index] = item
+                setattr(ancestor_model, cls.JSON_NAME, items)
+                ancestor_model.put()
+                return True, item.to_dict(include=cls.PUBLIC_PROPERTIES)
+        return False, cls.JSON_NAME + ' not found'
+
+    @classmethod
+    def delete(cls, ancestor_model, key):
+        items = getattr(ancestor_model, cls.JSON_NAME) or []
+        for index, item in enumerate(items):
+            if item.key == key:
+                items.remove(item)
+                setattr(ancestor_model, cls.JSON_NAME, items)
+                ancestor_model.put()
+                return True, item.to_dict(include=cls.PUBLIC_PROPERTIES)
+        return False, cls.JSON_NAME + ' not found'

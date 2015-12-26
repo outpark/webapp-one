@@ -7,89 +7,160 @@
 
     });
 
-    module.controller('ProfileWizardController', function($scope, $log, gaAuthentication){
-        $scope.step = $scope.user.profile.show_profile_wizard;
-        $log.debug('Profile wizard controller active. At step: ' + $scope.step);
+    module.controller('ProfileWizardController', function($scope, $log, Restangular, profile, $timeout,
+                                                          gaAuthentication, GoogleIntegration, $uibModal){
+        var active = $scope.user.show_profile_wizard;
+        angular.forEach(['workplaces_struct', 'colleges_struct', 'schools_struct'], function(value){
+            Restangular.restangularizeCollection(profile, profile[value], value);
+        });
+        $scope.user['profile'] = profile;
 
-        var profile = $scope.user.profile;
-        var editingWorkplace = false;
+        $scope.forms = [
+            {
+                name: "Personal Information",
+                partial: "/p/modules/mainapp/profile/wizard-partials/personal-info.partial.html"
+            },
+            {
+                name: "Work & Education",
+                partial: "/p/modules/mainapp/profile/wizard-partials/work-education.partial.html"
+            },
+            {
+                name: "HackNYU",
+                partial: "/p/modules/mainapp/profile/wizard-partials/hacknyu.partial.html"
+            }
+        ];
+        if (active > 0 && active <= $scope.forms.length)
+            $scope.forms[active - 1].active = true;
+
+        function parseError(error){
+            if (typeof error === "string" && error.indexOf('json') > -1)
+                return angular.fromJson(error);
+            else
+                return error;
+        }
 
         $scope.wizardFxn = {
-            addWorkplace: function(){
-                if (editingWorkplace)
-                    return;
-                $log.debug('adding workplace');
-                if (!profile.workplaces){
-                    profile['workplaces'] = [];
+            addProfileCollegeItem: function(){
+                $scope.wizardFxn.addProfileItem('colleges_struct',
+                    {
+                        attended_for: 'College',
+                        is_present: true
+                    });
+            },
+            addProfileItem: function(itemType, item){
+                if (!profile[itemType]) {
+                    profile[itemType] = []
                 }
-                profile.workplaces.push({
-                    edit: true,
-                    new: true
-                });
-                editingWorkplace = true;
+                item = item || {is_present: true};
+                profile[itemType].push(item);
+                $scope.wizardFxn.editProfileItem(item);
             },
-            isEditingWorkplace: function(){
-                return editingWorkplace;
-            },
-            cancelWorkplace: function(workplace){
-                var index = profile.workplaces.indexOf(workplace);
-                if (workplace.new){
-                    profile.workplaces.splice(index, 1);
-                } else {
-                    workplace.edit = false;
-                    workplace.error = false;
-                }
-                editingWorkplace = false;
-            },
-            deleteWorkplace: function(workplace){
-                var index = profile.workplaces.indexOf(workplace);
-                profile.workplaces.splice(index, 1);
-                editingWorkplace = false;
-            },
-            saveWorkplace: function(workplace){
-                workplace = { //only push things that we want in workplace
-                    company: workplace.company,
-                    position: workplace.position,
-                    city: workplace.city,
-                    description: workplace.description
+            editProfileItem: function(item){
+                item.editor = {
+                    show: true,
+                    animation: 'bounceInRight',
+                    error: false
                 };
-                $scope.wizardFxn.saveChanges(null, function(){
-                    //workplace.edit = false;
-                    //editingWorkplace = false;
-                }, function(error){
-                    workplace.error= {
-                        message: error.data.message || 'Failed to save workplace.',
-                        animation: 'shake'
-                    };
+            },
+            dismissProfileItem: function(item){
+                $log.debug('dismissing item');
+
+                item.editor = {
+                    show: false,
+                    animation: 'bounceOutRight',
+                    error: false
+                };
+            },
+            deleteProfileItem: function(item, itemType){
+                $log.debug('deleting item');
+                if (item.key){ // delete from database
+                    item.remove().then(function(){
+                        item.editor.animation = 'bounceOutRight';
+                        _.remove(profile[itemType], item); //profile[itemType].splice(index, 1);
+                    }, function(error){
+                        item.editor.error = parseError(error.data.message);
+                    });
+                } else
+                    _.remove(profile[itemType], item);
+            },
+            saveProfileItem: function(item, itemType){
+                item.editor.error = false; // old errors are hidden this way
+                if (item.key){
+                    item.save().then(function(data){
+                        $scope.wizardFxn.dismissProfileItem(item)
+                    }, function(error){
+                        item.editor.error = parseError(error.data.message);
+                    });
+                } else {
+                    profile[itemType].post(item).then(function(data){
+                        _.remove(profile[itemType], item);
+                        profile[itemType].push(data);
+                    }, function(error){
+                        item.editor.error = parseError(error.data.message);
+                    });
+                }
+            },
+            savePersonal: function(){
+                $scope.user.save().then(function(user){
+                    $scope.wizardFxn.nextPage(0);
                 });
             },
-            saveChanges: function(form, success, fail){
-                $scope.user.save().then(function(data){
-                    _.extend($scope.user, data);
-                    gaAuthentication.setUser($scope.user);
-                    if (form) {
-                        form.$dirty = false;
-                        form.$pristine = true;
-                    }
-                    if (success)
-                        success(data);
-                }, function(error){
-                    $log.debug(error);
-                    if (fail)
-                        fail(error);
+            nextPage: function(currentPage){
+                if (currentPage + 1 <= $scope.forms.length) {
+                    $scope.forms[currentPage].active = false;
+                    $scope.forms[++currentPage].active = true;
+                }
+            },
+            prevPage: function(currentPage){
+                if (currentPage - 1 >= 0) {
+                    $scope.forms[currentPage].active = false;
+                    $scope.forms[--currentPage].active = true;
+                }
+            },
+            getDateFromString : function(item){
+                return new Date(item.start_date);
+            },
+            //hacknyu page
+            doGoogleLogin: function(){
+                GoogleIntegration.login().then(function(){
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        size: 'lg',
+                        templateUrl: 'modalBrowser.html',
+                        controller: 'ModalBrowserController'
+                    });
+
+                    modalInstance.result.then(function(fileUrl){
+                        $log.debug(fileUrl);
+                    });
                 });
-            },
-            onNextPage: function(form){
-                $log.debug('on next page');
-                $scope.wizardFxn.saveChanges(form);
-            },
-            submit: function(){
-                $log.debug('submit form');
             }
         };
+    });
 
-        if (!profile.workplaces || profile.workplaces.length == 0){
-            $scope.wizardFxn.addWorkplace();
+    module.controller('ModalBrowserController', function($scope, $log, $uibModalInstance, GoogleIntegration){
+        $scope.files = [];
+        GoogleIntegration.getFiles().then(function(data){
+            $scope.files = data.items || [];
+        });
+        $scope.fileSelected = function(file){
+            GoogleIntegration.uploadFile(file).then(function(file){
+                $scope.files.push(file);
+            }, function(error){
+                $log.debug(error);
+            });
+        };
+
+        $scope.previewFile = function(file){
+
+        };
+
+        $scope.submit = function(){
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function(){
+            $uibModalInstance.dismiss();
         }
-    })
+    });
 }());

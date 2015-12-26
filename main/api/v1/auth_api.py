@@ -49,19 +49,17 @@ class SignupAPI(Resource):
             roles=[User.Roles.MEMBER],
             first_name=args.first_name,
             last_name=args.last_name,
-            profile=Profile()
         )
-
         user_db.put()
+
+        Profile.get_or_create(user_db)
 
         if config.CONFIG_DB.verify_email:
             task.verify_user_email_notification(user_db)
 
         # sign in user
         auth.signin_user_db(user_db, remember=True)
-        user_json_response = user_db.to_dict(include=User.get_private_properties())
-        user_json_response["profile"] = user_db.profile.to_dict(include=Profile.get_private_properties())
-        return user_json_response
+        return user_db.to_dict(include=User.get_private_properties())
 
 
 @API.resource('/api/v1/auth/signin')
@@ -80,9 +78,7 @@ class SigninAPI(Resource):
 
         # everything is good; signin
         auth.signin_user_db(g.user_db, remember=g.args.remember)
-        user_json_response = g.user_db.to_dict(include=User.get_private_properties())
-        user_json_response["profile"] = g.user_db.profile.to_dict(include=Profile.get_private_properties())
-        return user_json_response
+        return g.user_db.to_dict(include=User.get_private_properties())
 
 
 @API.resource('/api/v1/auth/signout')

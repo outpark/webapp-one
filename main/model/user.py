@@ -30,9 +30,8 @@ class UserValidator(model.BaseValidator):
     @classmethod
     def existing_email(cls, email):
         """Validates if given email is in datastore"""
-        user_db = User.get_by('email', email)
-        if not user_db:
-            raise ValueError('This email is not in our database.')
+        if not User.is_email_available(email):
+            raise ValueError('Sorry, this email is already taken.')
         return email
 
 
@@ -54,35 +53,12 @@ class UserValidator(model.BaseValidator):
 
 
     @classmethod
-    def username_validator(cls, prop, value):
+    def username_validator(cls, prop, username):
         try:
-            username = util.constrain_regex(value, util.ALPHANUM_NO_SPACES_REGEX)
+            username = util.constrain_regex(username, util.ALPHANUM_NO_SPACES_REGEX)
         except ValueError:
             raise ValueError('Username can only contain letters (a-z), numbers (0-9), periods and underscores.')
         return util.constrain_string(username, 3, 64)
-
-
-class ProfileValidator(model.BaseValidator):
-    location = [0, 100]
-    bio = [0, 140]
-    occupation = [0, 200]
-    organization = [0, 200]
-
-
-class Profile(model.Base):
-    show_profile_wizard = ndb.IntegerProperty(default=1, required=True) # 0: don't show, 1,2,...the step of the wizard to show
-    terms_accepted = ndb.BooleanProperty(default=False, required=True)
-    location = ndb.StringProperty(validator=ProfileValidator.create('location'))
-    workplaces = ndb.JsonProperty(repeated=True)
-    colleges = ndb.JsonProperty(repeated=True)
-    schools = ndb.JsonProperty(repeated=True)
-    bio = ndb.StringProperty(validator=ProfileValidator.create('bio'))
-    first_run = ndb.BooleanProperty(default=True, required=True)
-
-    PUBLIC_PROPERTIES = ['location', 'workplaces', 'colleges', 'schools', 'bio', 'organization'] # accessible by everyone
-
-    PRIVATE_PROPERTIES = ['show_profile_wizard', 'terms_accepted', 'first_run'] # accessible only by the user
-
 
 class User(model.Base):
     # Define roles for all members
@@ -109,11 +85,15 @@ class User(model.Base):
     token = ndb.StringProperty(default='') # For password setting / reset
     password_hash = ndb.StringProperty(default='')
     avatar_url = ndb.StringProperty(default='')
-    profile = ndb.StructuredProperty(Profile)
+    first_run = ndb.BooleanProperty(default=True, required=True)
+    show_profile_wizard = ndb.IntegerProperty(default=1, required=True) # 0: don't show, 1,2,...the step of the wizard to show
+    terms_accepted = ndb.BooleanProperty(default=False, required=True) # switch to false when terms change
 
-    PUBLIC_PROPERTIES = ['first_name', 'last_name', 'name', 'username', 'avatar_url'] # accessible by everyone
 
-    PRIVATE_PROPERTIES = ['email', 'active', 'admin', 'roles', 'permissions', 'verified'] # accessible only by user
+    PUBLIC_PROPERTIES = ['name', 'username', 'avatar_url'] # accessible by everyone
+
+    PRIVATE_PROPERTIES = ['first_name', 'last_name', 'email', 'active', 'admin', 'roles', 'permissions', 'verified',
+                          'show_profile_wizard', 'terms_accepted', 'first_run'] # accessible only by user
 
     ## Gets the link to the user gravatar
     @classmethod
@@ -134,6 +114,12 @@ class User(model.Base):
     def is_username_available(cls, username):
         """Tests if user has username is available"""
         return cls.get_by('username', username) is None
+
+    ## Checks whether the given email is available
+    @classmethod
+    def is_email_available(cls, email):
+        """Tests if user has email is available"""
+        return cls.get_by('email', email) is None
 
     ## get a user by credentials
     @classmethod

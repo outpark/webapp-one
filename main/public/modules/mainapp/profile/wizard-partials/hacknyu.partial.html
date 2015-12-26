@@ -1,0 +1,87 @@
+<div class="row text-left">
+    <div class="col-lg-6 col-lg-offset-3">
+        <h2>Register for HACKNYU 2016</h2>
+        <hr>
+        <blockquote>
+            <strong>Hackathons are invention competitions</strong> &mdash; Designers, programmers, builders and experts in various
+            fields come together to learn, build, and share their creations over the course of a few days.
+            Hackathons are not limited to computer science majors — anyone who has an interest in technology and is eager to
+            learn can participate in a hackathon.
+        </blockquote>
+        <blockquote>
+            HACKNYU is a collaborative challenge to create transformative technologies that challenge education,
+            healthcare and dentistry, environmental sustainability, accessiblity issues and current financial
+            systems. Students from accross the nation and globally in Abu Dhabi and Shanghai are tackling
+            focused problems that help millions of people around the globe. HACKNYU fosters a new and refreshing
+            culture of creation, invention and innovation through partnerships
+            between makers, industry leaders, and community members.
+        </blockquote>
+        <hr>
+    </div>
+</div>
+<form name="personalForm" class="form-horizontal" unsaved-warning-form>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="inputFile">Resume</label>
+        <div class="col-sm-7">
+            <input type="text" class="form-control input-lg" ng-model="data.resume"
+                   placeholder="Paste a public url &mdash; eg. dropbox, skydrive">
+            <div class="horizontal-rule"><span>OR</span></div>
+            <button class="btn btn-danger btn-block btn-lg" ng-click="wizardFxn.doGoogleLogin()">
+                <i class="fa fa-google"></i> Upload with Google Drive</button>
+            <p class="help-block">Please disable your pop-blocker to login with google.</p>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">First Name</label>
+        <div class="col-sm-7">
+            <input type="text" class="form-control input-lg" ng-model="data.first_name"
+                   placeholder="First Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Last Name</label>
+        <div class="col-sm-7">
+            <input type="text" class="form-control input-lg" ng-model="data.last_name"
+                   placeholder="Last Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Email</label>
+        <div class="col-md-7">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon btn-primary"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control input-lg" placeholder="Email Address"
+                       ng-model="data.email">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Username</label>
+        <div class="col-md-7">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon btn-danger">@</span>
+                <input type="text" class="form-control input-lg" placeholder="Username"
+                       ng-model="data.username">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Phone</label>
+        <div class="col-md-7">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon btn-default"><i class="fa fa-phone"></i></span>
+                <input type="text" class="form-control input-lg" placeholder="Phone"
+                       ng-model="data.profile.phone">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">About me</label>
+        <div class="col-sm-7">
+            <textarea class="form-control" rows="6" ng-model="data.profile.bio"></textarea>
+        </div>
+    </div>
+</form>

@@ -31,12 +31,12 @@
             .state('app', {
                 url: '/app',
                 resolve: {
-                  authentication: function(gaAuthentication, $state) {
-                      return gaAuthentication.getUser().then(null,
-                      function(error){
-                          $state.go('login');
-                      });
-                  }
+                    authentication: function(gaAuthentication, $state) {
+                        return gaAuthentication.getUser().then(null,
+                            function(error){
+                                $state.go('login');
+                            });
+                    }
                 },
                 controller: 'AppController',
                 abstract: true,
@@ -50,7 +50,15 @@
             .state('app.profile-wizard', {
                 url: '/profile/wizard',
                 controller: 'ProfileWizardController',
-                templateUrl: '/p/modules/mainapp/profile/profile-wizard.view.html'
+                templateUrl: '/p/modules/mainapp/profile/profile-wizard.view.html',
+                resolve: {
+                    profile: function (gaAuthentication) {
+                        var user = gaAuthentication.user;
+                        return user.one('profile').get().then(function(data){
+                            return data
+                        });
+                    }
+                }
             })
             .state('app.dashboard', {
                 url: '',

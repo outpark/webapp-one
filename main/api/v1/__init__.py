@@ -5,3 +5,4 @@
 from .app_api import *
 from .user_api import *
 from .auth_api import *
+from .profile_api import *

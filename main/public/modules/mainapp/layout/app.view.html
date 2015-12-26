@@ -221,10 +221,13 @@
         </div>
     </header>
     <aside ng-controller="SidebarController"
-     ng-include="'/p/modules/mainapp/layout/sidebar.view.html'">
+           ng-include="'/p/modules/mainapp/layout/sidebar.view.html'">
     </aside>
     <section id="main-content" class="{{ showLeftSidebar ? '' : 'merge-left' }}">
-        <data-ui-view></data-ui-view>
+        <section class="wrapper">
+            <div flash-message="5000" ></div>
+            <data-ui-view></data-ui-view>
+        </section>
     </section>
     <div class="right-sidebar {{ showRightSidebar ? 'open-right-bar' : '' }}">
         <div class="search-row">

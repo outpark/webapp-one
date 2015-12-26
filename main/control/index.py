@@ -70,7 +70,6 @@ def inject_user():
     if auth.is_logged_in():
         user = auth.current_user_db()
         user_json = user.to_dict(include=User.get_private_properties())
-        user_json['profile'] = user.profile.to_dict(include=Profile.get_private_properties())
         return {
             'user': user_json
         }

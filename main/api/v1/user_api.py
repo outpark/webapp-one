@@ -12,7 +12,7 @@ from google.appengine.ext.blobstore import blobstore
 
 from main import API
 from model import User, UserValidator, UserImage
-from api.helpers import ArgumentValidator, make_list_response, make_empty_ok_response
+from api.helpers import ArgumentValidator, make_list_response, make_empty_ok_response, ApiException
 from flask import request, g
 from pydash import _
 from api.decorators import model_by_key, user_by_username, authorization_required, admin_required, login_required
@@ -57,16 +57,21 @@ class UserByKeyAPI(Resource):
     @model_by_key
     def post(self, key):
         """Updates user's properties"""
-        update_properties = ['first_name', 'last_name', 'avatar_url']
+        update_properties = ['first_name', 'last_name', 'avatar_url', 'email', 'username']
         if auth.is_admin():
             update_properties += ['verified', 'active', 'admin']
         new_user_data = _.pick(request.json, update_properties)
-        # get profile data
-        profile = request.json.get('profile')
-        update_properties = ['show_profile_wizard', 'workplaces', 'colleges', 'schools', 'first_run']
-        new_profile_data = _.pick(profile, update_properties)
+
+        new_email_set = False
+        new_email = new_user_data.get('email')
+        if new_email != g.model_db.email:
+            UserValidator.create('unique_email')(new_email)
+            new_email_set = True
+        new_username = new_user_data.get('username')
+        if new_username != g.model_db.username:
+            UserValidator.create('unique_username')(new_username)
+
         g.model_db.populate(**new_user_data)
-        g.model_db.profile.populate(**new_profile_data)
         g.model_db.put()
         return g.model_db.to_dict(include=User.get_public_properties())
 

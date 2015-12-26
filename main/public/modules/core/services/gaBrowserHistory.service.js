@@ -54,7 +54,7 @@
             },
             redirectAfterLogin: function(user){
                 if (beforeLogin == null) { //no redirect login
-                    if (user != null && user.profile.show_profile_wizard) { // redirect to profile editor
+                    if (user != null && user.show_profile_wizard) { // redirect to profile editor
                         wasProfileShownForcefully = true;
                         $state.go(dashboardProfile);
                     }

@@ -202,19 +202,42 @@ class ApiException(object):
         107: {
             "type": exceptions.BadRequest,
             "message": "Must agree to all terms and conditions"
+        },
+        108: { # not authorized to edit
+            "type": exceptions.Forbidden,
+            "message": "Not authorized to edit this resource"
+        },
+
+        #Profile api codes are 200
+        200: {
+            "type": exceptions.BadRequest,
+            "message": "Could not save profile"
+        },
+        201: {
+            "type": exceptions.BadRequest,
+            "message": "Profile item not found"
+        },
+
+        #user api codes are 300
+        300: {
+            "type": exceptions.BadRequest,
+            "message": "Could not save user"
         }
     }
 
     @classmethod
-    def error(cls, code):
+    def error(cls, code, message=None):
         """Raises 400 Bad request exception
 
         Raises:
             HTTPException: with 400 code
         """
         error = cls.Error.get(code, cls.Error.get(0))
+        if isinstance(message, dict):
+            message['json'] = True
+            message = json.dumps(message)
 
-        raise  error.get("type")(error.get("message"))
+        raise  error.get("type")(message if message else error.get("message"))
 
 
 

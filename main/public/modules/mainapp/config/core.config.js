@@ -29,7 +29,7 @@
     });
 
     module.run(function(Restangular, $state, $rootScope, $timeout, gaAuthentication,
-                        gaBrowserHistory, gaFlashMessages, Flash) {
+                        gaBrowserHistory, gaFlashMessages, Flash, GAuth) {
         var loadingPromise;
         var endLoading = function () {
             $timeout.cancel(loadingPromise);
@@ -42,20 +42,27 @@
 
         gaBrowserHistory.init();
 
+        function showError(color, message, testJson){
+            if (testJson && message.indexOf('json') > -1)
+                return;
+            else
+                Flash.create(color, message)
+        }
+
         Restangular.setErrorInterceptor(function (res) {
             endLoading();
             var msg = res.data && res.data.message ? res.data.message :
                 'Sorry, I failed so badly I can\'t even describe it :(';
             if (res.status === 403) {
-                Flash.create('danger', 'Sorry, you\'re not allowed to do it, please sign in with different account');
+                showError('danger', 'Sorry, you\'re not allowed to do it, please sign in with different account');
                 $state.go('login');
             } else if (res.status === 401) {
-                Flash.create('danger', 'Please sign in first!');
+                showError('danger', 'Please sign in first!');
                 $state.go('login');
             } else if (res.status === 404) {
-                Flash.create('danger', res.data.message || 'Sorry, this requested page doesn\'t exist');
+                showError('danger', res.data.message || 'Sorry, this requested page doesn\'t exist');
             } else {
-                Flash.create('danger', msg);
+                showError('danger', msg, true);
             }
             return true;
         });
