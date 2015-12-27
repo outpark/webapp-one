@@ -25,7 +25,7 @@ module.controller('FormWizardController', ['$scope', '$element', '$interval', '$
             }
         };
 
-        self.getCurrentIndex = $scope.getCurrentIndex = function() {
+        self.getCurrentIndex = function() {
             if (self.currentSlide && angular.isDefined(self.currentSlide.index)) {
                 return +self.currentSlide.index;
             }

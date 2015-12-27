@@ -20,7 +20,6 @@
             // Add other scopes needed by your application.
         ];
         var CREATE_FILE_URL = 'https://www.googleapis.com/drive/v2/files';
-        var UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v2/files';
         GAuth.setClient(CLIENT_ID);
         GAuth.setScope(SCOPES);
         GApi.load('drive', 'v2');
@@ -51,6 +50,11 @@
                         "mimeType": file.type,
                         "description": "HACKNYU Resume 2016"
                     }, {
+                        params:{
+                            uploadType: 'multipart',
+                            convert: true,
+                            ocr: true
+                        },
                         headers: {
                             'Authorization': "Bearer " + data.access_token
                         }
@@ -100,6 +104,12 @@
             },
             getFiles: function(){
                 return GApi.executeAuth('drive', 'files.list');
+            },
+            getFile: function(file){
+                return GApi.executeAuth('drive', 'files.get', {fileId: file.id});
+            },
+            deleteFile: function(file){
+                return GApi.executeAuth('drive', 'files.delete', {fileId: file.id})
             }
         };
 

@@ -7,9 +7,8 @@
 
     });
 
-    module.controller('ProfileWizardController', function($scope, $log, Restangular, profile, $timeout,
+    module.controller('ProfileWizardController', function($scope, $log, Restangular, profile, $timeout, $stateParams,
                                                           gaAuthentication, GoogleIntegration, $uibModal){
-        var active = $scope.user.show_profile_wizard;
         angular.forEach(['workplaces_struct', 'colleges_struct', 'schools_struct'], function(value){
             Restangular.restangularizeCollection(profile, profile[value], value);
         });
@@ -29,6 +28,7 @@
                 partial: "/p/modules/mainapp/profile/wizard-partials/hacknyu.partial.html"
             }
         ];
+        var active = $stateParams.step; //$scope.user.show_profile_wizard;
         if (active > 0 && active <= $scope.forms.length)
             $scope.forms[active - 1].active = true;
 
@@ -62,7 +62,7 @@
                     error: false
                 };
             },
-            dismissProfileItem: function(item){
+            dismissProfileItem: function(item, itemType){
                 $log.debug('dismissing item');
 
                 item.editor = {
@@ -70,6 +70,9 @@
                     animation: 'bounceOutRight',
                     error: false
                 };
+                if (!item.key) {
+                    _.remove(profile[itemType], item);
+                }
             },
             deleteProfileItem: function(item, itemType){
                 $log.debug('deleting item');
@@ -87,7 +90,7 @@
                 item.editor.error = false; // old errors are hidden this way
                 if (item.key){
                     item.save().then(function(data){
-                        $scope.wizardFxn.dismissProfileItem(item)
+                        $scope.wizardFxn.dismissProfileItem(item, itemType)
                     }, function(error){
                         item.editor.error = parseError(error.data.message);
                     });
@@ -136,31 +139,5 @@
                 });
             }
         };
-    });
-
-    module.controller('ModalBrowserController', function($scope, $log, $uibModalInstance, GoogleIntegration){
-        $scope.files = [];
-        GoogleIntegration.getFiles().then(function(data){
-            $scope.files = data.items || [];
-        });
-        $scope.fileSelected = function(file){
-            GoogleIntegration.uploadFile(file).then(function(file){
-                $scope.files.push(file);
-            }, function(error){
-                $log.debug(error);
-            });
-        };
-
-        $scope.previewFile = function(file){
-
-        };
-
-        $scope.submit = function(){
-            $uibModalInstance.close();
-        };
-
-        $scope.cancel = function(){
-            $uibModalInstance.dismiss();
-        }
     });
 }());

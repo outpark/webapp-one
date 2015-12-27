@@ -48,7 +48,7 @@
                 templateUrl:'/p/modules/mainapp/profile/profile.view.html'
             })
             .state('app.profile-wizard', {
-                url: '/profile/wizard',
+                url: '/profile/wizard?step',
                 controller: 'ProfileWizardController',
                 templateUrl: '/p/modules/mainapp/profile/profile-wizard.view.html',
                 resolve: {

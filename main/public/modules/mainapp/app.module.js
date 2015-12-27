@@ -2,4 +2,4 @@
  * @class angularModule.core
  * @memberOf angularModule
  */
-AppConfig.registerModule('mainapp');
+AppConfig.registerModule('mainapp', ['ngTagsInput']);

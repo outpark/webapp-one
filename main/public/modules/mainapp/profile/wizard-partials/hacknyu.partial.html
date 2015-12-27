@@ -1,4 +1,4 @@
-<div class="row text-left">
+<div class="row text-left" ng-controller="HackathonWizardController">
     <div class="col-lg-6 col-lg-offset-3">
         <h2>Register for HACKNYU 2016</h2>
         <hr>
@@ -18,70 +18,147 @@
         </blockquote>
         <hr>
     </div>
+    <div class="col-lg-12">
+        <form name="personalForm" class="form-horizontal" unsaved-warning-form>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="optionsHackathonRsvp">I am</label>
+                <div class="col-sm-7">
+                    <div class="radio" ng-repeat="rsvpOption in rsvpOptions">
+                        <label>
+                            <input type="radio" name="optionsHackathonRsvp"
+                                   ng-model="hackathon.rsvp" value="rsvpOption.value">
+                            <span ng-bind-html="rsvpOption.label"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="inputFile">Resume</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control input-lg" ng-model="data.resume"
+                           placeholder="Paste a public url &mdash; eg. dropbox, skydrive">
+                    <div class="horizontal-rule"><span>OR</span></div>
+                    <button class="btn btn-danger btn-block btn-lg" ng-click="wizardFxn.doGoogleLogin()">
+                        <i class="fa fa-google"></i> Upload with Google Drive</button>
+                    <p class="help-block">Please disable your pop-blocker to login with google.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class=" col-sm-3 control-label">I specialize in</label>
+                <div class="col-sm-9">
+                    <tags-input ng-model="hackathon.skills" class="custom-tags-input"
+                                placeholder="What are your strengths? &mdash; Python, Biomaterials">
+                    </tags-input>
+                    <p class="help-block">Select tags for APIs, libraries, data, etc. you have experience with or are interested in.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Phone</label>
+                <div class="col-sm-7">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon btn-default"><i class="fa fa-phone"></i></span>
+                        <input type="text" class="form-control input-lg" placeholder="Phone"
+                               ng-model="data.profile.phone">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="optionsTshirt">My T-Shirt Size is</label>
+                <div class="col-sm-7">
+                    <div class="radio" ng-repeat="size in sizes">
+                        <label>
+                            <input type="radio" name="optionsTshirt"
+                                   ng-model="hackathon.shirt_size" value="{{ size }}">
+                            {{ size }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="optionsGender">What is your gender?</label>
+                <div class="col-sm-7">
+                    <div class="radio" ng-repeat="gender in ['Male', 'Female', 'Rather not specify']">
+                        <label>
+                            <input type="radio" name="optionsGender"
+                                   ng-model="hackathon.gender" value="{{ gender }}">
+                            {{ gender }}
+                        </label>
+                    </div>
+                    <label class="control-label">Other</label>
+                    <input type="text" class="form-control input-lg" ng-model="hackathon.gender"
+                               placeholder="Please specify.">
+                    <p class="help-block">This data is collected for providing correct t-shirt size.</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">If I had a Superpower</label>
+                <div class="col-sm-7">
+                    <textarea class="form-control input-lg" rows="6" ng-model="hackathon.superpower"
+                              placeholder="My superpower would be ..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default btn-lg" ng-click="wizardFxn.prevPage(2)">Previous</a>
+                <a class="btn btn-primary btn-lg" ng-click="saveHackathon(hackathon)">Finish</a>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/ng-template" id="modalBrowser.html">
+        <div class="modal-content">
+            <form ng-submit="submit(activeFile)" unsaved-warning-form name="uploadForm">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">×</button>
+                    <h2 class="modal-title"><i class="hn-hack_nyu"></i> Google Drive</h2>
+                </div>
+                <div class="modal-body file-browser col-sm-12">
+                    <div class="form-group">
+                        <div class="controls text-right">
+                            <div class="fileupload fileupload-exists" data-provides="fileupload"><input type="hidden" value="" name="">
+                                <i class="fa fa-spin fa-circle-o-notch" ng-if="uploading"></i>
+                                <span class="btn btn-primary btn-file" disabled="uploading">
+                                <span class="fileupload-new"><i class="fa fa-plus-circle"></i>
+                                    Upload a file
+                                </span>
+                                <input type="file" class="default" onchange="angular.element(this).scope().inputFileChanged(this.files[0])">
+                                </span><br/>
+                                <span class="fileupload-preview" style="margin-left:5px;">{{ fileSelected }}</span>
+                                <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="file col-sm-4" ng-repeat="file in files" ng-click="selectFile(file)">
+                            <div class="body" ng-class="{'active': file==activeFile}">
+                                <div class="file-thumbnail">
+                                    <div class="preview">
+                                        <img class="img-responsive"
+                                             src="{{ file.thumbnailLink || 'https://placehold.it/170x140?text=Preparing+thumbnail' }}"
+                                             alt="File Thumbnail"/>
+                                    </div>
+                                    <div class="toolbar">
+                                        <a href="" ng-click="deleteFile(file)" class="text-danger"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div class="file-bar">
+                                    <div class="icon"><img src="{{ file.iconLink }}"/></div>
+                                    <div class="filename">{{ file.title }}</div><br>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" style="margin-top:10px;" type="button" ng-click="cancel()">Cancel</button>
+                    <button class="btn btn-success" style="margin-top:10px;" type="submit" ng-disabled="!activeFile">Select File</button>
+                </div>
+            </form>
+        </div>
+    </script>
 </div>
-<form name="personalForm" class="form-horizontal" unsaved-warning-form>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" for="inputFile">Resume</label>
-        <div class="col-sm-7">
-            <input type="text" class="form-control input-lg" ng-model="data.resume"
-                   placeholder="Paste a public url &mdash; eg. dropbox, skydrive">
-            <div class="horizontal-rule"><span>OR</span></div>
-            <button class="btn btn-danger btn-block btn-lg" ng-click="wizardFxn.doGoogleLogin()">
-                <i class="fa fa-google"></i> Upload with Google Drive</button>
-            <p class="help-block">Please disable your pop-blocker to login with google.</p>
-        </div>
-
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label">First Name</label>
-        <div class="col-sm-7">
-            <input type="text" class="form-control input-lg" ng-model="data.first_name"
-                   placeholder="First Name">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">Last Name</label>
-        <div class="col-sm-7">
-            <input type="text" class="form-control input-lg" ng-model="data.last_name"
-                   placeholder="Last Name">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">Email</label>
-        <div class="col-md-7">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon btn-primary"><i class="fa fa-envelope"></i></span>
-                <input type="email" class="form-control input-lg" placeholder="Email Address"
-                       ng-model="data.email">
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">Username</label>
-        <div class="col-md-7">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon btn-danger">@</span>
-                <input type="text" class="form-control input-lg" placeholder="Username"
-                       ng-model="data.username">
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">Phone</label>
-        <div class="col-md-7">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon btn-default"><i class="fa fa-phone"></i></span>
-                <input type="text" class="form-control input-lg" placeholder="Phone"
-                       ng-model="data.profile.phone">
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label">About me</label>
-        <div class="col-sm-7">
-            <textarea class="form-control" rows="6" ng-model="data.profile.bio"></textarea>
-        </div>
-    </div>
-</form>
