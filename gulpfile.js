@@ -77,7 +77,8 @@
             '!modules/**/tests/**/*.js'
         ],
         appScripts: [
-            'modules/mainapp/**/*.js'
+            'modules/mainapp/**/*.js',
+            'lib/ng-tags-input/ng-tags-input.js'
         ],
         homeScripts: [
             'modules/home/**/*.js'
@@ -127,7 +128,8 @@
     //css/less files
     var cssFiles = [
         'lib/angular-flash-alert/dist/angular-flash.min.css',
-        'lib/animate.css/animate.css'
+        'lib/animate.css/animate.css',
+        'lib/ng-tags-input/ng-tags-input.min.css'
     ];
     var lessPaths = [
         publicLibDir + '/font-awesome/less',

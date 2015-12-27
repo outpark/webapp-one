@@ -28,7 +28,7 @@
                 partial: "/p/modules/mainapp/profile/wizard-partials/hacknyu.partial.html"
             }
         ];
-        var active = $stateParams.step; //$scope.user.show_profile_wizard;
+        var active = $stateParams.step || 0; //$scope.user.show_profile_wizard;
         if (active > 0 && active <= $scope.forms.length)
             $scope.forms[active - 1].active = true;
 
@@ -119,6 +119,12 @@
                     $scope.forms[currentPage].active = false;
                     $scope.forms[--currentPage].active = true;
                 }
+            },
+            goToForm: function(index){
+                angular.forEach($scope.forms, function(form){
+                    form.active = false;
+                });
+                $scope.forms[index].active = true;
             },
             getDateFromString : function(item){
                 return new Date(item.start_date);
