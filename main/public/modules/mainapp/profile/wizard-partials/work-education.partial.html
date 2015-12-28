@@ -1,23 +1,24 @@
-<div class="row text-left">
+<div class="row text-left" ng-controller="WorkEducationController">
     <div class="col-lg-8 col-lg-offset-2">
         <h2>Work & Education Portfolio</h2>
-        <button class="btn btn-default btn-lg btn-facebook"><i class="fa fa-facebook-official"></i>
-            Get from Facebook
+        <button class="btn btn-default btn-lg btn-facebook" ng-click="wizardFxn.doFacebookLogin()">
+            <i class="fa fa-facebook-official"></i> Get from Facebook
         </button>
+        <!-- Future implementation
         <button class="btn btn-default btn-lg btn-linkedin"><i class="fa fa-linkedin-square"></i>
             Get from LinkedIn
-        </button>
+        </button>-->
         <hr>
     </div>
-</div>
-<div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
-        <ng-include src="'/p/modules/mainapp/profile/wizard-partials/work.partial.html'"></ng-include>
-        <ng-include src="'/p/modules/mainapp/profile/wizard-partials/college.partial.html'"></ng-include>
-        <ng-include src="'/p/modules/mainapp/profile/wizard-partials/school.partial.html'"></ng-include>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <ng-include src="'/p/modules/mainapp/profile/wizard-partials/work.partial.html'"></ng-include>
+            <ng-include src="'/p/modules/mainapp/profile/wizard-partials/college.partial.html'"></ng-include>
+            <ng-include src="'/p/modules/mainapp/profile/wizard-partials/school.partial.html'"></ng-include>
+        </div>
     </div>
-</div>
-<div class="modal-footer">
-    <a class="btn btn-default btn-lg" ng-click="wizardFxn.prevPage(1)">Previous</a>
-    <a class="btn btn-primary btn-lg" ng-click="wizardFxn.nextPage(1)">Next</a>
+    <div class="modal-footer">
+        <a class="btn btn-default btn-lg" ng-click="wizardFxn.prevPage(1)">Previous</a>
+        <a class="btn btn-primary btn-lg" ng-click="wizardFxn.nextPage(1)">Next</a>
+    </div>
 </div>

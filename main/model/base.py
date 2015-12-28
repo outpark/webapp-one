@@ -119,7 +119,7 @@ class Base(ndb.Expando):
                 repr_dict[name] = attr.isoformat()
             elif isinstance(attr, ndb.Key):
                 repr_dict[name] = self.key.urlsafe()
-                repr_dict['id'] = self.key.id()
+                repr_dict['id'] = self.id()
             else:
                 repr_dict[name] = attr
 
@@ -156,6 +156,15 @@ class Base(ndb.Expando):
 
     def id(self):
         return self.key.id()
+
+    #TODO override this to take care of denormalized data
+    # e.g. when the user model updates it should put an entry in
+    # the denormalization model to update associated models like
+    # hackathon table and the profile table if there is need,
+    # for instance if the name changes
+    def put(self):
+        self._put()
+
 
 
 class StructuredBase(Base):

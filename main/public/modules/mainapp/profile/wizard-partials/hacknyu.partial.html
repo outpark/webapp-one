@@ -19,92 +19,113 @@
         <hr>
     </div>
     <div class="col-lg-12">
-        <form name="personalForm" class="form-horizontal" unsaved-warning-form>
+        <form name="hackathonForm" class="form-horizontal" ng-submit="wizardFxn.saveHackathon(hackathon)" unsaved-warning-form>
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="optionsHackathonRsvp">I am</label>
                 <div class="col-sm-7">
                     <div class="radio" ng-repeat="rsvpOption in rsvpOptions">
                         <label>
                             <input type="radio" name="optionsHackathonRsvp"
-                                   ng-model="hackathon.rsvp" value="rsvpOption.value">
+                                   ng-model="hackathon.rsvp" value="{{  rsvpOption.value }}">
                             <span ng-bind-html="rsvpOption.label"></span>
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputFile">Resume</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control input-lg" ng-model="data.resume"
-                           placeholder="Paste a public url &mdash; eg. dropbox, skydrive">
-                    <div class="horizontal-rule"><span>OR</span></div>
-                    <button class="btn btn-danger btn-block btn-lg" ng-click="wizardFxn.doGoogleLogin()">
-                        <i class="fa fa-google"></i> Upload with Google Drive</button>
-                    <p class="help-block">Please disable your pop-blocker to login with google.</p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class=" col-sm-3 control-label">I specialize in</label>
-                <div class="col-sm-9">
-                    <tags-input ng-model="hackathon.skills" class="custom-tags-input"
-                                placeholder="What are your strengths? &mdash; Python, Biomaterials">
-                    </tags-input>
-                    <p class="help-block">Select tags for APIs, libraries, data, etc. you have experience with or are interested in.</p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Phone</label>
-                <div class="col-sm-7">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon btn-default"><i class="fa fa-phone"></i></span>
-                        <input type="text" class="form-control input-lg" placeholder="Phone"
-                               ng-model="data.profile.phone">
+            <div class="animated bounceInRight well" ng-if="hackathon.rsvp && hackathon.rsvp != 'cant_go'">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="inputFile">Resume</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control input-lg" ng-model="hackathon.resume"
+                               placeholder="Paste a public url &mdash; eg. dropbox, skydrive">
+                        <div class="horizontal-rule"><span>OR</span></div>
+                        <button class="btn btn-danger btn-block btn-lg" type="button" ng-click="wizardFxn.doGoogleLogin()">
+                            <i class="fa fa-google"></i> Upload with Google Drive</button>
+                        <p class="help-block">Please disable your pop-blocker to login with google.</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="optionsTshirt">My T-Shirt Size is</label>
-                <div class="col-sm-7">
-                    <div class="radio" ng-repeat="size in sizes">
-                        <label>
-                            <input type="radio" name="optionsTshirt"
-                                   ng-model="hackathon.shirt_size" value="{{ size }}">
-                            {{ size }}
-                        </label>
+                <div class="form-group">
+                    <label class=" col-sm-3 control-label">I specialize in</label>
+                    <div class="col-sm-9">
+                        <tags-input ng-model="hackathon.skills" class="custom-tags-input"
+                                    placeholder="e.g. Python, Biomaterials">
+                        </tags-input>
+                        <p class="help-block">Select tags for APIs, libraries, data, etc. you have experience with or are interested in.</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="optionsGender">What is your gender?</label>
-                <div class="col-sm-7">
-                    <div class="radio" ng-repeat="gender in ['Male', 'Female', 'Rather not specify']">
-                        <label>
-                            <input type="radio" name="optionsGender"
-                                   ng-model="hackathon.gender" value="{{ gender }}">
-                            {{ gender }}
-                        </label>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="optionsMaker">What kind of maker are you?</label>
+                    <div class="col-sm-7">
+                        <div class="checkbox" ng-repeat="item in makers">
+                            <label>
+                                <input type="checkbox" name="optionsMaker"
+                                       ng-checked="hackathon.makers.indexOf(item) > -1"
+                                       ng-click="toggleMaker(item)" value="{{ item }}">
+                                {{ item }}
+                            </label>
+                        </div>
+                        <p class="help-block">Makers challenge norms today in order to transform tomorrow.</p>
                     </div>
-                    <label class="control-label">Other</label>
-                    <input type="text" class="form-control input-lg" ng-model="hackathon.gender"
-                               placeholder="Please specify.">
-                    <p class="help-block">This data is collected for providing the correct t-shirt size.</p>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label">If I had a Superpower</label>
-                <div class="col-sm-7">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Phone</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon btn-danger"><i class="fa fa-phone"></i></span>
+                            <input type="text" class="form-control input-lg" placeholder="Phone"
+                                   ng-model="data.profile.phone">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="optionsTshirt">My T-Shirt Size is</label>
+                    <div class="col-sm-7">
+                        <div class="radio" ng-repeat="size in sizes">
+                            <label>
+                                <input type="radio" name="optionsTshirt"
+                                       ng-model="hackathon.shirt" value="{{ size }}">
+                                {{ size }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="optionsGender">What is your gender?</label>
+                    <div class="col-sm-7">
+                        <div class="radio" ng-repeat="gender in genders">
+                            <label>
+                                <input type="radio" name="optionsGender"
+                                       ng-model="hackathon.gender" value="{{ gender }}">
+                                {{ gender }}
+                            </label>
+                        </div>
+                        <label class="control-label">Other</label>
+                        <input type="text" class="form-control input-lg" ng-model="hackathon.genderOther"
+                               placeholder="Please specify." ng-change="genderOtherChange()">
+                        <p class="help-block">This data is collected for providing the correct t-shirt size.</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">If I had a Superpower</label>
+                    <div class="col-sm-7">
                     <textarea class="form-control input-lg" rows="6" ng-model="hackathon.superpower"
                               placeholder="My superpower would be ..."></textarea>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default btn-lg" ng-click="wizardFxn.prevPage(2)">Previous</a>
-                <a class="btn btn-primary btn-lg" ng-click="saveHackathon(hackathon)">Finish</a>
+                <i class="fa fa-spin fa-circle-o-notch" ng-if="wizardFxn.isLoading"></i>
+                <button class="btn btn-default btn-lg" type="button" ng-if="!hackathonForm.$dirty" ng-click="wizardFxn.prevPage(2)">Previous</button>
+                <button class="btn btn-primary btn-lg" type="submit" ng-if="hackathonForm.$dirty" ng-disabled="wizardFxn.isLoading">
+                    <i class="fa fa-check"></i> Complete Registration</button>
+                <button class="btn btn-primary btn-lg" type="button" ng-click="wizardFxn.finishWizard()"
+                        ng-if="!hackathonForm.$dirty">Finish Wizard</button>
             </div>
         </form>
     </div>

@@ -116,7 +116,7 @@
                 <span class="arrow"></span>
                 <div class="text">
                     <div class="first">
-                        {{ workplace.start_date | date: 'mediumDate' }}
+                        {{ workplace.is_present ? 'Present' : workplace.end_date | date: 'mediumDate' }}
                     </div>
                     <div class="second bg-red ">
                         <a href="" ng-click="wizardFxn.editProfileItem(workplace, 'workplaces_struct')">{{ workplace.company }} &middot;

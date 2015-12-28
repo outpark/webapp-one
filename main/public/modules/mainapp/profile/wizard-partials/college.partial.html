@@ -22,10 +22,11 @@
     </div>
 
     <!-- Comment -->
-    <div ng-repeat="college in data.profile.colleges_struct | orderBy: wizardFxn.getDateFromString:true">
+    <div ng-repeat="college in data.profile.colleges_struct | orderBy: wizardFxn.getDateFromString:true ">
         <div class="edit-form well animated {{ college.editor.animation }}" ng-if="college.editor.show">
             <form ng-submit="wizardFxn.saveProfileItem(college, 'colleges_struct')" class="form-horizontal" name="collegeForm" unsaved-warning-form>
                 <p class="alert alert-danger" ng-if="college.editor.error">Failed to save college.</p>
+                <p class="alert alert-warning" ng-if="college.editor.warning">{{ college.editor.warning }}</p>
                 <div class="col-lg-12 tools">
                     <a href="" ng-click="wizardFxn.deleteProfileItem(college, 'colleges_struct')" class="fa fa-trash text-danger"> Delete</a>
                 </div>
@@ -47,6 +48,33 @@
                     </div>
                 </div>
 
+                <div class="form-group" ng-class="{'has-error': college.editor.error.graduation_date}">
+                    <label class="col-sm-3 control-label">Graduation Date</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon btn-info"
+                                  ng-click="status.end_opened = true">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <input type="text" class="form-control input-lg" placeholder="Graduation Date"
+                                   is-open="status.end_opened" uib-datepicker-popup readonly
+                                   ng-model="college.graduation_date" required>
+                        </div>
+                        <p class="help-block">{{ college.editor.error.graduation_date }}</p>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': college.editor.error.is_present}">
+                    <label class="col-sm-3 control-label"></label>
+
+                    <div class="col-sm-7">
+                        <input type="checkbox" name="checkboxPresent" style="margin-top:10px;"
+                               ng-model="college.is_present"/>
+                        <label for="checkboxPresent">I currently study here</label>
+                        <p class="help-block">{{ college.editor.error.is_present }}</p>
+                    </div>
+                </div>
+
                 <div class="form-group" ng-class="{'has-error': college.editor.error.start_date}">
                     <label class="col-sm-3 control-label">Start Date</label>
                     <div class="col-sm-7">
@@ -63,49 +91,24 @@
                     </div>
                 </div>
 
-                <div class="form-group" ng-class="{'has-error': college.editor.error.graduation_date}">
-                    <label class="col-sm-3 control-label"></label>
-
-                    <div class="col-sm-7">
-                        <input type="checkbox" name="checkboxPresent" style="margin-top:10px;"
-                               ng-model="college.is_present"/>
-                        <label for="checkboxPresent">I currently study here</label>
-                        <p class="help-block">{{ college.editor.error.graduation_date }}</p>
-                    </div>
-                </div>
-
-                <div class="form-group" ng-if="!college.is_present" ng-class="{'has-error': college.editor.error.graduation_date}">
-                    <label class="col-sm-3 control-label">Graduation Date</label>
-                    <div class="col-sm-7">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon btn-info"
-                                  ng-click="status.end_opened = true">
-                                <i class="fa fa-calendar"></i>
-                            </span>
-                            <input type="text" class="form-control input-lg" placeholder="Graduation Date"
-                                   is-open="status.end_opened" uib-datepicker-popup readonly
-                                   ng-model="college.graduation_date" required>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="attendedFor">Attended for</label>
                     <div class="col-sm-7">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsAttendedFor" id="optionsRadios1"
-                                           ng-model="college.attended_for" value="College" checked="">
-                                    College
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsAttendedFor" id="optionsRadios2"
-                                           ng-model="college.attended_for" value="Graduate School">
-                                    Graduate School
-                                </label>
-                            </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsAttendedFor" id="optionsRadios1"
+                                       ng-model="college.attended_for" value="College" checked="">
+                                College
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsAttendedFor" id="optionsRadios2"
+                                       ng-model="college.attended_for" value="Graduate School">
+                                Graduate School
+                            </label>
+                        </div>
                     </div>
                 </div>
 
@@ -128,7 +131,7 @@
                 <span class="arrow"></span>
                 <div class="text">
                     <div class="first">
-                        {{ college.start_date | date: 'mediumDate' }}
+                        {{ college.is_present ? 'Present - ' + (college.graduation_date | date: 'yyyy') : (college.graduation_date | date: 'mediumDate') }}
                     </div>
                     <div class="second bg-red ">
                         <a href="" ng-click="wizardFxn.editProfileItem(college, 'colleges_struct')">{{ college.name }} &middot;

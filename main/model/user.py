@@ -74,8 +74,9 @@ class User(model.Base):
     first_name = ndb.StringProperty(validator=UserValidator.create('name'), required=True)
     last_name = ndb.StringProperty(validator=UserValidator.create('name'), required=True)
     name = ndb.ComputedProperty(lambda self: self.first_name.title() + ' ' + self.last_name.title())
-    username = ndb.StringProperty(default='', required=True, validator=UserValidator.create('username_validator'))
-    email = ndb.StringProperty(default='', validator=UserValidator.create('email', required=True))
+    username = ndb.StringProperty(required=True, validator=UserValidator.create('username_validator'))
+    email = ndb.StringProperty(validator=UserValidator.create('email', required=True))
+    hometown = ndb.JsonProperty()
     auth_ids = ndb.StringProperty(repeated=True)
     active = ndb.IntegerProperty(default=1) # 1: active, 0: deactivated by user, 2: suspended, 3: forbidden, 4: deleted
     admin = ndb.BooleanProperty(default=False) # True if user has global permissions (most powerful setting)
@@ -90,7 +91,7 @@ class User(model.Base):
     terms_accepted = ndb.BooleanProperty(default=False, required=True) # switch to false when terms change
 
 
-    PUBLIC_PROPERTIES = ['name', 'username', 'avatar_url'] # accessible by everyone
+    PUBLIC_PROPERTIES = ['name', 'username', 'avatar_url', 'hometown'] # accessible by everyone
 
     PRIVATE_PROPERTIES = ['first_name', 'last_name', 'email', 'active', 'admin', 'roles', 'permissions', 'verified',
                           'show_profile_wizard', 'terms_accepted', 'first_run'] # accessible only by user

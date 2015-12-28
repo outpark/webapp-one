@@ -58,46 +58,56 @@
                         headers: {
                             'Authorization': "Bearer " + data.access_token
                         }
-                    }).then(function (fileResource) { // got back the data for new file, now upload content
+                    }).then(function (fileResource) { // got back the data for new file, now make readable
                         var fileId = fileResource.data.id;
-                        const boundary = '-------314159265358979323846';
-                        const delimiter = "\r\n--" + boundary + "\r\n";
-                        const close_delim = "\r\n--" + boundary + "--";
+                        var requestShare = $window.gapi.client.drive.permissions.insert({
+                            'fileId': fileId,
+                            'resource': {
+                                role: 'reader',
+                                type: 'anyone'
+                            }
+                        });
+                        var callbackShare = function() { //now upload content
+                            const boundary = '-------314159265358979323846';
+                            const delimiter = "\r\n--" + boundary + "\r\n";
+                            const close_delim = "\r\n--" + boundary + "--";
 
-                        var reader = new FileReader();
-                        reader.readAsBinaryString(file);
-                        reader.onload = function(e) {
-                            var contentType = file.type || 'application/octet-stream';
-                            // Updating the metadata is optional and you can instead use the value from drive.files.get.
-                            var base64Data = btoa(reader.result);
-                            var multipartRequestBody =
-                                delimiter +
-                                'Content-Type: application/json\r\n\r\n' +
-                                JSON.stringify({
-                                    "title": file.name || "HACKNYU-resume",
-                                    "mimeType": file.type,
-                                    "description": "HACKNYU Resume 2016"
-                                }) +
-                                delimiter +
-                                'Content-Type: ' + contentType + '\r\n' +
-                                'Content-Transfer-Encoding: base64\r\n' +
-                                '\r\n' +
-                                base64Data +
-                                close_delim;
+                            var reader = new FileReader();
+                            reader.readAsBinaryString(file);
+                            reader.onload = function(e) {
+                                var contentType = file.type || 'application/octet-stream';
+                                // Updating the metadata is optional and you can instead use the value from drive.files.get.
+                                var base64Data = btoa(reader.result);
+                                var multipartRequestBody =
+                                    delimiter +
+                                    'Content-Type: application/json\r\n\r\n' +
+                                    JSON.stringify({
+                                        "title": file.name || "HACKNYU-resume",
+                                        "mimeType": file.type,
+                                        "description": "HACKNYU Resume 2016"
+                                    }) +
+                                    delimiter +
+                                    'Content-Type: ' + contentType + '\r\n' +
+                                    'Content-Transfer-Encoding: base64\r\n' +
+                                    '\r\n' +
+                                    base64Data +
+                                    close_delim;
 
-                            var request = $window.gapi.client.request({
-                                'path': '/upload/drive/v2/files/' + fileId,
-                                'method': 'PUT',
-                                'params': {'uploadType': 'multipart', 'alt': 'json', convert:true},
-                                'headers': {
-                                    'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
-                                },
-                                'body': multipartRequestBody});
-                            var callback = function(file) {
-                                _deferred.resolve(file);
-                            };
-                            request.execute(callback);
-                        }
+                                var request = $window.gapi.client.request({
+                                    'path': '/upload/drive/v2/files/' + fileId,
+                                    'method': 'PUT',
+                                    'params': {'uploadType': 'multipart', 'alt': 'json', convert:true},
+                                    'headers': {
+                                        'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
+                                    },
+                                    'body': multipartRequestBody});
+                                var callback = function(file) {
+                                    _deferred.resolve(file);
+                                };
+                                request.execute(callback);
+                            }
+                        };
+                        requestShare.execute(callbackShare);
                     }, _deferred.reject); //after url get
                 }, _deferred.reject); //after auth token get
                 return _deferred.promise;

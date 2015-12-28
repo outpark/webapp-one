@@ -3,8 +3,13 @@
 
     var module = angular.module('mainapp');
 
-    module.controller('HackathonWizardController', function ($scope) {
-        $scope.hackathon = {};
+    module.controller('HackathonWizardController', function ($scope, $log, GoogleIntegration, $uibModal,
+                                                             gaBrowserHistory, HackNYUConst) {
+        $scope.toggleMaker = function(value){
+            $scope.hackathonForm.$setDirty();
+            _.remove($scope.hackathon.maker, value);
+            $scope.hackathon.makers.push(value);
+        };
 
         $scope.rsvpOptions = [
             {
@@ -20,7 +25,69 @@
                 label: "Can't Go"
             }
         ];
+
+        $scope.makers = ['Artist', 'Content Provider', 'Front-End Developer', 'Back-End Developer',
+            'Designer', 'Mobile Developer', 'Game Developer'];
         $scope.sizes = ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'];
+        $scope.genders = ['Male', 'Female', 'Rather not specify'];
+
+        $scope.genderOtherChange = function(){
+            $scope.hackathon.gender = null;
+        };
+
+        var user = $scope.data;
+
+        //set current hackathon as 'spring_2016'
+        if (user.hackathons && user.hackathons instanceof Array){
+            angular.forEach(user.hackathons, function(value){
+                if (value.which == HackNYUConst.HACKATHON_NAME) {
+                    if ($scope.genders.indexOf(value.gender) == -1)
+                        value['genderOther'] = value.gender;
+                    $scope.hackathon = value;
+                }
+            })
+        }
+        $scope.hackathon = $scope.hackathon || {makers:[]};
+
+
+        _.extend($scope.wizardFxn, {
+            doGoogleLogin: function(){
+                GoogleIntegration.login().then(function(){
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        size: 'lg',
+                        templateUrl: 'modalBrowser.html',
+                        controller: 'ModalBrowserController'
+                    });
+
+                    modalInstance.result.then(function(fileUrl){
+                        $scope.hackathon.resume = fileUrl;
+                    });
+                });
+            },
+            saveHackathon: function(item){
+                $scope.wizardFxn.isLoading = true;
+
+                //set gender from other
+                $scope.hackathon.gender = $scope.hackathon.genderOther ?
+                    $scope.hackathon.genderOther : $scope.hackathon.gender;
+
+                var after = function(){
+                    $scope.wizardFxn.isLoading = false;
+                };
+
+                if (item.key){
+                    item.save().finally(after);
+                } else {
+                    user.post('hackathons', item).then(function(data){
+                        _.extend(item, data);
+                    }).finally(after);
+                }
+            },
+            finishWizard: function(){
+                gaBrowserHistory.back();
+            }
+        });
     });
 
     module.controller('ModalBrowserController', function($scope, $log, $uibModalInstance, GoogleIntegration, $timeout,
@@ -55,6 +122,7 @@
         $scope.deleteFile = function(file){
             GoogleIntegration.deleteFile(file).then(function(){
                 _.remove($scope.files, file);
+                $scope.activeFile = null;
             });
         };
         $scope.submit = function(file){

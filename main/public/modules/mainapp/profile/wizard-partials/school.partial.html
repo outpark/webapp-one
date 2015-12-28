@@ -26,6 +26,7 @@
         <div class="edit-form well animated {{ school.editor.animation }}" ng-if="school.editor.show">
             <form ng-submit="wizardFxn.saveProfileItem(school, 'schools_struct')" class="form-horizontal" name="schoolForm" unsaved-warning-form>
                 <p class="alert alert-danger" ng-if="school.editor.error">Failed to save high school.</p>
+                <p class="alert alert-warning" ng-if="school.editor.warning">{{ school.editor.warning }}</p>
                 <div class="col-lg-12 tools">
                     <a href="" ng-click="wizardFxn.deleteProfileItem(school, 'schools_struct')" class="fa fa-trash text-danger"> Delete</a>
                 </div>
@@ -35,6 +36,33 @@
                         <input type="text" class="form-control input-lg" ng-model="school.name"
                                placeholder="Where have you studied?" required>
                         <p class="help-block">{{ school.editor.error.name }}</p>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': school.editor.error.graduation_date}">
+                    <label class="col-sm-3 control-label">Graduation Date</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon btn-info"
+                                  ng-click="status.end_opened = true">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <input type="text" class="form-control input-lg" placeholder="Graduation Date"
+                                   is-open="status.end_opened" uib-datepicker-popup readonly
+                                   ng-model="school.graduation_date" required>
+                        </div>
+                        <p class="help-block">{{ school.editor.error.graduation_date }}</p>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': school.editor.error.is_present}">
+                    <label class="col-sm-3 control-label"></label>
+
+                    <div class="col-sm-7">
+                        <input type="checkbox" name="checkboxPresent" style="margin-top:10px;"
+                               ng-model="school.is_present"/>
+                        <label for="checkboxPresent">I currently study here</label>
+                        <p class="help-block">{{ school.editor.error.is_present }}</p>
                     </div>
                 </div>
 
@@ -51,32 +79,6 @@
                                    ng-model="school.start_date" required>
                         </div>
                         <p class="help-block">{{ school.editor.error.start_date }}</p>
-                    </div>
-                </div>
-
-                <div class="form-group" ng-class="{'has-error': school.editor.error.graduation_date}">
-                    <label class="col-sm-3 control-label"></label>
-
-                    <div class="col-sm-7">
-                        <input type="checkbox" name="checkboxPresent" style="margin-top:10px;"
-                               ng-model="school.is_present"/>
-                        <label for="checkboxPresent">I currently study here</label>
-                        <p class="help-block">{{ school.editor.error.graduation_date }}</p>
-                    </div>
-                </div>
-
-                <div class="form-group" ng-if="!school.is_present" ng-class="{'has-error': school.editor.error.graduation_date}">
-                    <label class="col-sm-3 control-label">Graduation Date</label>
-                    <div class="col-sm-7">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon btn-info"
-                                  ng-click="status.end_opened = true">
-                                <i class="fa fa-calendar"></i>
-                            </span>
-                            <input type="text" class="form-control input-lg" placeholder="Graduation Date"
-                                   is-open="status.end_opened" uib-datepicker-popup readonly
-                                   ng-model="school.graduation_date" required>
-                        </div>
                     </div>
                 </div>
 
@@ -99,7 +101,7 @@
                 <span class="arrow"></span>
                 <div class="text">
                     <div class="first">
-                        {{ school.start_date | date: 'mediumDate' }}
+                        {{ school.is_present ? 'Present - ' + (school.graduation_date | date: 'yyyy') : (school.graduation_date | date: 'mediumDate')  }}
                     </div>
                     <div class="second bg-red ">
                         <a href="" ng-click="wizardFxn.editProfileItem(school, 'schools_struct')">{{ school.name }} &middot;

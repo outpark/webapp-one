@@ -1,562 +1,560 @@
-<section class="wrapper">
-    <!-- page start-->
+<!-- profile page start-->
 
-    <div class="row">
-        <div class="col-md-12">
-            <section class="panel">
-                <div class="panel-body profile-information">
-                    <div class="col-md-3">
-                        <div class="profile-pic text-center">
-                            <img src="{{ user.avatar_url }}" alt="Profile picture">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-desk">
-                            <h1>{{ user.name }}</h1>
-                            <span class="text-muted">{{ user.profile.occupation || 'HackNYU Member' }}</span>
-                            <br/>
-                            <p>
-                                {{ user.profile.bio || 'Write a bio...' }}
-                            </p>
-                            <br/>
-                            <a href="" ui-sref="app.profile-wizard" class="btn btn-primary">Edit Profile</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="profile-statistics">
-                            <h1>1240</h1>
-                            <p>This Week Sales</p>
-                            <h1>$5,61,240</h1>
-                            <p>This Week Earn</p>
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+<div class="row">
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body profile-information">
+                <div class="col-md-3">
+                    <div class="profile-pic text-center">
+                        <img src="{{ user.avatar_url }}" alt="Profile picture">
                     </div>
                 </div>
-            </section>
-        </div>
-        <div class="col-md-12">
-            <section class="panel">
-                <header class="panel-heading tab-bg-dark-navy-blue">
-                    <ul class="nav nav-tabs nav-justified ">
-                        <li class="active">
-                            <a data-toggle="tab" href="#overview" aria-expanded="true">
-                                Overview
-                            </a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#job-history" aria-expanded="false">
-                                Job History
-                            </a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#contacts" class="contact-map" aria-expanded="false">
-                                Contacts
-                            </a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#settings" aria-expanded="false">
-                                Settings
-                            </a>
-                        </li>
-                    </ul>
-                </header>
-                <div class="panel-body">
-                    <div class="tab-content tasi-tab">
-                        <div id="overview" class="tab-pane active">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="recent-act">
-                                        <h1>Recent Activity</h1>
-                                        <div class="activity-icon terques">
-                                            <i class="fa fa-check"></i>
-                                        </div>
-                                        <div class="activity-desk">
-                                            <h2>1 Hour Ago</h2>
-                                            <p>Purchased new stationary items for head office</p>
-                                        </div>
-                                        <div class="activity-icon red">
-                                            <i class="fa fa-beer"></i>
-                                        </div>
-                                        <div class="activity-desk">
-                                            <h2 class="red">2 Hour Ago</h2>
-                                            <p>Completed Coffee meeting with <a href="#" class="terques">Stive Martin</a> regarding the Product Promotion</p>
-                                        </div>
-                                        <div class="activity-icon purple">
-                                            <i class="fa fa-tags"></i>
-                                        </div>
-                                        <div class="activity-desk">
-                                            <h2 class="purple">today evening</h2>
-                                            <p>3 photo Uploaded on facebook product page</p>
-                                            <div class="photo-gl">
-                                                <a href="#">
-                                                    <img src="images/sm-img-1.jpg" alt="">
-                                                </a>
-                                                <a href="#">
-                                                    <img src="images/sm-img-2.jpg" alt="">
-                                                </a>
-                                                <a href="#">
-                                                    <img src="images/sm-img-3.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="activity-icon green">
-                                            <i class="fa fa-map-marker"></i>
-                                        </div>
-                                        <div class="activity-desk">
-                                            <h2 class="green">yesterday</h2>
-                                            <p>Outdoor visit at <a href="#" class="blue">California State Route</a> 85 with <a href="#" class="terques">John Boltana</a> &amp; <a href="#" class="terques">Harry Piterson</a> regarding to setup a new show room.</p>
-                                            <div class="loc-map">
-                                                location map goes here
-                                            </div>
-                                        </div>
-
-                                        <div class="activity-icon yellow">
-                                            <i class="fa fa-user-md"></i>
-                                        </div>
-                                        <div class="activity-desk">
-                                            <h2 class="yellow">12 december 2013</h2>
-                                            <p>Montly Regular Medical check up at Greenland Hospital.</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="prf-box">
-                                        <h3 class="prf-border-head">work in progress</h3>
-                                        <div class=" wk-progress">
-                                            <div class="col-md-5">Themeforest</div>
-                                            <div class="col-md-5">
-                                                <div class="progress  ">
-                                                    <div style="width: 70%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-danger">
-                                                        <span class="sr-only">70% Complete (success)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">70%</div>
-                                        </div>
-                                        <div class=" wk-progress">
-                                            <div class="col-md-5">Graphics River</div>
-                                            <div class="col-md-5">
-                                                <div class="progress ">
-                                                    <div style="width: 57%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success">
-                                                        <span class="sr-only">57% Complete (success)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">57%</div>
-                                        </div>
-                                        <div class=" wk-progress">
-                                            <div class="col-md-5">Code Canyon</div>
-                                            <div class="col-md-5">
-                                                <div class="progress ">
-                                                    <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-info">
-                                                        <span class="sr-only">20% Complete (success)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">20%</div>
-                                        </div>
-                                        <div class=" wk-progress">
-                                            <div class="col-md-5">Audio Jungle</div>
-                                            <div class="col-md-5">
-                                                <div class="progress ">
-                                                    <div style="width: 30%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
-                                                        <span class="sr-only">30% Complete (success)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">30%</div>
-                                        </div>
-                                    </div>
-                                    <div class="prf-box">
-                                        <h3 class="prf-border-head">performance status</h3>
-                                        <div class=" wk-progress pf-status">
-                                            <div class="col-md-8 col-xs-8">Total Product Sales</div>
-                                            <div class="col-md-4 col-xs-4">
-                                                <strong>23545</strong>
-                                            </div>
-                                        </div>
-                                        <div class=" wk-progress pf-status">
-                                            <div class="col-md-8 col-xs-8">Total Product Refer</div>
-                                            <div class="col-md-4 col-xs-4">
-                                                <strong>235</strong>
-                                            </div>
-                                        </div>
-                                        <div class=" wk-progress pf-status">
-                                            <div class="col-md-8 col-xs-8">Total Earn</div>
-                                            <div class="col-md-4 col-xs-4">
-                                                <strong>235452344$</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="prf-box">
-                                        <h3 class="prf-border-head">team members</h3>
-                                        <div class=" wk-progress tm-membr">
-                                            <div class="col-md-2 col-xs-2">
-                                                <div class="tm-avatar">
-                                                    <img src="images/lock_thumb.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-7 col-xs-7">
-                                                <span class="tm">John Boltana</span>
-                                            </div>
-                                            <div class="col-md-3 col-xs-3">
-                                                <a href="#" class="btn btn-white">Assign</a>
-                                            </div>
-                                        </div>
-                                        <div class=" wk-progress tm-membr">
-                                            <div class="col-md-2 col-xs-2">
-                                                <div class="tm-avatar">
-                                                    <img src="images/avatar-mini-2.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-7 col-xs-7">
-                                                <span class="tm">John Boltana</span>
-                                            </div>
-                                            <div class="col-md-3 col-xs-3">
-                                                <a href="#" class="btn btn-white">Assign</a>
-                                            </div>
-                                        </div>
-                                        <div class=" wk-progress tm-membr">
-                                            <div class="col-md-2 col-xs-2">
-                                                <div class="tm-avatar">
-                                                    <img src="images/avatar-mini-3.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-7 col-xs-7">
-                                                <span class="tm">John Boltana</span>
-                                            </div>
-                                            <div class="col-md-3 col-xs-3">
-                                                <a href="#" class="btn btn-white">Assign</a>
-                                            </div>
-                                        </div>
-                                        <div class=" wk-progress tm-membr">
-                                            <div class="col-md-2 col-xs-2">
-                                                <div class="tm-avatar">
-                                                    <img src="images/avatar-mini-4.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-7 col-xs-7">
-                                                <span class="tm">John Boltana</span>
-                                            </div>
-                                            <div class="col-md-3 col-xs-3">
-                                                <a href="#" class="btn btn-white">Assign</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="job-history" class="tab-pane">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="timeline-messages">
-                                        <h3>Take a Tour</h3>
-                                        <!-- Comment -->
-                                        <div class="msg-time-chat">
-                                            <div class="message-body msg-in">
-                                                <span class="arrow"></span>
-                                                <div class="text">
-                                                    <div class="first">
-                                                        13 January 2013
-                                                    </div>
-                                                    <div class="second bg-terques ">
-                                                        Join as Product Asst. Manager
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /comment -->
-
-                                        <!-- Comment -->
-                                        <div class="msg-time-chat">
-                                            <div class="message-body msg-in">
-                                                <span class="arrow"></span>
-                                                <div class="text">
-                                                    <div class="first">
-                                                        10 February 2012
-                                                    </div>
-                                                    <div class="second bg-red">
-                                                        Completed Provition period and Appointed as a permanent Employee
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /comment -->
-
-                                        <!-- Comment -->
-                                        <div class="msg-time-chat">
-                                            <div class="message-body msg-in">
-                                                <span class="arrow"></span>
-                                                <div class="text">
-                                                    <div class="first">
-                                                        2 January 2011
-                                                    </div>
-                                                    <div class="second bg-purple">
-                                                        Selected Employee of the Month
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /comment -->
-
-                                        <!-- Comment -->
-                                        <div class="msg-time-chat">
-                                            <div class="message-body msg-in">
-                                                <span class="arrow"></span>
-                                                <div class="text">
-                                                    <div class="first">
-                                                        4 March 2010
-                                                    </div>
-                                                    <div class="second bg-green">
-                                                        Got Promotion and become area manager of California
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /comment -->
-                                        <!-- Comment -->
-                                        <div class="msg-time-chat">
-                                            <div class="message-body msg-in">
-                                                <span class="arrow"></span>
-                                                <div class="text">
-                                                    <div class="first">
-                                                        3 April 2009
-                                                    </div>
-                                                    <div class="second bg-yellow">
-                                                        Selected the Best Employee of the Year 2013 and was awarded
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /comment -->
-
-                                        <!-- Comment -->
-                                        <div class="msg-time-chat">
-                                            <div class="message-body msg-in">
-                                                <span class="arrow"></span>
-                                                <div class="text">
-                                                    <div class="first">
-                                                        23 May 2008
-                                                    </div>
-                                                    <div class="second bg-terques">
-                                                        Got Promotion and become Product Manager and was transper from Branch to Head Office. Lorem ipsum dolor sit amet
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /comment -->
-                                        <!-- Comment -->
-                                        <div class="msg-time-chat">
-                                            <div class="message-body msg-in">
-                                                <span class="arrow"></span>
-                                                <div class="text">
-                                                    <div class="first">
-                                                        14 June 2007
-                                                    </div>
-                                                    <div class="second bg-blue">
-                                                        Height Sales scored and break all of the previous sales record ever in the company. Awarded
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /comment -->
-                                        <!-- Comment -->
-                                        <div class="msg-time-chat">
-                                            <div class="message-body msg-in">
-                                                <span class="arrow"></span>
-                                                <div class="text">
-                                                    <div class="first">
-                                                        1 January 2006
-                                                    </div>
-                                                    <div class="second bg-green">
-                                                        Take 15 days leave for his wedding and Honeymoon &amp; Christmas
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /comment -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="contacts" class="tab-pane">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="prf-contacts">
-                                        <h2> <span><i class="fa fa-map-marker"></i></span> location</h2>
-                                        <div class="location-info">
-                                            <p>Postal Address<br>
-                                                PO Box 16122 Collins Street West<br>
-                                                Victoria 8007 Australia</p>
-                                            <p>Headquarters<br>
-                                                121 King Street, Melbourne<br>
-                                                Victoria 3000 Australia</p>
-                                        </div>
-                                        <h2> <span><i class="fa fa-phone"></i></span> contacts</h2>
-                                        <div class="location-info">
-                                            <p>Phone	: +61 3 8376 6284 <br>
-                                                Cell		: +61 3 8376 6284</p>
-                                            <p>Email		: david@themebucket.net<br>
-                                                Skype		: david.rojormillan</p>
-                                            <p>
-                                                Facebook	: https://www.facebook.com/themebuckets <br>
-                                                Twitter	: https://twitter.com/theme_bucket
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div id="map-canvas" style="position: relative; overflow: hidden; transform: translateZ(0px) translateZ(0px) translateZ(0px) translateZ(0px); background-color: rgb(229, 227, 223);"><div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -241px; top: -32px;"></div></div></div></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: -241px; top: -32px;"><canvas draggable="false" height="256" width="256" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div></div></div></div><div style="position: absolute; z-index: 0; transform: translateZ(0px); left: 0px; top: 0px;"><div style="overflow: hidden;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 2; width: 100%; height: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 3; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div><div style="padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 0px; height: 0px; position: absolute; left: 5px; top: 5px; background-color: white;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;"></div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px; width: 12px;"><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer; display: none;">Map Data</a><span style="display: none;"></span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);"></div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; -webkit-user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a></div></div><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; height: 14px; line-height: 14px; display: none; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report errors in the road map or imagery to Google" href="https://www.google.com/maps/@-37.815207,144.963937,15z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report a map error</a></div></div><div class="gmnoprint" draggable="false" controlwidth="0" controlheight="0" style="margin: 10px; -webkit-user-select: none; position: absolute; display: none; bottom: 0px; right: 0px;"><div class="gmnoprint" style="display: none; position: absolute;"><div draggable="false" style="-webkit-user-select: none; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(255, 255, 255);"><div title="Zoom in" style="position: relative;"><div style="overflow: hidden; position: absolute;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></div><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; background-color: rgb(230, 230, 230);"></div><div title="Zoom out" style="position: relative;"><div style="overflow: hidden; position: absolute;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></div></div></div><div controlwidth="28" controlheight="28" style="box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; width: 28px; height: 28px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default; display: none; position: absolute; background-color: rgb(255, 255, 255);"><div style="position: absolute; left: 1px; top: 1px;"></div></div><div class="gmnoprint" controlwidth="28" controlheight="0" style="display: none; position: absolute;"><div title="Rotate map 90 degrees" style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; cursor: pointer; display: none; background-color: rgb(255, 255, 255);"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: 6px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gm-tilt" style="width: 0px; height: 0px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; top: 0px; cursor: pointer; background-color: rgb(255, 255, 255);"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl4.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div><div class="gmnoprint" style="margin: 10px; z-index: 0; position: absolute; cursor: pointer; display: none; left: 0px; top: 0px;"><div class="gm-style-mtc" style="float: left;"><div draggable="false" title="Show street map" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; padding: 8px; border-bottom-left-radius: 2px; border-top-left-radius: 2px; -webkit-background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; font-weight: 500; background-color: rgb(255, 255, 255); background-clip: padding-box;">Map</div><div style="z-index: -1; padding: 2px; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; position: absolute; left: 0px; top: 0px; text-align: left; display: none; background-color: white;"><div draggable="false" title="Show street map with terrain" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; padding: 6px 8px 6px 6px; direction: ltr; text-align: left; white-space: nowrap; background-color: rgb(255, 255, 255);"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle; background-color: rgb(255, 255, 255);"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;"><img src="https://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;"></div></span><label style="vertical-align: middle; cursor: pointer;">Terrain</label></div></div></div><div class="gm-style-mtc" style="float: left;"><div draggable="false" title="Show satellite imagery" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(86, 86, 86); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; padding: 8px; border-bottom-right-radius: 2px; border-top-right-radius: 2px; -webkit-background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-left-width: 0px; background-color: rgb(255, 255, 255); background-clip: padding-box;">Satellite</div><div style="z-index: -1; padding: 2px; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; position: absolute; right: 0px; top: 0px; text-align: left; display: none; background-color: white;"><div draggable="false" title="Show imagery with street names" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; padding: 6px 8px 6px 6px; direction: ltr; text-align: left; white-space: nowrap; background-color: rgb(255, 255, 255);"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle; background-color: rgb(255, 255, 255);"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden;"><img src="https://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;"></div></span><label style="vertical-align: middle; cursor: pointer;">Labels</label></div></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps?ll=-37.815207,144.963937&amp;z=15&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/google4.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div></div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="settings" class="tab-pane">
-                            <div class="position-center">
-                                <div class="prf-contacts sttng">
-                                    <h2>  Personal Information</h2>
-                                </div>
-                                <form role="form" class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label"> Avatar</label>
-                                        <div class="col-lg-6">
-                                            <input type="file" id="exampleInputFile" class="file-pos">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Company</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="c-name" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Lives In</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="lives-in" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Country</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="country" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Description</label>
-                                        <div class="col-lg-10">
-                                            <textarea rows="10" cols="30" class="form-control" id="" name=""></textarea>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="prf-contacts sttng">
-                                    <h2> socail networks</h2>
-                                </div>
-                                <form role="form" class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Facebook</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="fb-name" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Twitter</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="twitter" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Google plus</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="g-plus" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Flicr</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="flicr" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Youtube</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="youtube" class="form-control">
-                                        </div>
-                                    </div>
-
-                                </form>
-                                <div class="prf-contacts sttng">
-                                    <h2>Contact</h2>
-                                </div>
-                                <form role="form" class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Address 1</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="addr1" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Address 2</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="addr2" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Phone</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="phone" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Cell</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="cell" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Email</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="email" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 control-label">Skype</label>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder=" " id="skype" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-lg-offset-2 col-lg-10">
-                                            <button class="btn btn-primary" type="submit">Save</button>
-                                            <button class="btn btn-default" type="button">Cancel</button>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-
-                        </div>
+                <div class="col-md-6">
+                    <div class="profile-desk">
+                        <h1>{{ user.name }}</h1>
+                        <span class="text-muted">{{ user.profile.occupation || 'HackNYU Member' }}</span>
+                        <br/>
+                        <p>
+                            {{ user.profile.bio || 'Write a bio...' }}
+                        </p>
+                        <br/>
+                        <a href="" ui-sref="app.profile-wizard" class="btn btn-primary">Edit Profile</a>
                     </div>
                 </div>
-            </section>
-        </div>
+                <div class="col-md-3">
+                    <div class="profile-statistics">
+                        <h1>1240</h1>
+                        <p>This Week Sales</p>
+                        <h1>$5,61,240</h1>
+                        <p>This Week Earn</p>
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <!-- page end-->
-</section>
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading tab-bg-dark-navy-blue">
+                <ul class="nav nav-tabs nav-justified ">
+                    <li class="active">
+                        <a data-toggle="tab" href="#overview" aria-expanded="true">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#job-history" aria-expanded="false">
+                            Job History
+                        </a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#contacts" class="contact-map" aria-expanded="false">
+                            Contacts
+                        </a>
+                    </li>
+                    <li class="">
+                        <a data-toggle="tab" href="#settings" aria-expanded="false">
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </header>
+            <div class="panel-body">
+                <div class="tab-content tasi-tab">
+                    <div id="overview" class="tab-pane active">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="recent-act">
+                                    <h1>Recent Activity</h1>
+                                    <div class="activity-icon terques">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="activity-desk">
+                                        <h2>1 Hour Ago</h2>
+                                        <p>Purchased new stationary items for head office</p>
+                                    </div>
+                                    <div class="activity-icon red">
+                                        <i class="fa fa-beer"></i>
+                                    </div>
+                                    <div class="activity-desk">
+                                        <h2 class="red">2 Hour Ago</h2>
+                                        <p>Completed Coffee meeting with <a href="#" class="terques">Stive Martin</a> regarding the Product Promotion</p>
+                                    </div>
+                                    <div class="activity-icon purple">
+                                        <i class="fa fa-tags"></i>
+                                    </div>
+                                    <div class="activity-desk">
+                                        <h2 class="purple">today evening</h2>
+                                        <p>3 photo Uploaded on facebook product page</p>
+                                        <div class="photo-gl">
+                                            <a href="#">
+                                                <img src="images/sm-img-1.jpg" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="images/sm-img-2.jpg" alt="">
+                                            </a>
+                                            <a href="#">
+                                                <img src="images/sm-img-3.jpg" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-icon green">
+                                        <i class="fa fa-map-marker"></i>
+                                    </div>
+                                    <div class="activity-desk">
+                                        <h2 class="green">yesterday</h2>
+                                        <p>Outdoor visit at <a href="#" class="blue">California State Route</a> 85 with <a href="#" class="terques">John Boltana</a> &amp; <a href="#" class="terques">Harry Piterson</a> regarding to setup a new show room.</p>
+                                        <div class="loc-map">
+                                            location map goes here
+                                        </div>
+                                    </div>
+
+                                    <div class="activity-icon yellow">
+                                        <i class="fa fa-user-md"></i>
+                                    </div>
+                                    <div class="activity-desk">
+                                        <h2 class="yellow">12 december 2013</h2>
+                                        <p>Montly Regular Medical check up at Greenland Hospital.</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="prf-box">
+                                    <h3 class="prf-border-head">work in progress</h3>
+                                    <div class=" wk-progress">
+                                        <div class="col-md-5">Themeforest</div>
+                                        <div class="col-md-5">
+                                            <div class="progress  ">
+                                                <div style="width: 70%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-danger">
+                                                    <span class="sr-only">70% Complete (success)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">70%</div>
+                                    </div>
+                                    <div class=" wk-progress">
+                                        <div class="col-md-5">Graphics River</div>
+                                        <div class="col-md-5">
+                                            <div class="progress ">
+                                                <div style="width: 57%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success">
+                                                    <span class="sr-only">57% Complete (success)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">57%</div>
+                                    </div>
+                                    <div class=" wk-progress">
+                                        <div class="col-md-5">Code Canyon</div>
+                                        <div class="col-md-5">
+                                            <div class="progress ">
+                                                <div style="width: 20%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-info">
+                                                    <span class="sr-only">20% Complete (success)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">20%</div>
+                                    </div>
+                                    <div class=" wk-progress">
+                                        <div class="col-md-5">Audio Jungle</div>
+                                        <div class="col-md-5">
+                                            <div class="progress ">
+                                                <div style="width: 30%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
+                                                    <span class="sr-only">30% Complete (success)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">30%</div>
+                                    </div>
+                                </div>
+                                <div class="prf-box">
+                                    <h3 class="prf-border-head">performance status</h3>
+                                    <div class=" wk-progress pf-status">
+                                        <div class="col-md-8 col-xs-8">Total Product Sales</div>
+                                        <div class="col-md-4 col-xs-4">
+                                            <strong>23545</strong>
+                                        </div>
+                                    </div>
+                                    <div class=" wk-progress pf-status">
+                                        <div class="col-md-8 col-xs-8">Total Product Refer</div>
+                                        <div class="col-md-4 col-xs-4">
+                                            <strong>235</strong>
+                                        </div>
+                                    </div>
+                                    <div class=" wk-progress pf-status">
+                                        <div class="col-md-8 col-xs-8">Total Earn</div>
+                                        <div class="col-md-4 col-xs-4">
+                                            <strong>235452344$</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="prf-box">
+                                    <h3 class="prf-border-head">team members</h3>
+                                    <div class=" wk-progress tm-membr">
+                                        <div class="col-md-2 col-xs-2">
+                                            <div class="tm-avatar">
+                                                <img src="images/lock_thumb.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-xs-7">
+                                            <span class="tm">John Boltana</span>
+                                        </div>
+                                        <div class="col-md-3 col-xs-3">
+                                            <a href="#" class="btn btn-white">Assign</a>
+                                        </div>
+                                    </div>
+                                    <div class=" wk-progress tm-membr">
+                                        <div class="col-md-2 col-xs-2">
+                                            <div class="tm-avatar">
+                                                <img src="images/avatar-mini-2.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-xs-7">
+                                            <span class="tm">John Boltana</span>
+                                        </div>
+                                        <div class="col-md-3 col-xs-3">
+                                            <a href="#" class="btn btn-white">Assign</a>
+                                        </div>
+                                    </div>
+                                    <div class=" wk-progress tm-membr">
+                                        <div class="col-md-2 col-xs-2">
+                                            <div class="tm-avatar">
+                                                <img src="images/avatar-mini-3.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-xs-7">
+                                            <span class="tm">John Boltana</span>
+                                        </div>
+                                        <div class="col-md-3 col-xs-3">
+                                            <a href="#" class="btn btn-white">Assign</a>
+                                        </div>
+                                    </div>
+                                    <div class=" wk-progress tm-membr">
+                                        <div class="col-md-2 col-xs-2">
+                                            <div class="tm-avatar">
+                                                <img src="images/avatar-mini-4.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-xs-7">
+                                            <span class="tm">John Boltana</span>
+                                        </div>
+                                        <div class="col-md-3 col-xs-3">
+                                            <a href="#" class="btn btn-white">Assign</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="job-history" class="tab-pane">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="timeline-messages">
+                                    <h3>Take a Tour</h3>
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <div class="first">
+                                                    13 January 2013
+                                                </div>
+                                                <div class="second bg-terques ">
+                                                    Join as Product Asst. Manager
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <div class="first">
+                                                    10 February 2012
+                                                </div>
+                                                <div class="second bg-red">
+                                                    Completed Provition period and Appointed as a permanent Employee
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <div class="first">
+                                                    2 January 2011
+                                                </div>
+                                                <div class="second bg-purple">
+                                                    Selected Employee of the Month
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <div class="first">
+                                                    4 March 2010
+                                                </div>
+                                                <div class="second bg-green">
+                                                    Got Promotion and become area manager of California
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <div class="first">
+                                                    3 April 2009
+                                                </div>
+                                                <div class="second bg-yellow">
+                                                    Selected the Best Employee of the Year 2013 and was awarded
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <div class="first">
+                                                    23 May 2008
+                                                </div>
+                                                <div class="second bg-terques">
+                                                    Got Promotion and become Product Manager and was transper from Branch to Head Office. Lorem ipsum dolor sit amet
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <div class="first">
+                                                    14 June 2007
+                                                </div>
+                                                <div class="second bg-blue">
+                                                    Height Sales scored and break all of the previous sales record ever in the company. Awarded
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+                                    <!-- Comment -->
+                                    <div class="msg-time-chat">
+                                        <div class="message-body msg-in">
+                                            <span class="arrow"></span>
+                                            <div class="text">
+                                                <div class="first">
+                                                    1 January 2006
+                                                </div>
+                                                <div class="second bg-green">
+                                                    Take 15 days leave for his wedding and Honeymoon &amp; Christmas
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /comment -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contacts" class="tab-pane">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-map-marker"></i></span> location</h2>
+                                    <div class="location-info">
+                                        <p>Postal Address<br>
+                                            PO Box 16122 Collins Street West<br>
+                                            Victoria 8007 Australia</p>
+                                        <p>Headquarters<br>
+                                            121 King Street, Melbourne<br>
+                                            Victoria 3000 Australia</p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-phone"></i></span> contacts</h2>
+                                    <div class="location-info">
+                                        <p>Phone	: +61 3 8376 6284 <br>
+                                            Cell		: +61 3 8376 6284</p>
+                                        <p>Email		: david@themebucket.net<br>
+                                            Skype		: david.rojormillan</p>
+                                        <p>
+                                            Facebook	: https://www.facebook.com/themebuckets <br>
+                                            Twitter	: https://twitter.com/theme_bucket
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="map-canvas" style="position: relative; overflow: hidden; transform: translateZ(0px) translateZ(0px) translateZ(0px) translateZ(0px); background-color: rgb(229, 227, 223);"><div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -241px; top: -32px;"></div></div></div></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: -241px; top: -32px;"><canvas draggable="false" height="256" width="256" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div></div></div></div><div style="position: absolute; z-index: 0; transform: translateZ(0px); left: 0px; top: 0px;"><div style="overflow: hidden;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 2; width: 100%; height: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 3; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div><div style="padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 0px; height: 0px; position: absolute; left: 5px; top: 5px; background-color: white;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;"></div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px; width: 12px;"><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer; display: none;">Map Data</a><span style="display: none;"></span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);"></div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; -webkit-user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a></div></div><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; height: 14px; line-height: 14px; display: none; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report errors in the road map or imagery to Google" href="https://www.google.com/maps/@-37.815207,144.963937,15z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report a map error</a></div></div><div class="gmnoprint" draggable="false" controlwidth="0" controlheight="0" style="margin: 10px; -webkit-user-select: none; position: absolute; display: none; bottom: 0px; right: 0px;"><div class="gmnoprint" style="display: none; position: absolute;"><div draggable="false" style="-webkit-user-select: none; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(255, 255, 255);"><div title="Zoom in" style="position: relative;"><div style="overflow: hidden; position: absolute;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></div><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; background-color: rgb(230, 230, 230);"></div><div title="Zoom out" style="position: relative;"><div style="overflow: hidden; position: absolute;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></div></div></div><div controlwidth="28" controlheight="28" style="box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; width: 28px; height: 28px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default; display: none; position: absolute; background-color: rgb(255, 255, 255);"><div style="position: absolute; left: 1px; top: 1px;"></div></div><div class="gmnoprint" controlwidth="28" controlheight="0" style="display: none; position: absolute;"><div title="Rotate map 90 degrees" style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; cursor: pointer; display: none; background-color: rgb(255, 255, 255);"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: 6px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gm-tilt" style="width: 0px; height: 0px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; top: 0px; cursor: pointer; background-color: rgb(255, 255, 255);"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl4.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div><div class="gmnoprint" style="margin: 10px; z-index: 0; position: absolute; cursor: pointer; display: none; left: 0px; top: 0px;"><div class="gm-style-mtc" style="float: left;"><div draggable="false" title="Show street map" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; padding: 8px; border-bottom-left-radius: 2px; border-top-left-radius: 2px; -webkit-background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; font-weight: 500; background-color: rgb(255, 255, 255); background-clip: padding-box;">Map</div><div style="z-index: -1; padding: 2px; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; position: absolute; left: 0px; top: 0px; text-align: left; display: none; background-color: white;"><div draggable="false" title="Show street map with terrain" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; padding: 6px 8px 6px 6px; direction: ltr; text-align: left; white-space: nowrap; background-color: rgb(255, 255, 255);"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle; background-color: rgb(255, 255, 255);"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;"><img src="https://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;"></div></span><label style="vertical-align: middle; cursor: pointer;">Terrain</label></div></div></div><div class="gm-style-mtc" style="float: left;"><div draggable="false" title="Show satellite imagery" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(86, 86, 86); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; padding: 8px; border-bottom-right-radius: 2px; border-top-right-radius: 2px; -webkit-background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-left-width: 0px; background-color: rgb(255, 255, 255); background-clip: padding-box;">Satellite</div><div style="z-index: -1; padding: 2px; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; position: absolute; right: 0px; top: 0px; text-align: left; display: none; background-color: white;"><div draggable="false" title="Show imagery with street names" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; padding: 6px 8px 6px 6px; direction: ltr; text-align: left; white-space: nowrap; background-color: rgb(255, 255, 255);"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle; background-color: rgb(255, 255, 255);"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden;"><img src="https://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;"></div></span><label style="vertical-align: middle; cursor: pointer;">Labels</label></div></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps?ll=-37.815207,144.963937&amp;z=15&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/google4.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="settings" class="tab-pane">
+                        <div class="position-center">
+                            <div class="prf-contacts sttng">
+                                <h2>  Personal Information</h2>
+                            </div>
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label"> Avatar</label>
+                                    <div class="col-lg-6">
+                                        <input type="file" id="exampleInputFile" class="file-pos">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Company</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="c-name" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Lives In</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="lives-in" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Country</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="country" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Description</label>
+                                    <div class="col-lg-10">
+                                        <textarea rows="10" cols="30" class="form-control" id="" name=""></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="prf-contacts sttng">
+                                <h2> socail networks</h2>
+                            </div>
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Facebook</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="fb-name" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Twitter</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="twitter" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Google plus</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="g-plus" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Flicr</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="flicr" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Youtube</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="youtube" class="form-control">
+                                    </div>
+                                </div>
+
+                            </form>
+                            <div class="prf-contacts sttng">
+                                <h2>Contact</h2>
+                            </div>
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Address 1</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="addr1" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Address 2</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="addr2" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Phone</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="phone" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Cell</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="cell" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Email</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="email" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Skype</label>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder=" " id="skype" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                        <button class="btn btn-default" type="button">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!--profile page end-->

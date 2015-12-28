@@ -21,8 +21,7 @@ var AppConfig = (function() {
         'truncate',
         'monospaced.elastic',
         'angular-nicescroll',
-        'ui.bootstrap',
-        'angular-google-gapi'
+        'ui.bootstrap'
     ];
 
     // Add a new vertical module

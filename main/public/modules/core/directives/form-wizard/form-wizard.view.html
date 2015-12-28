@@ -4,7 +4,7 @@
             <li style="width:{{  100/slides.length }}%" role="tab" ng-repeat="slide in slides | orderBy:indexOfSlide track by $index"
                 ng-class="{ current: slide.active}" class="disabled">
                 <a id="wizard-t-0" href="" ng-click="wizardFxn.goToForm($index)">
-                    <span class="number">{{ $index + 1 }}.</span> {{ slide.name }}
+                    {{ $index + 1 }}. <span ng-bind-html="slide.name"></span>
                 </a>
             </li>
         </ul>

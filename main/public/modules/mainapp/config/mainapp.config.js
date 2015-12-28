@@ -13,8 +13,7 @@
 
     module.constant('_', _);
 
-    module.config(function($locationProvider, RestangularProvider,
-                           $fbProvider, $twtProvider, $httpProvider) {
+    module.config(function($locationProvider, RestangularProvider, FacebookProvider, $httpProvider) {
         $locationProvider.html5Mode(false);
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
         RestangularProvider
@@ -22,14 +21,16 @@
             .setRestangularFields({
                 id : 'key'
             });
-
-        $fbProvider.init('1044653762222445');
-        $twtProvider.init()
-            .trimText(true);
+        //todo put appid in backend config
+        FacebookProvider.init({
+            appId      : '903435779732345',
+            xfbml      : true,
+            version    : 'v2.5'
+        });
     });
 
     module.run(function(Restangular, $state, $rootScope, $timeout, gaAuthentication,
-                        gaBrowserHistory, gaFlashMessages, Flash, GAuth) {
+                        gaBrowserHistory, gaFlashMessages, Flash) {
         var loadingPromise;
         var endLoading = function () {
             $timeout.cancel(loadingPromise);
@@ -43,10 +44,8 @@
         gaBrowserHistory.init();
 
         function showError(color, message, testJson){
-            if (testJson && message.indexOf('json') > -1)
-                return;
-            else
-                Flash.create(color, message)
+            if (!(testJson && message.indexOf('json') > -1))
+                Flash.create(color, message);
         }
 
         Restangular.setErrorInterceptor(function (res) {
@@ -54,10 +53,9 @@
             var msg = res.data && res.data.message ? res.data.message :
                 'Sorry, I failed so badly I can\'t even describe it :(';
             if (res.status === 403) {
-                showError('danger', 'Sorry, you\'re not allowed to do it, please sign in with different account');
-                $state.go('login');
+                showError('danger', res.data.message || 'Sorry, you\'re not allowed to do it, please sign in with different account');
             } else if (res.status === 401) {
-                showError('danger', 'Please sign in first!');
+                showError('danger', res.data.message || 'Please sign in first!');
                 $state.go('login');
             } else if (res.status === 404) {
                 showError('danger', res.data.message || 'Sorry, this requested page doesn\'t exist');
@@ -112,13 +110,6 @@
         }
     });
 
-    module.controller('CoreController', function($scope, $document, $anchorScroll, $location,
-                                                 gaAuthentication, gaAppConfig){
-        $scope.user = gaAuthentication.user; //attaches signed in user to scope of <body/>
-        $scope.cfg = gaAppConfig; //attaches config to scope of <body/>
-
-    });
-
     module.constant('hnyColor', {
         DARK_PRIMARY_COLOR: '#512DA8',
         PRIMARY_COLOR: '#673AB7',
@@ -129,4 +120,8 @@
         SECONDARY_TEXT_COLOR: '#727272',
         DIVIDER_COLOR: '#B6B6B6'
     });
+
+    module.constant('HackNYUConst',{
+        HACKATHON_NAME: 'spring_2016'
+    })
 }());

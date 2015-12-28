@@ -19,6 +19,7 @@
     var zip = require('gulp-zip');
     var autoprefixer = require('gulp-autoprefixer');
     var gutil = require('gutil');
+    var htmlmin = require('gulp-htmlmin');
 
     var rootDir = '.';
 
@@ -68,8 +69,7 @@
             'lib/angular-elastic/elastic.js',
             'lib/jquery.nicescroll/dist/jquery.nicescroll.min.js',
             'lib/angular-nicescroll/angular-nicescroll.js',
-            'lib/angular-bootstrap/ui-bootstrap-tpls.js',
-            'lib/angular-google-gapi/angular-google-gapi.js'
+            'lib/angular-bootstrap/ui-bootstrap-tpls.js'
         ],
         scripts:[
             'application.js',
@@ -78,7 +78,10 @@
         ],
         appScripts: [
             'modules/mainapp/**/*.js',
-            'lib/ng-tags-input/ng-tags-input.js'
+            'lib/ng-tags-input/ng-tags-input.js',
+            'lib/angular-google-gapi/angular-google-gapi.js',
+            'lib/angular-facebook/lib/angular-facebook.js',
+            'lib/angular-google-places-autocomplete/src/autocomplete.js'
         ],
         homeScripts: [
             'modules/home/**/*.js'
@@ -225,7 +228,8 @@
     gulp.task('template-cache', function() {
         gulp.src('modules/**/*.html', {
             cwd : publicDir
-        }).pipe(templateCache('templates.js', {
+        }).pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(templateCache('templates.js', {
             standalone : false,
             root       : '/p/modules',
             module     : 'app'

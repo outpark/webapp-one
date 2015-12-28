@@ -222,6 +222,16 @@ class ApiException(object):
         300: {
             "type": exceptions.BadRequest,
             "message": "Could not save user"
+        },
+
+        #regular erros
+        403: {
+            "type": exceptions.Forbidden,
+            "message": "Forbidden, you do not have access to this resource"
+        },
+        404: {
+            "type": exceptions.NotFound,
+            "message": "Resource not found"
         }
     }
 

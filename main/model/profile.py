@@ -11,7 +11,6 @@ import util
 
 
 class ProfileValidator(model.BaseValidator):
-    location = [0, 100]
     bio = [0, 140]
     occupation = [0, 200]
     organization = [0, 200]
@@ -73,10 +72,8 @@ class College(model.StructuredBase):
             errors["name"] = 'Please provide the college name'
         if not model.concentrations:
             errors["name"] = 'Please tell us what you studied at the college'
-        if not model.start_date:
-            errors["start_date"] = "Please provide a start date"
-        if not (model.is_present or model.graduation_date):
-            errors["graduation_date"] = "Please check off 'I currently study here' or provide a graduation date"
+        if not (model.graduation_date):
+            errors["graduation_date"] = "Please provide a graduation date"
         if errors != {}:
             return False, errors
         else:
@@ -102,10 +99,8 @@ class School(model.StructuredBase):
         errors = {}
         if not model.name:
             errors["name"] = 'Please provide the high school name'
-        if not model.start_date:
-            errors["start_date"] = "Please provide a start date"
-        if not (model.is_present or model.graduation_date):
-            errors["graduation_date"] = "Please check off 'I currently study here' or provide a graduation date"
+        if not (model.graduation_date):
+            errors["graduation_date"] = "Please provide a graduation date"
         if errors != {}:
             return False, errors
         else:
@@ -114,19 +109,21 @@ class School(model.StructuredBase):
 
 
 class Profile(model.Base): # denormalized profile data (has to be updated when user model changes)
-    user_id = ndb.IntegerProperty()
+    user_id = ndb.IntegerProperty(required=True)
     name = ndb.StringProperty(required=True)
     username = ndb.StringProperty(required=True)
     email = ndb.StringProperty(required=True)
 
-    city = ndb.StringProperty(validator=ProfileValidator.create('location'))
     workplaces_struct = ndb.StructuredProperty(Workplace, repeated=True)
     colleges_struct = ndb.StructuredProperty(College, repeated=True)
     schools_struct = ndb.StructuredProperty(School, repeated=True)
     bio = ndb.StringProperty(validator=ProfileValidator.create('bio'))
+    twitter_handle = ndb.StringProperty()
+    website = ndb.StringProperty()
 
     public_properties = ndb.StringProperty(repeated=True) # can be changed in the privacy settings by user
-    ALL_NON_STRUCTURED_PROPERTIES = ['city', 'bio', 'name', 'username', 'email', 'user_id', 'public_properties']
+    ALL_NON_STRUCTURED_PROPERTIES = ['bio', 'name', 'username', 'email',
+                                     'user_id', 'public_properties', 'twitter_handle', 'website']
     ALL_STRUCTURED_PROPERTIES = {
         "workplaces_struct": Workplace,
         "colleges_struct": College,
@@ -136,7 +133,7 @@ class Profile(model.Base): # denormalized profile data (has to be updated when u
     def get_all_properties(self):
         return ['city', 'workplaces_struct', 'colleges_struct', 'schools_struct',
                 'bio', 'name', 'username', 'email', 'user_id',
-                'public_properties']
+                'public_properties', 'twitter_handle', 'website']
 
     @classmethod
     def get_or_create(cls, user_db):

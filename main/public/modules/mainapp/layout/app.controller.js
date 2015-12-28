@@ -16,8 +16,6 @@
         $scope.auth = gaAuthentication;
         $scope.user = $scope.auth.user;
 
-        $log.debug($scope.user);
-
         $scope.showLeftSidebar = true;
         $scope.showRightSidebar = false;
 

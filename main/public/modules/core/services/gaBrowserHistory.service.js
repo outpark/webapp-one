@@ -41,7 +41,7 @@
             back : function(toTop) {
                 var state = history.pop();
                 if (!state || (gaAuthentication.isLogged() && state.state.data && state.state.data.signedOutOnly)) {
-                    $state.go('dashboard.home');
+                    $state.go(dashboardHome);
                 } else {
                     $state.go(state.state, state.params);
                 }

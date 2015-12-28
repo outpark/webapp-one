@@ -52,10 +52,22 @@
                 controller: 'ProfileWizardController',
                 templateUrl: '/p/modules/mainapp/profile/profile-wizard.view.html',
                 resolve: {
-                    profile: function (gaAuthentication) {
+                    profile: function (gaAuthentication, Flash, gaBrowserHistory) {
                         var user = gaAuthentication.user;
                         return user.one('profile').get().then(function(data){
                             return data
+                        }, function(error){
+                            Flash.create('danger', error.data.message);
+                            gaBrowserHistory.back();
+                        });
+                    },
+                    hackathons: function (gaAuthentication, Flash, gaBrowserHistory) {
+                        var user = gaAuthentication.user;
+                        return user.all('hackathons').getList().then(function(data){
+                            return data
+                        }, function(error){
+                            Flash.create('danger', error.data.message);
+                            gaBrowserHistory.back();
                         });
                     }
                 }
