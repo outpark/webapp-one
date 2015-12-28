@@ -158,7 +158,7 @@ def signin_oauth(oauth_app, scheme=None):
             '%s_authorized' % oauth_app.name, _external=True, _scheme=scheme
         ))
     except oauth.OAuthException:
-        flask.flash('Something went wrong with sign in. Please try again.')
+        flask.flash('Something went wrong with sign in. Please try again.', 'danger')
         return flask.redirect(flask.url_for('index'))
 
 
@@ -231,5 +231,5 @@ def signout_user():
 def signin_via_social(*args, **kwargs):
     """Signs in given, when he used social account and then it redirects him to home page"""
     if not signin_user_db(*args, **kwargs):
-        flask.flash('Sorry, there was an error while signing you in')
+        flask.flash('Sorry, there was an error while signing you in', 'danger')
     return flask.redirect(flask.url_for('index'))

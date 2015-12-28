@@ -20,7 +20,6 @@
             },
             setUser  : function(user) {
                 me.user = Restangular.restangularizeElement(null, user, 'users');
-                console.log(me.user);
             },
             getUser: function(){
                 var _deferred = $q.defer();

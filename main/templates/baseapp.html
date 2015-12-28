@@ -20,7 +20,7 @@
     var module = angular.module('app');
     module.value('gaAuthenticatedUser', {{ user | tojson | safe }});
     module.value('gaAppConfig', {{ app_config | tojson | safe }});
-    module.value('gaFlashMessages', {{ get_flashed_messages() | tojson | safe }});
+    module.value('gaFlashMessages', {{ get_flashed_messages(with_categories=true) | tojson | safe }});
     module.value('gaValidators', {{ validators | tojson | safe }});
 </script>
 </body>

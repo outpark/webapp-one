@@ -35,7 +35,7 @@ def error_handler(err):
     if flask.request.path.startswith('/app/'):
         return flask.render_template('app.html')
 
-    flask.flash(err.name)
+    flask.flash(err.name, 'danger')
     return flask.render_template('error.html')
 
 

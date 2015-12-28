@@ -1,9 +1,7 @@
 <div class="container">
-
     <form class="form-signin" name="loginForm" ng-submit="signin()">
         <div class="form-alert-space">
-            <div class="alert alert-{{ formError.color }}
-            animated fadeInDown" ng-show="formError.show">{{ formError.message }}</div>
+            <div flash-message="5000" ></div>
         </div>
         <h2 class="form-signin-heading">
             <img class="img-responsive" src="/p/modules/core/img/logo.png" alt="HackNYU Logo"/>

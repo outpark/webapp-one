@@ -18,7 +18,7 @@ def user_reset(token=None):
     set new password"""
     user_db = model.User.get_by('token', token)
     if not user_db:
-        flask.flash('Sorry, password reset link is either invalid or expired.')
+        flask.flash('Sorry, password reset link is either invalid or expired.', 'danger')
         return flask.redirect(flask.url_for('index'))
 
     if auth.is_logged_in():
@@ -42,8 +42,7 @@ def user_verify(token):
         user_db.token = util.uuid()
         user_db.verified = True
         user_db.put()
-        flask.flash('Account activated. Please log in to continue!')
+        flask.flash('Account activated. Please log in to continue!', category='success')
     else:
-        flask.flash('Sorry, activation link is either invalid or expired.')
-
-    return flask.redirect('/login')
+        flask.flash('Sorry, activation link is either invalid or expired.', category='danger')
+    return flask.redirect('/app/login')

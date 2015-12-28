@@ -106,7 +106,9 @@
          * If there are FlashMessages from server, toast will display them
          */
         if (!_.isEmpty(gaFlashMessages)) {
-            Flash.create(gaFlashMessages[0]);
+            angular.forEach(gaFlashMessages, function(value){
+               Flash.create(value[0], value[1]);
+            });
         }
     });
 
