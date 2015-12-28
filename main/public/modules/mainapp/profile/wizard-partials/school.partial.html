@@ -81,6 +81,18 @@
                         <p class="help-block">{{ school.editor.error.start_date }}</p>
                     </div>
                 </div>
+                
+                <div class="form-group" ng-class="{'has-error': school.editor.error.city}">
+                    <label class="col-sm-3 control-label">City/Town</label>
+                    <div class="col-sm-7">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon btn-warning" style="width:50px;"><i class="fa fa-map-marker"></i></span>
+                            <input class="form-control input-lg" placeholder=""
+                                   g-places-autocomplete ng-model="school.city"/>
+                            <p class="help-block">{{ school.editor.error.city }}</p>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group" ng-class="{'has-error': school.editor.error.description}">
                     <label class="col-sm-3 control-label">Description</label>

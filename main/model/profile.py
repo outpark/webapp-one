@@ -20,7 +20,7 @@ class Workplace(model.StructuredBase):
     key = ndb.StringProperty(required=True)
     company = ndb.StringProperty(required=True)
     position = ndb.StringProperty(required=True)
-    city = ndb.StringProperty()
+    city = ndb.JsonProperty()
     image = ndb.StringProperty()
     description = ndb.TextProperty()
     start_date = ndb.StringProperty(required=True)
@@ -59,9 +59,10 @@ class College(model.StructuredBase):
     description = ndb.TextProperty()
     concentrations = ndb.StringProperty()
     attended_for = ndb.StringProperty()
+    city = ndb.JsonProperty()
 
     PUBLIC_PROPERTIES = ['name', 'graduated', 'concentrations', 'image', 'description', 'start_date',
-                         'attended_for', 'graduation_date', 'is_present', 'key']
+                         'attended_for', 'graduation_date', 'is_present', 'key', 'city']
 
     JSON_NAME = 'colleges_struct'
 
@@ -88,9 +89,9 @@ class School(model.StructuredBase):
     graduation_date = ndb.StringProperty()
     is_present = ndb.BooleanProperty()
     description = ndb.TextProperty()
+    city = ndb.JsonProperty()
 
-
-    PUBLIC_PROPERTIES = ['key', 'name', 'image', 'start_date', 'graduation_date', 'is_present', 'description']
+    PUBLIC_PROPERTIES = ['key', 'name', 'image', 'start_date', 'graduation_date', 'is_present', 'description', 'city']
 
     JSON_NAME = 'schools_struct'
 
@@ -120,9 +121,10 @@ class Profile(model.Base): # denormalized profile data (has to be updated when u
     bio = ndb.StringProperty(validator=ProfileValidator.create('bio'))
     twitter_handle = ndb.StringProperty()
     website = ndb.StringProperty()
-
+    hometown = ndb.JsonProperty()
     public_properties = ndb.StringProperty(repeated=True) # can be changed in the privacy settings by user
-    ALL_NON_STRUCTURED_PROPERTIES = ['bio', 'name', 'username', 'email',
+
+    ALL_NON_STRUCTURED_PROPERTIES = ['bio', 'name', 'username', 'email', 'hometown',
                                      'user_id', 'public_properties', 'twitter_handle', 'website']
     ALL_STRUCTURED_PROPERTIES = {
         "workplaces_struct": Workplace,
@@ -132,7 +134,7 @@ class Profile(model.Base): # denormalized profile data (has to be updated when u
 
     def get_all_properties(self):
         return ['city', 'workplaces_struct', 'colleges_struct', 'schools_struct',
-                'bio', 'name', 'username', 'email', 'user_id',
+                'bio', 'name', 'username', 'email', 'user_id', 'hometown',
                 'public_properties', 'twitter_handle', 'website']
 
     @classmethod
@@ -141,8 +143,9 @@ class Profile(model.Base): # denormalized profile data (has to be updated when u
         if not profile:
             profile = cls(
                 user_id = user_db.id(),
-                public_properties=['city', 'workplaces_struct', 'colleges_struct', 'schools_struct', 'bio',
-                                   'name', 'username'], # default
+                public_properties=['city', 'workplaces_struct', 'colleges_struct', 'schools_struct',
+                                   'bio', 'name', 'username', 'email', 'user_id', 'hometown',
+                                   'public_properties', 'twitter_handle', 'website'], # default
                 name=user_db.name,
                 username=user_db.username,
                 email=user_db.email

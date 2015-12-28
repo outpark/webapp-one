@@ -38,14 +38,14 @@
              * Navigates back to previous state
              * If user is logged and his previous state was signin page, it won't redirect there
              */
-            back : function(toTop) {
+            back : function(notTop) {
                 var state = history.pop();
-                if (!state || (gaAuthentication.isLogged() && state.state.data && state.state.data.signedOutOnly)) {
+                if (!state || (gaAuthentication.isLogged() && state.state && $state.get('login') == state.state)) {
                     $state.go(dashboardHome);
                 } else {
                     $state.go(state.state, state.params);
                 }
-                if (toTop)
+                if (!notTop)
                     $anchorScroll();
             },
             redirectLogin: function(){

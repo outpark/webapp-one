@@ -57,7 +57,7 @@ class UserByKeyAPI(Resource):
     @model_by_key
     def post(self, key):
         """Updates user's properties"""
-        update_properties = ['first_name', 'hometown', 'last_name', 'avatar_url', 'email', 'username']
+        update_properties = ['first_name', 'last_name', 'avatar_url', 'email', 'username']
         if auth.is_admin():
             update_properties += ['verified', 'active', 'admin']
         new_user_data = _.pick(request.json, update_properties)
