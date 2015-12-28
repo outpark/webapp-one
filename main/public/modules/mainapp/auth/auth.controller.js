@@ -5,9 +5,6 @@
     var module = angular.module('mainapp');
 
     function showFormError($scope, $timeout, message, color, notShake){
-        $scope.formError.show = true;
-        $scope.formError.message = message;
-        $scope.formError.color = color || 'danger';
         if (!notShake) {
             $timeout(function () {
                 $scope.loginAnimation = '';
@@ -25,12 +22,6 @@
             terms: false
         };
 
-        $scope.formError = {
-            show: false,
-            color: 'alert',
-            message: ''
-        };
-
         $scope.credentials = angular.copy(defaultCredentials);
 
         $scope.signin = function() {
@@ -41,10 +32,6 @@
                 $log.debug(error);
                 showFormError($scope, $timeout, error.data.message || 'Login failed.');
             });
-        };
-
-        $scope.inputChanged = function(){
-            $scope.formError.show = false;
         };
 
         $scope.openModalForgot = function(){
@@ -77,12 +64,6 @@
         $log.debug('Sign up controller active');
         $scope.cfg = gaAppConfig;
 
-        $scope.formError = {
-            show: false,
-            color: 'alert',
-            message: ''
-        };
-
         $scope.signup = function() {
             Restangular.all('auth/signup').post($scope.credentials).then(function (user) {
                 gaAuthentication.setUser(user);
@@ -91,10 +72,6 @@
                 $log.debug(error);
                 showFormError($scope, $timeout, error.data.message || 'Sign up failed.');
             });
-        };
-
-        $scope.inputChanged = function(){
-            $scope.formError.show = false;
         };
     });
 }());

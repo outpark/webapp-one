@@ -9,14 +9,14 @@
         <div class="login-wrap">
             <div class="user-login-info animated {{ loginAnimation }}">
                 <h2 class="heading">Sign up</h2>
-                <input type="text" class="form-control" ng-model="credentials.first_name" ng-change="inputChanged()"
+                <input type="text" class="form-control" ng-model="credentials.first_name"
                        placeholder="First Name" name="firstName">
-                <input type="text" class="form-control" ng-model="credentials.last_name" ng-change="inputChanged()"
+                <input type="text" class="form-control" ng-model="credentials.last_name"
                        placeholder="Last Name" name="lastName" required>
-                <input type="email" class="form-control" ng-model="credentials.email" ng-change="inputChanged()"
+                <input type="email" class="form-control" ng-model="credentials.email"
                        placeholder="Username/Email Address" name="email" required>
                 <input type="password" class="form-control" ng-model="credentials.password"
-                       placeholder="Password" name="password" required ng-change="inputChanged()">
+                       placeholder="Password" name="password" required>
             </div>
             <div class="form-button-bar">
                  <label class="checkbox">
